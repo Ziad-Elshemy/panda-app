@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cate_card_view"
+            android:layout_width="150dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:padding="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@+id/frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp">
+
+                    <ImageView
+                        android:id="@+id/driver_info_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="categories_image"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/offer_img" />
+
+                    <ImageView
+                        android:id="@+id/fav_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="34dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/baseline_favorite_border_24" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/offer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Meat grinder"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frame" />
+
+                <TextView
+                    android:id="@+id/offer_old_price"
+                    app:layout_constraintTop_toBottomOf="@id/offer_name"
+                    android:layout_marginStart="7dp"
+                    android:text="YER 6000"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/offer_price"
+                    app:layout_constraintTop_toTopOf="@id/offer_old_price"
+                    app:layout_constraintStart_toEndOf="@id/offer_old_price"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    style="line"
+                    android:layout_marginStart="12dp"
+                    android:text="YER 6000"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/rate1"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintBottom_toBottomOf="@id/rate2"
+                    app:layout_constraintTop_toTopOf="@id/rate2"
+                    app:layout_constraintEnd_toStartOf="@id/rate2"
+                    android:background="@drawable/background_rate"
+                    android:text="3.7"
+                    android:gravity="end"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:drawableRight="@drawable/baseline_star_24"
+
+                    />
+
+                <TextView
+                    android:id="@+id/rate2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="10dp"
+                    android:text="(174)"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="10dp"
+
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

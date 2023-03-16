@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "711027564102",
+    "project_id": "chat-notifications-b503a",
+    "storage_bucket": "chat-notifications-b503a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711027564102:android:a6c32d2f27b3837244b447",
+        "android_client_info": {
+          "package_name": "com.example.chatmodule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711027564102-c657qth5s6rrq90k34t2gtdgeu4tekqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCftMkHyTW_KML8N4WykX6N1K341U2r1Og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711027564102-c657qth5s6rrq90k34t2gtdgeu4tekqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

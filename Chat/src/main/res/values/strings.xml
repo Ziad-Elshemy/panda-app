@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Chat Module</string>
+    <string name="todo">TODO</string>
+    <string name="group_channel">Group Channel</string>
+</resources>
