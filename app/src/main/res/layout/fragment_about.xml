@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/main_image"
                 android:layout_width="117dp"
                 android:layout_height="150dp"
-                android:src="@drawable/panda"
                 android:layout_marginTop="20dp"
+                android:src="@drawable/panda"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/about_us_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About us"
                 android:layout_marginTop="10dp"
-                android:textAlignment="center"
-                android:textSize="32sp"
                 android:fontFamily="@font/bold"
+                android:text="@string/about_us"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_image" />
@@ -40,9 +42,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:layout_marginTop="50dp"
                 android:src="@drawable/google_play_icon"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="50dp"
                 app:layout_constraintTop_toBottomOf="@+id/about_us_text" />
 
             <ImageView
@@ -57,15 +59,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/regular"
                 android:lineHeight="28dp"
                 android:paddingBottom="100dp"
-                android:layout_marginTop="30dp"
-                android:text="The largest e-commerce site in the Arab world. Every month, Souq.com attracts more than 30 million visits to its catalog of more than 2 million unique products in 10 different categories, including books, cars, consumer electronics, home goods, fashion, watches, fragrances, toys, and baby products. Founded in 2023, Panda today operates as an award-winning retailer and online marketplace that allows small and medium businesses, merchants, brands and distributors to distribute their products online."
+                android:text="@string/the_largest_e_commerce_site_in_the_arab_world_every_month_souq_com_attracts_more_than_30_million_visits_to_its_catalog_of_more_than_2_million_unique_products_in_10_different_categories_including_books_cars_consumer_electronics_home_goods_fashion_watches_fragrances_toys_and_baby_products_founded_in_2023_panda_today_operates_as_an_award_winning_retailer_and_online_marketplace_that_allows_small_and_medium_businesses_merchants_brands_and_distributors_to_distribute_their_products_online"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/google_play_icon" />

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cate_card_view"
             android:layout_width="150dp"
             android:layout_height="220dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
             android:padding="20dp"
             app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,8 +40,8 @@
 
                     <ImageView
                         android:id="@+id/fav_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="34dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="end"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
@@ -52,6 +53,7 @@
                     android:id="@+id/offer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/regular"
                     android:text="iphone 14 pro max"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -65,9 +67,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
-                    android:textColor="@color/black"
                     android:layout_marginTop="8dp"
-                    android:text="YER 70000"
+                    android:fontFamily="@font/light"
+                    android:text="@string/yer_70000"
+                    android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -76,20 +79,21 @@
 
                 <TextView
                     android:id="@+id/rate1"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/background_rate"
                     android:drawableRight="@drawable/baseline_star_24"
+                    android:fontFamily="@font/light"
                     android:gravity="end"
+                    android:paddingHorizontal="5dp"
                     android:text="3.7"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/rate2"
                     app:layout_constraintEnd_toStartOf="@id/rate2"
-                    app:layout_constraintTop_toTopOf="@id/rate2"
+                    app:layout_constraintStart_toStartOf="parent"
 
-                    />
+                    app:layout_constraintTop_toTopOf="@id/rate2" />
 
                 <TextView
                     android:id="@+id/rate2"
@@ -97,8 +101,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/light"
                     android:text="(174)"
                     android:textColor="@color/black"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
 
@@ -108,9 +114,6 @@
 
 
         </androidx.cardview.widget.CardView>
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

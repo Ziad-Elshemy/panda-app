@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -11,11 +12,13 @@
             android:id="@+id/cate_card_view"
             android:layout_width="150dp"
             android:layout_height="220dp"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
-            android:padding="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,72 +56,70 @@
                     android:id="@+id/offer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/regular"
                     android:text="Meat grinder"
-                    android:textSize="16sp"
                     android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/frame" />
 
                 <TextView
                     android:id="@+id/offer_old_price"
-                    app:layout_constraintTop_toBottomOf="@id/offer_name"
-                    android:layout_marginStart="7dp"
-                    android:text="YER 6000"
-
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:fontFamily="@font/light"
+                    android:text="YER 6000"
+                    app:layout_constraintTop_toBottomOf="@id/offer_name" />
 
                 <TextView
                     android:id="@+id/offer_price"
-                    app:layout_constraintTop_toTopOf="@id/offer_old_price"
-                    app:layout_constraintStart_toEndOf="@id/offer_old_price"
-                    app:layout_constraintEnd_toEndOf="parent"
                     style="line"
-                    android:layout_marginStart="12dp"
-                    android:text="YER 6000"
-
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/light"
+                    android:text="YER 6000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/offer_old_price"
+                    app:layout_constraintTop_toTopOf="@id/offer_old_price" />
 
                 <TextView
                     android:id="@+id/rate1"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="@id/rate2"
-                    app:layout_constraintTop_toTopOf="@id/rate2"
-                    app:layout_constraintEnd_toStartOf="@id/rate2"
                     android:background="@drawable/background_rate"
-                    android:text="3.7"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
                     android:drawableRight="@drawable/baseline_star_24"
-
-                    />
+                    android:fontFamily="@font/regular"
+                    android:gravity="end"
+                    android:paddingHorizontal="10dp"
+                    android:text="3.7"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@id/rate2"
+                    app:layout_constraintEnd_toStartOf="@id/rate2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/rate2" />
 
                 <TextView
                     android:id="@+id/rate2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/light"
                     android:text="(174)"
                     android:textColor="@color/black"
-                    android:layout_marginEnd="10dp"
-
-                    />
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.cardview.widget.CardView>
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,48 +25,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                >
+                android:background="@drawable/text_input_shadow"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                app:layout_constraintStart_toStartOf="parent">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delivery to Sanaa, Yemen"
                     android:drawableLeft="@drawable/baseline_location_on_24"
-                    android:gravity="center"
-                    android:textSize="16sp"
                     android:fontFamily="@font/regular"
+                    android:gravity="center"
+                    android:text="@string/delivery_to_sanaa_yemen"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="16sp" />
+
                 <Spinner
                     android:id="@+id/dropdown_menu_address"
-                    android:layout_width="match_parent"
                     style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                    android:layout_height="60dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/address"
                     android:spinnerMode="dropdown"
-                    android:contentDescription="address"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/text_view_payment_methods"
-                    />
+                    tools:ignore="TouchTargetSizeCheck" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ImageView
                 android:id="@+id/search_icon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/baseline_search_24"
-                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                />
+                android:layout_marginTop="25dp"
+                android:src="@drawable/baseline_search_24" />
 
             <ImageView
                 android:id="@+id/notification_icon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/baseline_notifications_24"
-                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                />
+                android:layout_marginTop="20dp"
+                android:src="@drawable/baseline_notifications_24" />
 
         </LinearLayout>
 
@@ -79,7 +80,7 @@
             app:iss_period="2000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headingLinear"/>
+            app:layout_constraintTop_toBottomOf="@id/headingLinear" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categories_rv"
@@ -92,40 +93,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_slider"
             tools:listitem="@layout/categories_list_item" />
+
         <TextView
             android:id="@+id/offers_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/categories_rv"
-            app:layout_constraintStart_toStartOf="@id/categories_rv"
-            android:text="Offers"
+            android:layout_marginTop="15dp"
+            android:text="@string/offers"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="22sp"
-            android:layout_marginTop="15dp"/>
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/medium"
+            app:layout_constraintStart_toStartOf="@id/categories_rv"
+            app:layout_constraintTop_toBottomOf="@id/categories_rv" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/offers_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/offers_tv"
-            android:layout_marginBottom="10dp"
             tools:listitem="@layout/offers_list_item" />
-
-
-
-
-
-
-
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/wallet_card"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="25dp"
@@ -26,17 +26,19 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/wallet_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="My Balance"
+                    android:text="@string/my_balance"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/regular"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,10 +52,10 @@
                     android:text="YER 100.00"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/wallet_tv" />
 
@@ -78,10 +80,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
-                android:text="Wallet Balance"
+                android:text="@string/wallet_balance"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,9 +101,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="Add balance"
+                android:text="@string/add_balance"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:fontFamily="@font/regular"
                 app:layout_constraintStart_toEndOf="@id/add1"
 
                 app:layout_constraintTop_toTopOf="@id/add1"
@@ -126,10 +129,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
-                android:text="Payment methods"
+                android:text="@string/payment_methods"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -147,11 +150,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="Add payment method"
+                android:text="@string/add_payment_method"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:fontFamily="@font/regular"
                 app:layout_constraintStart_toEndOf="@id/add2"
-
                 app:layout_constraintTop_toTopOf="@id/add2"
                 app:layout_constraintBottom_toBottomOf="@id/add2"/>
 
@@ -174,10 +177,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
-                android:text="Promotions"
+                android:text="@string/promotions"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -195,11 +198,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="Add promo code"
+                android:text="@string/add_promo_code"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:fontFamily="@font/regular"
                 app:layout_constraintStart_toEndOf="@id/add3"
-
                 app:layout_constraintTop_toTopOf="@id/add3"
                 app:layout_constraintBottom_toBottomOf="@id/add3"/>
 

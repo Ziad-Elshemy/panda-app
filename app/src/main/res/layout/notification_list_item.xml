@@ -3,10 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/wallet_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp">
 
 
             <ImageView
@@ -25,8 +41,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/regular"
-                android:text="New products"
-                android:textStyle="bold"
+                android:text="@string/new_products"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/done_imageView"
@@ -37,10 +52,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-
                 android:fontFamily="@font/regular"
-                android:text="Have been added new products in  section the fashion "
                 android:maxLines="3"
+                android:text="@string/have_been_added_new_products_in_section_the_fashion"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/title_textView"
@@ -50,22 +64,16 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/light"
+                android:text="@string/_15_mar_2023"
+                android:textAlignment="textEnd"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/done_imageView"
-                android:text="15 Mar 2023"
-                android:layout_marginStart="20dp"/>
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="20dp"
-                app:dividerColor="#B5B3B3"
-                app:layout_constraintTop_toBottomOf="@id/msg_textView" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    </androidx.cardview.widget.CardView>
 </layout>

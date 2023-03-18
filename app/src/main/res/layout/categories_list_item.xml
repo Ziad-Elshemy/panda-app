@@ -1,48 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/const_holder5"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:elevation="50dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cate_card_view"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:padding="20dp"
-            app:cardCornerRadius="100dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints">
-
-            <ImageView
-                android:id="@+id/driver_info_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="categories_image"
-                android:scaleType="centerCrop"
-                android:src="@drawable/cate_img" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/cate_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/cate_card_view"
-            app:layout_constraintStart_toStartOf="@id/cate_card_view"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content">
 
-            android:text="Super Market"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cate_card_view"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginVertical="10dp"
+                android:padding="20dp"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/driver_info_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="categories_image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cate_img" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/cate_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/regular"
+                android:text="Super Market"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cate_card_view" />
 
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
