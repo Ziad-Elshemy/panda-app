@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_home"
+        android:id="@+id/homeFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_wishListFragment"
+            app:destination="@id/wishListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categories1Fragment"
+            app:destination="@id/categories1Fragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myAccountFragment2"
+            app:destination="@id/myAccountFragment2" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_wish_list"
+        android:id="@+id/wishListFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.wishlist.WishListFragment"
+        android:label="WishListFragment" />
+    <fragment
+        tools:layout="@layout/fragment_categories1"
+        android:id="@+id/categories1Fragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.categories1.Categories1Fragment"
+        android:label="Categories1Fragment" />
+    <fragment
+        tools:layout="@layout/fragment_my_account"
+        android:id="@+id/myAccountFragment2"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.myAccount.MyAccountFragment"
+        android:label="MyAccountFragment" />
+</navigation>

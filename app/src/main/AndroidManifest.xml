@@ -10,28 +10,28 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="${userCleartextTraffic}"
+
         android:theme="@style/Theme.Panda"
         tools:targetApi="31">
         <activity
             android:name=".HomeFlow.HomeActivity"
-            android:exported="true"
-            >
-
-        </activity>
-
-        <activity
-            android:name=".AuthFlow.splash.SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".AuthFlow.splash.SplashActivity"
+            android:exported="true">
+
+
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="true">
 
         </activity>
     </application>
