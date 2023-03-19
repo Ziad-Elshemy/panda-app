@@ -23,9 +23,6 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_otpFragment"
-            app:destination="@id/otpFragment" />
-        <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
@@ -33,5 +30,9 @@
         android:id="@+id/otpFragment"
         android:name="com.easy_pro_code.panda.AuthFlow.otp.OtpFragment"
         android:label="fragment_otp"
-        tools:layout="@layout/fragment_otp" />
+        tools:layout="@layout/fragment_otp" >
+        <argument
+            android:name="verficationId"
+            app:argType="string" />
+    </fragment>
 </navigation>

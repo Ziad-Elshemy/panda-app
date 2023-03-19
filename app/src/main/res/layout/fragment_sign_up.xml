@@ -154,6 +154,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_phoneNumber" />
 
+        <ProgressBar
+            android:id="@+id/progress_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:indeterminateTint="@color/black"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="5dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
         <Button
             android:id="@+id/btn_signUp"
             android:layout_width="match_parent"

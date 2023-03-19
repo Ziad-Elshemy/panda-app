@@ -25,9 +25,9 @@
             android:id="@+id/card_view"
             android:layout_width="280dp"
             android:layout_height="280dp"
+            android:elevation="70dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
-            android:elevation="70dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="100dp"
             app:cardElevation="3dp"
@@ -62,6 +62,7 @@
             android:fontFamily="@font/regular"
             android:hint="@string/enter_your_number"
             android:inputType="phone"
+            android:paddingLeft="15dp"
             android:paddingStart="15dp"
             android:textAlignment="center"
             android:textAllCaps="false"
@@ -117,6 +118,20 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:fontFamily="@font/bold"/>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar_loadingPhoneAuth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/black"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_phoneNumber"
+            app:layout_constraintVertical_bias="0.294" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

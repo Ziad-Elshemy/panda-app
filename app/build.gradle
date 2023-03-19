@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+
+
 }
 
 android {
@@ -18,6 +22,9 @@ android {
     }
 
     buildTypes {
+        debug{
+            manifestPlaceholders=[userCleartextTraffic:"true"]
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -44,13 +51,14 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //chat
 
-    implementation project(":Chat")
+    //implementation project(":Chat")
 
     implementation 'com.sendbird.sdk:sendbird-android-sdk:3.1.25'
 
@@ -65,5 +73,26 @@ dependencies {
 
     // dependency for slider view
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
+    //firebase phone Auth
+    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.7.21"
+
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+
+    //gson converter
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //create ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
+
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha11"
 
 }
