@@ -122,7 +122,7 @@ class LoginFragment : AuthFragment() {
 
     private fun sendPhoneNumber(callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks) {
         val options = PhoneAuthOptions.newBuilder(FirebaseUtils.auth)
-            .setPhoneNumber("+2"+binding.btnLogin.text.toString())       // Phone number to verify
+            .setPhoneNumber("+2"+binding.etPhoneNumber.text.toString())       // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
             .setActivity(requireActivity())                 // Activity (for callback binding)
             .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks

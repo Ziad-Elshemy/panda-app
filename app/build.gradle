@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 
 
 }
@@ -17,6 +18,8 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+
+        manifestPlaceholders = [google_maps_api_key: "AIzaSyD1DsjuhE4Epv8SUgpis-Erin_LABBLPNI"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,6 +58,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation 'com.google.firebase:firebase-auth:21.0.3'
+
 
     //chat
 
