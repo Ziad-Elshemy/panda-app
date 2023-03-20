@@ -1,6 +1,7 @@
 package com.easy_pro_code.panda.data.api.api_manager
 
 import com.easy_pro_code.panda.data.api.web_services.AuthenticationWebService
+import com.easy_pro_code.panda.data.api.web_services.ProductWebService
 import com.sendbird.android.shadow.okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,6 +38,9 @@ class ApiManager {
 
         fun getAuthenticationApi(): AuthenticationWebService {
             return getInstance().create(AuthenticationWebService::class.java)
+        }
+        fun getProductApi(): ProductWebService {
+            return getInstance().create(ProductWebService::class.java)
         }
     }
 }

@@ -15,7 +15,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-
         android:usesCleartextTraffic="${userCleartextTraffic}"
         android:theme="@style/Theme.Panda"
         tools:targetApi="31">

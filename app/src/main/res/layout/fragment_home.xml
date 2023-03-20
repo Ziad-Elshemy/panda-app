@@ -3,123 +3,151 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".HomeFlow.presentations.home.HomeFragment">
+        android:fillViewport="true">
 
-        <LinearLayout
-            android:id="@+id/headingLinear"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context=".HomeFlow.presentations.home.HomeFragment">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/address_drop_down"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/headingLinear"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/text_input_shadow"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="10dp"
-                app:layout_constraintStart_toStartOf="parent">
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/address_drop_down"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/baseline_location_on_24"
-                    android:fontFamily="@font/regular"
-                    android:gravity="center"
-                    android:text="@string/delivery_to_sanaa_yemen"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/text_input_shadow"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="10dp"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <Spinner
-                    android:id="@+id/dropdown_menu_address"
-                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/baseline_location_on_24"
+                        android:fontFamily="@font/regular"
+                        android:gravity="center"
+                        android:text="@string/delivery_to_sanaa_yemen"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/dropdown_menu_address"
+                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/address"
+                        android:spinnerMode="dropdown"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_payment_methods"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <ImageView
+                    android:id="@+id/search_icon"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/address"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/text_view_payment_methods"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/baseline_search_24" />
 
-            <ImageView
-                android:id="@+id/search_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/baseline_search_24" />
+                <ImageView
+                    android:id="@+id/notification_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/baseline_notifications_24" />
 
-            <ImageView
-                android:id="@+id/notification_icon"
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:iss_auto_cycle="true"
+                app:iss_delay="0"
+                app:iss_period="2000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headingLinear" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categories_rv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/baseline_notifications_24" />
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_slider"
+                tools:listitem="@layout/categories_list_item" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/offers_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/medium"
+                android:text="@string/offers"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/categories_rv"
+                app:layout_constraintTop_toBottomOf="@id/categories_rv" />
 
-        <com.denzcoskun.imageslider.ImageSlider
-            android:id="@+id/image_slider"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            app:iss_auto_cycle="true"
-            app:iss_delay="0"
-            app:iss_period="2000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headingLinear" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/offers_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/offers_tv"
+                tools:listitem="@layout/offers_list_item" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categories_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_slider"
-            tools:listitem="@layout/categories_list_item" />
+            <TextView
+                android:id="@+id/products_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/medium"
+                android:text="products"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/offers_rv" />
 
-        <TextView
-            android:id="@+id/offers_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/offers"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/medium"
-            app:layout_constraintStart_toStartOf="@id/categories_rv"
-            app:layout_constraintTop_toBottomOf="@id/categories_rv" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/offers_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/offers_tv"
-            tools:listitem="@layout/offers_list_item" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/product_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/products_text"
+                app:spanCount="2"
+                />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
