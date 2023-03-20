@@ -3,6 +3,7 @@ package com.easy_pro_code.panda.AuthFlow.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +65,7 @@ class LoginFragment : AuthFragment() {
         startState()
         initViews()
         subscribeToLiveData()
-
+//        Log.e("Ziad Response",binding.btnLogin.text.toString())
         return binding.root
     }
 
@@ -74,7 +75,8 @@ class LoginFragment : AuthFragment() {
                     response->
                 binding.progressBarLoadingPhoneAuth.visibility = View.GONE
                 binding.btnLogin.visibility = View.GONE
-                if (response.message.equals("User Not found.")){
+//                Log.e("Ziad Response",binding.etPhoneNumber.text.toString())
+                if (response.message.equals("user not found")){
                     Toast.makeText(requireContext(), "please sign up first", Toast.LENGTH_SHORT).show()
                     loginViewModel.clearLiveData()
 
@@ -103,16 +105,17 @@ class LoginFragment : AuthFragment() {
 
     private fun checkPhoneNumber() {
 
-        val phoneNumber = binding.btnLogin.text
+        val phoneNumber = binding.etPhoneNumber.text
         if (phoneNumber.isBlank() || phoneNumber.isEmpty() || !TextUtils.isDigitsOnly(
                 phoneNumber
             ) || phoneNumber.length != 11
         ) {
 
-            Toast.makeText(requireContext(), "Enter Valid Number", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Enter Valid Number ${phoneNumber.length}", Toast.LENGTH_LONG).show()
         } else {
             //Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
             loadingState()
+            Log.i("Ziad: error" , "loginFragment ${phoneNumber.toString()}")
             loginViewModel.logIn(phoneNumber.toString())
         }
     }
@@ -130,15 +133,17 @@ class LoginFragment : AuthFragment() {
     override fun loadingState() {
         binding.progressBarLoadingPhoneAuth.visibility = View.VISIBLE
         binding.btnLogin.visibility = View.GONE
+        Log.i("Ziad: error" , "loadingState")
     }
 
     override fun successState(verificationId: String , token: PhoneAuthProvider.ForceResendingToken) {
         binding.progressBarLoadingPhoneAuth.visibility = View.GONE
         binding.btnLogin.visibility = View.GONE
 
+        Log.i("Ziad: error" , "successState")
+
         //navigation
-        val action =
-           LoginFragmentDirections.actionLoginFragmentToOtpFragment(verificationId)
+        val action = LoginFragmentDirections.actionLoginFragmentToOtpFragment(verificationId)
         //this must be passed on argument in nav_graph <<<<---------------------------------------
         FirebaseUtils.token=token
         action.arguments.putParcelable("verification",
@@ -149,10 +154,12 @@ class LoginFragment : AuthFragment() {
     override fun errorState() {
         binding.progressBarLoadingPhoneAuth.visibility = View.GONE
         binding.btnLogin.visibility = View.VISIBLE
+        Log.i("Ziad: error" , "errorState")
         Toast.makeText(requireContext(), "Please try again", Toast.LENGTH_LONG).show()
     }
     private fun startState() {
         binding.progressBarLoadingPhoneAuth.visibility = View.GONE
+        Log.i("Ziad: error" , "startState")
         binding.btnLogin.visibility = View.VISIBLE
     }
     companion object{

@@ -40,7 +40,9 @@ class LoginViewModel : ViewModel(){
 
             try {
                 val userRequest= SignInRequest(phoneNumber)
+//                Log.i("Ziad: error" , "try loginViewModel ${userRequest.toString()}")
                 _userLiveData.value=authenticationWebService.signIn(userRequest)
+//                Log.i("Ziad: error" , _userLiveData.value.toString())
             }catch (t:Throwable){
                 when(t){
                     is HttpException ->{
@@ -49,13 +51,13 @@ class LoginViewModel : ViewModel(){
                             400 -> {
 //                                val response=UserData(message = "User Not found.")
 //                                _userLiveData.value=response
-                                Log.i("error" , "400")
+                                Log.i("Ziad: error" , "400")
                             }
                             else -> {
 //                                val response = UserData(message = "something went wrong")
 //                                _userLiveData.value = response
 
-                                Log.i("error" , "Something went Wrong")
+                                Log.i("Ziad: error" , "Something went Wrong")
 
                             }
                         }
