@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.easy_pro_code.panda.AuthFlow.Model.LoginViewModel
 import com.easy_pro_code.panda.AuthFragment.AuthFragment
 import com.easy_pro_code.panda.HomeFlow.HomeActivity
 import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.remote_backend.UserData
 import com.easy_pro_code.panda.databinding.FragmentLoginBinding
 import com.easy_pro_code.panda.data.Models.remote_firebase.FirebaseUtils
 import com.easy_pro_code.panda.data.Models.remote_firebase.PhoneVerification
@@ -26,9 +28,11 @@ import java.util.concurrent.TimeUnit
 
 class LoginFragment : AuthFragment() {
 
-    lateinit var binding:FragmentLoginBinding
-
+    lateinit var binding: FragmentLoginBinding
+    lateinit var phoneNumber: EditText
     private lateinit var loginViewModel: LoginViewModel
+    private  var verificationId:String=""
+    private lateinit var userData:UserData
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,13 +86,13 @@ class LoginFragment : AuthFragment() {
 
                     findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
                 }else if(response.message.equals("something went wrong")){
+
                     Toast.makeText(requireContext(), "something went wrong", Toast.LENGTH_SHORT).show()
                 } else{
                     sendPhoneNumber(callbacks)
-                    loginViewModel.onSucessfulsignIn(
-                        response,
-                        binding.etPhoneNumber.text.toString()
-                    )
+
+                    userData=response
+
                 }
             }
 
@@ -136,20 +140,17 @@ class LoginFragment : AuthFragment() {
         Log.i("Ziad: error" , "loadingState")
     }
 
-    override fun successState(verificationId: String , token: PhoneAuthProvider.ForceResendingToken) {
-        binding.progressBarLoadingPhoneAuth.visibility = View.GONE
-        binding.btnLogin.visibility = View.GONE
+    override fun successState(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
 
-        Log.i("Ziad: error" , "successState")
-
-        //navigation
-        val action = LoginFragmentDirections.actionLoginFragmentToOtpFragment(verificationId)
-        //this must be passed on argument in nav_graph <<<<---------------------------------------
+        this.verificationId=verificationId
         FirebaseUtils.token=token
-        action.arguments.putParcelable("verification",
-            PhoneVerification(verificationId,token,"+2"+binding.btnLogin.text.toString())
-        )
+        val phoneData=PhoneVerification(verificationId,token,"+2"+binding.etPhoneNumber.text.toString())
+
+        val action = LoginFragmentDirections.actionLoginFragmentToOtpFragment(phoneData,userData)
+        //this must be passed on argument in nav_graph <<<<---------------------------------------
+
         findNavController().navigate(action)
+
     }
     override fun errorState() {
         binding.progressBarLoadingPhoneAuth.visibility = View.GONE
@@ -165,4 +166,5 @@ class LoginFragment : AuthFragment() {
     companion object{
         val TAG="phoneAuthFragment"
     }
+
 }

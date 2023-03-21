@@ -1,18 +1,28 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.home
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.denzcoskun.imageslider.models.SlideModel
+import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.HomeFlow.models.toProduct
 import com.easy_pro_code.panda.HomeFlow.view_model.HomeViewModel
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.databinding.FragmentHomeBinding
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 
 
 class HomeFragment : Fragment() {
@@ -21,6 +31,20 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private val productsList:List<Product>? = listOf()
     private val offersList:List<Product>? = listOf()
+    private lateinit var edTextObj:EditText
+    private var city:String=""
+    private var edTextId:Int=-1
+
+
+
+
+
+    var startAutocompleteIntentListener =
+        View.OnClickListener { view: View ->
+            edTextObj= view as EditText
+            startAutocompleteIntent()
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeViewModel=ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -29,7 +53,6 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
         val imageList = ArrayList<SlideModel>()
 
@@ -59,7 +82,22 @@ class HomeFragment : Fragment() {
         binding.offersRv.adapter=offersAdapter
         subscribeToLiveData(productsAdapter,offersAdapter)
         homeViewModel.getAllProducts()
+
+        //// initial plasces
+        initPlacesSdk()
+        ////calling AutoCompelete
+        binding.locationDetection.setOnClickListener(startAutocompleteIntentListener)
+
         return binding.root
+
+    }
+
+
+    private fun initPlacesSdk() {
+        // Initialize the SDK
+        Places.initialize(requireContext().applicationContext,MAPS_API_KEY)
+        // Create a new PlacesClient instance
+        Places.createClient(requireContext())
     }
 
     private fun subscribeToLiveData(
@@ -72,4 +110,47 @@ class HomeFragment : Fragment() {
         }
     }
 
-}
+
+
+    private fun startAutocompleteIntent(){
+        val fields = listOf(
+            Place.Field.ADDRESS_COMPONENTS,
+            Place.Field.LAT_LNG, Place.Field.VIEWPORT,
+            Place.Field.NAME,
+            Place.Field.ADDRESS)
+        // Start the autocomplete intent.
+        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields )
+            .build(requireActivity())
+        registerForActivityResult.launch(intent)
+    }
+
+
+
+    private fun changeEditTextDataAndTripPoints(data: Place?) {
+        edTextId=edTextObj.id
+        edTextObj.setText(data?.name.toString())
+    }
+
+
+
+    private fun hideSuspendWindow(){
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
+
+    private val registerForActivityResult=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result->
+//        viewBinding.edFrom.setOnClickListener(startAutocompleteIntentListener)
+        hideSuspendWindow()
+        if(result.resultCode == Activity.RESULT_OK ){
+            val data= result?.data?.let { Autocomplete.getPlaceFromIntent(it) }
+            Log.i("PLACE: ", data?.address.toString())
+            val address=data?.address.toString().replace(" ","").split(",")
+            val country= address[address.size-1]
+            Log.i("city: ", city)
+            if (this.city==city && country=="Egypt"){
+                changeEditTextDataAndTripPoints(data)
+            }
+        }
+    }
+    }
