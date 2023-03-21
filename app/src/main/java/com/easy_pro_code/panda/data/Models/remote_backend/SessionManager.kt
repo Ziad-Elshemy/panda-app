@@ -2,6 +2,7 @@ package com.easy_pro_code.panda.data.Models.remote_backend
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.session.MediaSession.Token
 import android.util.Log
 import com.easy_pro_code.panda.R
 import java.time.LocalDateTime
@@ -38,6 +39,8 @@ class SessionManager (context: Context) {
        // editor.putStringSet(ROLE, user.roles?.toSet())
         editor.putString(EMAIL, user.email)
         editor.putString(PHONE, phone)
+        Log.i("USER_TOKEN",user.token.toString())
+        editor.putString(USER_TOKEN , user.token)
         user.id?.let { editor.putString(ID, it) }
         editor.putString(
             EXPIRE_DATE,
@@ -60,6 +63,7 @@ class SessionManager (context: Context) {
     fun getToken():String?{
         return prefsobj.getString(USER_TOKEN,null)
     }
+
 
     fun isTokenExpired():Boolean?{
         val current = LocalDateTime.now(ZoneId.of("UTC"))

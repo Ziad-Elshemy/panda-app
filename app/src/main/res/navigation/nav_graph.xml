@@ -32,7 +32,10 @@
         android:label="fragment_otp"
         tools:layout="@layout/fragment_otp" >
         <argument
-            android:name="verficationId"
-            app:argType="string" />
+            android:name="phoneData"
+            app:argType="com.easy_pro_code.panda.data.Models.remote_firebase.PhoneVerification" />
+        <argument
+            android:name="userData"
+            app:argType="com.easy_pro_code.panda.data.Models.remote_backend.UserData" />
     </fragment>
 </navigation>

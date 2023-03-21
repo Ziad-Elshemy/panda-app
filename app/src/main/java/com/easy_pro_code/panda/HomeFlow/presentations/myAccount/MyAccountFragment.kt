@@ -3,6 +3,7 @@ package com.easy_pro_code.panda.HomeFlow.presentations.myAccount
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.easy_pro_code.panda.AuthFlow.signUp.SignUpFragment
 import com.easy_pro_code.panda.MainActivity
 import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.databinding.FragmentMyAccountBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -21,6 +24,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MyAccountFragment : Fragment() {
 
     lateinit var binding : FragmentMyAccountBinding
+
+    val sessionManager = AuthUtils.manager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,45 +40,79 @@ class MyAccountFragment : Fragment() {
             }
         })
 
-        binding.loginBtn.setOnClickListener {
-            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToLoginFragment2()
-            findNavController().navigate(action)
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
-        }
-        binding.signupBtn.setOnClickListener {
-            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToSignUpFragment2()
-            findNavController().navigate(action)
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
-        }
-        binding.editAccountBtn.setOnClickListener {
-            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToEditMyAccountFragment()
-            findNavController().navigate(action)
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
-        }
-        binding.myWalletBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
+        Log.e("Ziad MyAccount",sessionManager.getToken().toString())
+        if (sessionManager.getToken().equals(null)){
+            binding.signupBtn.isVisible=false
+            binding.myWalletBtn.isVisible=false
+            binding.editAccountBtn.isVisible=false
+            binding.myOrdersBtn.isVisible=false
+            binding.support2Btn.isVisible=false
+
+            binding.loginBtn.setOnClickListener {
+//            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToLoginFragment2()
+//            findNavController().navigate(action)
+
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
+                    false
+            }
+
+            binding.language2Btn.setOnClickListener {
+                Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
+            }
+            binding.termsAndConditionsBtn.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://easyprocode.com/"))
+                startActivity(intent)
+            }
+            binding.aboutBtn.setOnClickListener {
+                val action = MyAccountFragmentDirections.actionMyAccountFragment2ToAboutFragment()
+                findNavController().navigate(action)
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
+                    false
+            }
+
+        }else {
+
+            binding.loginBtn.isVisible=false
+            binding.signupBtn.isVisible = false
+//            binding.signupBtn.setOnClickListener {
+////            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToSignUpFragment2()
+////            findNavController().navigate(action)
+//
+//                val intent = Intent(requireContext(), MainActivity::class.java)
+////            intent.putExtra("fragmentToLoad",true)
+//                startActivity(intent)
+//                requireActivity().finish()
+//
+//                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
+//                    false
+//            }
+            binding.editAccountBtn.setOnClickListener {
+                val action =
+                    MyAccountFragmentDirections.actionMyAccountFragment2ToEditMyAccountFragment()
+                findNavController().navigate(action)
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
+                    false
+            }
+            binding.myWalletBtn.setOnClickListener {
+                Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
 //            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToMyWalletFragment()
 //            findNavController().navigate(action)
-        }
-        binding.myOrdersBtn.setOnClickListener {
-            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToMyOrdersFragment()
-            findNavController().navigate(action)
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
-        }
-        binding.support2Btn.setOnClickListener {
-            Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
-        }
-        binding.language2Btn.setOnClickListener {
-            Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
-        }
-        binding.termsAndConditionsBtn.setOnClickListener {
-            val intent= Intent(Intent.ACTION_VIEW, Uri.parse("https://easyprocode.com/"))
-            startActivity(intent)
-        }
-        binding.aboutBtn.setOnClickListener {
-            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToAboutFragment()
-            findNavController().navigate(action)
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
+            }
+            binding.myOrdersBtn.setOnClickListener {
+                val action =
+                    MyAccountFragmentDirections.actionMyAccountFragment2ToMyOrdersFragment()
+                findNavController().navigate(action)
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
+                    false
+            }
+            binding.support2Btn.setOnClickListener {
+                Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
 
