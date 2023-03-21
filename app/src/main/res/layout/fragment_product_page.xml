@@ -291,7 +291,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="5dp"
         android:textAlignment="textStart"
-        android:text="Uber mission is to simplify and improve the lives of people and build an awesome organization that inspires the lives of people and build an awesome organization that inspires."
+        android:text="Panda mission is to simplify and improve the lives of people and build an awesome organization that inspires the lives of people and build an awesome organization that inspires."
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="16sp"

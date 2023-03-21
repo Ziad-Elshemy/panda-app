@@ -1,4 +1,4 @@
-package com.easy_pro_code.trella.HomeFlow.Presentations.About
+package com.easy_pro_code.panda.HomeFlow.presentations.About
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -69,7 +69,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -80,7 +80,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:994102135545:android:b926c6b9e12cfc045b3028",
         "android_client_info": {
-          "package_name": "com.easy_pro_code.trella"
+          "package_name": "com.easy_pro_code.panda"
         }
       },
       "oauth_client": [
@@ -88,7 +88,7 @@
           "client_id": "994102135545-o010cnfu76ccaimk3pibnfklf0jopsah.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.trella",
+            "package_name": "com.easy_pro_code.panda",
             "certificate_hash": "115dcca2121dbfdf672e3fdd58ac559de3576cdb"
           }
         },
@@ -96,7 +96,7 @@
           "client_id": "994102135545-sedpv5o87uqkjs8q76oqla5a86f0adlq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.trella",
+            "package_name": "com.easy_pro_code.panda",
             "certificate_hash": "34ceff0976725e97e4697f4d66193c6f60539de8"
           }
         },
@@ -124,7 +124,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -135,7 +135,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:994102135545:android:ce8dd428f63992cc5b3028",
         "android_client_info": {
-          "package_name": "com.easy_pro_code.trelladriver"
+          "package_name": "com.easy_pro_code.pandadriver"
         }
       },
       "oauth_client": [
@@ -143,7 +143,7 @@
           "client_id": "994102135545-9kjco89sdbctj0gt8lr23a8lv10tk09i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.trelladriver",
+            "package_name": "com.easy_pro_code.pandadriver",
             "certificate_hash": "2bc372b212de1c74dc0d818fa175014876a75915"
           }
         },
@@ -151,7 +151,7 @@
           "client_id": "994102135545-bbln9sgdkkviau7ei09k6ppltbgh8fmr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.trelladriver",
+            "package_name": "com.easy_pro_code.pandadriver",
             "certificate_hash": "039c41584a06ac49863e7d21380ed469c3f128ad"
           }
         },
@@ -179,7 +179,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -190,7 +190,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:994102135545:android:04bd73ecd84068695b3028",
         "android_client_info": {
-          "package_name": "com.easy_pro_code.uber_driver"
+          "package_name": "com.easy_pro_code.panda_driver"
         }
       },
       "oauth_client": [
@@ -198,7 +198,7 @@
           "client_id": "994102135545-1a1n6vtrt7t37cf3a3eft2i86820iond.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.uber_driver",
+            "package_name": "com.easy_pro_code.panda_driver",
             "certificate_hash": "115dcca2121dbfdf672e3fdd58ac559de3576cdb"
           }
         },
@@ -206,7 +206,7 @@
           "client_id": "994102135545-542r1ahu6lunp3pe5fb2jjaos53ht0og.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.uber_driver",
+            "package_name": "com.easy_pro_code.panda_driver",
             "certificate_hash": "cd0b8321c60af3c14d7dfcf4b99066edc743eaba"
           }
         },
@@ -214,7 +214,7 @@
           "client_id": "994102135545-oc9fuv36b7svdsnaur68r7lmek8di206.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.uber_driver",
+            "package_name": "com.easy_pro_code.panda_driver",
             "certificate_hash": "34ceff0976725e97e4697f4d66193c6f60539de8"
           }
         },
@@ -222,7 +222,7 @@
           "client_id": "994102135545-q957v0d5cccd6vsmhkq6uog2bhvkdlap.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.uber_driver",
+            "package_name": "com.easy_pro_code.panda_driver",
             "certificate_hash": "eb223e0193a8da6018508825f4936894bec8487e"
           }
         },
@@ -230,7 +230,7 @@
           "client_id": "994102135545-sijr4ncmp2us898f0gbqgl1ch5ru8j27.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.easy_pro_code.uber_driver",
+            "package_name": "com.easy_pro_code.panda_driver",
             "certificate_hash": "2bc372b212de1c74dc0d818fa175014876a75915"
           }
         },
@@ -258,7 +258,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -269,7 +269,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:994102135545:android:40a17edbc6fa6daa5b3028",
         "android_client_info": {
-          "package_name": "com.example.uber_yamen"
+          "package_name": "com.example.panda_yamen"
         }
       },
       "oauth_client": [
@@ -277,7 +277,7 @@
           "client_id": "994102135545-0fdl1mtmm2bt8avnieqr02n43h792b55.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "4e57ad2dd5bdd8a30c3ef379c3331faf9fc5efe8"
           }
         },
@@ -285,7 +285,7 @@
           "client_id": "994102135545-1l1012dvt0ehd69kdp68og2a57gnunn9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "eb223e0193a8da6018508825f4936894bec8487e"
           }
         },
@@ -293,7 +293,7 @@
           "client_id": "994102135545-5hbh40jv9796pv5ctllbjt2bbp84rg0e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "2bc372b212de1c74dc0d818fa175014876a75915"
           }
         },
@@ -301,7 +301,7 @@
           "client_id": "994102135545-eftuq6ki9bh40l9s2rh45favdbpbalf2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "1e9edc6e94e28ab995d23c95ad4eaaced035575a"
           }
         },
@@ -309,7 +309,7 @@
           "client_id": "994102135545-g8t5ebls2fq3ijcnir5jbhta2bvtap6r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "da3570a5a4574b3901bd895feefc5ca55155159f"
           }
         },
@@ -317,7 +317,7 @@
           "client_id": "994102135545-gc7g5jo3d5lm7m3n5fkjh78suc9jd5t0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "115dcca2121dbfdf672e3fdd58ac559de3576cdb"
           }
         },
@@ -325,7 +325,7 @@
           "client_id": "994102135545-hm93s6hgtskr106qpu7aug1tlundm355.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "cd0b8321c60af3c14d7dfcf4b99066edc743eaba"
           }
         },
@@ -333,7 +333,7 @@
           "client_id": "994102135545-o19b9re21j87rn1aqot6jaui4korf2rt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "56bb303f40f90cfb5fec14df485355ab5e8b7a6d"
           }
         },
@@ -341,7 +341,7 @@
           "client_id": "994102135545-uqrkn9lca7j84sqn09nforigj9k9ipda.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.uber_yamen",
+            "package_name": "com.example.panda_yamen",
             "certificate_hash": "34ceff0976725e97e4697f4d66193c6f60539de8"
           }
         },
@@ -369,7 +369,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -416,7 +416,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -463,7 +463,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -526,7 +526,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -573,7 +573,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -612,7 +612,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
@@ -659,7 +659,7 @@
               "client_id": "994102135545-lqni0973nip7s40b7lugl6j905b15llv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "easycode.UberVersion0"
+                "bundle_id": "easycode.PandaVersion0"
               }
             }
           ]
