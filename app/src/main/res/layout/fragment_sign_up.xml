@@ -50,6 +50,49 @@
         </androidx.cardview.widget.CardView>
 
         <EditText
+            android:id="@+id/first_name"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/text_input_shadow"
+            android:hint="@string/first_name"
+            android:layout_marginStart="15dp"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:fontFamily="@font/regular"
+            app:layout_constraintEnd_toStartOf="@id/last_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_view" />
+
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/text_input_shadow"
+            android:hint="@string/last_name"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingVertical="10dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:fontFamily="@font/regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/first_name"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toEndOf="@id/first_name"
+            app:layout_constraintTop_toTopOf="@id/first_name"/>
+
+        <EditText
             android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,50 +110,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_view" />
-
-        <EditText
-            android:id="@+id/first_name"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/text_input_shadow"
-            android:hint="@string/first_name"
-            android:layout_marginStart="10dp"
-            android:inputType="textPersonName"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text=""
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:fontFamily="@font/regular"
-            app:layout_constraintEnd_toStartOf="@id/last_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_name" />
-
-        <EditText
-            android:id="@+id/last_name"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/text_input_shadow"
-            android:hint="@string/last_name"
-            android:inputType="textPersonName"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingVertical="10dp"
-            android:text=""
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:fontFamily="@font/regular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/first_name"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toEndOf="@id/first_name"
-            app:layout_constraintTop_toTopOf="@id/first_name"/>
+            app:layout_constraintTop_toBottomOf="@+id/first_name" />
 
 
         <EditText
@@ -132,7 +132,7 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/first_name" />
+            app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
         <EditText
             android:id="@+id/email"
@@ -170,7 +170,6 @@
             android:id="@+id/btn_signUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="60dp"
             android:background="@drawable/radius_background"
