@@ -31,7 +31,8 @@ class LoginViewModel : ViewModel(){
     }
     fun onSucessfulsignIn(user: UserData,phoneNumber: String)
     {
-        sessionManager.saveAuthToken(user,phoneNumber)
+        //Comment
+//        sessionManager.saveAuthToken(user,phoneNumber)
     }
 
 

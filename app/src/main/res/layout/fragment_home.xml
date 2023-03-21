@@ -35,27 +35,21 @@
                     android:paddingVertical="10dp"
                     app:layout_constraintStart_toStartOf="parent">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/baseline_location_on_24"
-                        android:fontFamily="@font/regular"
-                        android:gravity="center"
-                        android:text="@string/delivery_to_sanaa_yemen"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                    <EditText
+                        android:id="@+id/locationDetection"
+                        android:background="@drawable/text_input_shadow"
+                        android:drawableStart="@drawable/baseline_location_on_24"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Detect the shipping location"
+                        android:singleLine="true"
+                        android:textAllCaps="false"
+                        android:textSize="15sp"
+                        android:editable="false"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"/>
 
-                    <Spinner
-                        android:id="@+id/dropdown_menu_address"
-                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/address"
-                        android:spinnerMode="dropdown"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/text_view_payment_methods"
-                        tools:ignore="TouchTargetSizeCheck" />
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <ImageView
