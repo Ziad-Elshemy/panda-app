@@ -19,10 +19,9 @@ import androidx.navigation.fragment.navArgs
 import com.easy_pro_code.panda.AuthFragment.AuthFragment
 import com.easy_pro_code.panda.HomeFlow.HomeActivity
 import com.easy_pro_code.panda.R
-import com.easy_pro_code.panda.databinding.FragmentOtpBinding
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.data.Models.remote_firebase.FirebaseUtils
-
+import com.easy_pro_code.panda.databinding.FragmentOtpBinding
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.coroutines.delay
@@ -86,6 +85,7 @@ class OtpFragment : AuthFragment() {
                     runBlocking {
                         delay(3000)
                         signedInSuccessful()
+
                     }
                     //successStart()
                 }else{
@@ -102,6 +102,7 @@ class OtpFragment : AuthFragment() {
     private fun signedInSuccessful() {
         binding.progressBarLoadingOtpVerification.visibility = View.GONE
         val intent=Intent(requireContext(),HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
     override fun successState(verificationId: String, token: PhoneAuthProvider.ForceResendingToken)
