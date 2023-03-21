@@ -24,8 +24,6 @@ import com.easy_pro_code.panda.databinding.FragmentOtpBinding
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.data.Models.remote_firebase.FirebaseUtils
 import com.easy_pro_code.panda.data.Models.remote_firebase.PhoneVerification
-
-import com.easy_pro_code.panda.databinding.FragmentOtpBinding
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
