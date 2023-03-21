@@ -11,6 +11,12 @@
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.home.HomeFragment"
         android:label="HomeFragment" >
         <action
+            android:id="@+id/action_homeFragment_to_myAccountFragment2"
+            app:destination="@id/myAccountFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoriesFragment2"
+            app:destination="@id/categoriesFragment2" />
+        <action
             android:id="@+id/action_homeFragment_to_productPageFragment"
             app:destination="@id/productPageFragment" />
     </fragment>
@@ -88,4 +94,11 @@
         android:id="@+id/productPageFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.productPage.ProductPageFragment"
         android:label="ProductPageFragment" />
+    <fragment
+        tools:layout="@layout/fragment_search_results"
+        android:id="@+id/categoriesFragment2"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.categories2.CategoriesFragment2"
+        android:label="CategoriesFragment2" >
+        <argument android:name="category" />
+    </fragment>
 </navigation>

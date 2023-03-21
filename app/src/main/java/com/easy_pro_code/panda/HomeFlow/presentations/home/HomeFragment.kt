@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.denzcoskun.imageslider.models.SlideModel
-import com.easy_pro_code.panda.HomeFlow.models.Product
-import com.easy_pro_code.panda.HomeFlow.models.toProduct
+import com.easy_pro_code.panda.HomeFlow.models.*
 import com.easy_pro_code.panda.HomeFlow.view_model.HomeViewModel
+import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.databinding.FragmentHomeBinding
 
@@ -19,12 +20,17 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding:FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
+    private val suspendWindowViewModel:SuspendWindowViewModel by activityViewModels()
     private val productsList:List<Product>? = listOf()
-    private val offersList:List<Product>? = listOf()
+    private val offersList:List<Offer>? = listOf()
+    private val categoryList:List<String>?= listOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeViewModel=ViewModelProvider(this).get(HomeViewModel::class.java)
+
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,24 +57,39 @@ class HomeFragment : Fragment() {
         )
         val imageSlider = binding.imageSlider
         imageSlider.setImageList(imageList)
+
         val productsAdapter=ProductsHomeRecyclerView(productsList)
         binding.productRv.adapter=productsAdapter
         productsAdapter.submitList(productsList)
-        val offersAdapter=ProductsHomeRecyclerView(offersList)
+        val offersAdapter=OffersRecyclerView(offersList)
         offersAdapter.submitList(offersList)
         binding.offersRv.adapter=offersAdapter
-        subscribeToLiveData(productsAdapter,offersAdapter)
+        val categoriesAdapter=CategoryRecyclerViewAdapter(categoryList)
+        binding.categoriesRv.adapter=categoriesAdapter
+        subscribeToLiveData(productsAdapter,offersAdapter,categoriesAdapter)
         homeViewModel.getAllProducts()
+        homeViewModel.getAllOffers()
+        homeViewModel.getAllCategories()
+        suspendWindowViewModel.progressBar(true)
         return binding.root
     }
 
     private fun subscribeToLiveData(
         productsAdapter: ProductsHomeRecyclerView,
-        offersAdapter: ProductsHomeRecyclerView
+        offersAdapter: OffersRecyclerView,
+        categoriesAdapter: CategoryRecyclerViewAdapter
     ) {
         homeViewModel.productsLiveData.observe(viewLifecycleOwner){
-            productsAdapter.submitList(it.products.toProduct())
-            offersAdapter.submitList(it.products.toProduct())
+            suspendWindowViewModel.progressBar(false)
+            productsAdapter.submitList(it.products.fromProductToProduct())
+        }
+
+        homeViewModel.offersLiveData.observe(viewLifecycleOwner){
+            offersAdapter.submitList(it.offers.fromOfferToProduct())
+        }
+
+        homeViewModel.categoryLiveData.observe(viewLifecycleOwner){
+            categoriesAdapter.submitList(it.category.categoryItemToMainCategoryName())
         }
     }
 

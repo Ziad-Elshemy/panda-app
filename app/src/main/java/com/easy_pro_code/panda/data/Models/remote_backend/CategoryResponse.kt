@@ -5,20 +5,14 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class GetAllProductsResponse(
+data class CategoryResponse(
 
-	@field:SerializedName("products")
-	val products: List<ProductsItem>? = null
+	@field:SerializedName("category")
+	val category: List<CategoryItem>? = null
 ) : Parcelable
 
 @Parcelize
-data class ProductsItem(
-
-	@field:SerializedName("Category")
-	val category: String? = null,
-
-	@field:SerializedName("Price")
-	val price: String? = null,
+data class CategoryItem(
 
 	@field:SerializedName("__v")
 	val v: Int? = null,
@@ -29,9 +23,6 @@ data class ProductsItem(
 	@field:SerializedName("_id")
 	val id: String? = null,
 
-	@field:SerializedName("Image")
-	val image: String? = null,
-
-	@field:SerializedName("rate")
-	val rate:Int?=null
+	@field:SerializedName("Main")
+	val main: String? = null
 ) : Parcelable
