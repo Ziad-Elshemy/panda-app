@@ -55,6 +55,7 @@ class LoginFragment : AuthFragment() {
         binding.skip.setOnClickListener {
             val intent = Intent(requireContext(),HomeActivity::class.java)
             startActivity(intent)
+            requireActivity().finish()
 
         }
 
