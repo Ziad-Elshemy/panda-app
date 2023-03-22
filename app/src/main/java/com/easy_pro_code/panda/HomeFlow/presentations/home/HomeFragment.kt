@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.denzcoskun.imageslider.models.SlideModel
 import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.HomeFlow.models.toProduct
+import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.HomeViewModel
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.databinding.FragmentHomeBinding
@@ -51,14 +53,23 @@ class HomeFragment : Fragment() {
         )
         val imageSlider = binding.imageSlider
         imageSlider.setImageList(imageList)
+
+
         val productsAdapter=ProductsHomeRecyclerView(productsList)
         binding.productRv.adapter=productsAdapter
         productsAdapter.submitList(productsList)
+
+
         val offersAdapter=ProductsHomeRecyclerView(offersList)
         offersAdapter.submitList(offersList)
         binding.offersRv.adapter=offersAdapter
+
         subscribeToLiveData(productsAdapter,offersAdapter)
         homeViewModel.getAllProducts()
+
+
+
+
         return binding.root
     }
 

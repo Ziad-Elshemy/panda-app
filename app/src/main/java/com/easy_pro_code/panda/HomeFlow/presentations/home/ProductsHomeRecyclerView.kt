@@ -22,6 +22,7 @@ class ProductsHomeRecyclerView(
         {
             val item=getItem(position)
             (holder as ProductViewHolder).bind(item)
+
         }
 
 
@@ -44,8 +45,11 @@ class ProductsHomeRecyclerView(
             binding.productName.setText(product.title)
             binding.productPrice.setText(product.price)
             binding.executePendingBindings()
+
+
         }
     }
+
 
     class ProductDiffUtil : DiffUtil.ItemCallback<Product>()
     {
@@ -58,4 +62,9 @@ class ProductsHomeRecyclerView(
             return oldItem == newItem
         }
 
+
+
     }
+
+
+

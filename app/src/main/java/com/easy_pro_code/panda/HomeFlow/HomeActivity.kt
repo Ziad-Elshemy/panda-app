@@ -2,14 +2,13 @@ package com.easy_pro_code.panda.HomeFlow
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.easy_pro_code.panda.HomeFlow.presentations.cart.cart
+import com.easy_pro_code.panda.HomeFlow.presentations.cart.MyCartFargment
 import com.easy_pro_code.panda.HomeFlow.presentations.categories1.Categories1Fragment
 import com.easy_pro_code.panda.HomeFlow.presentations.home.HomeFragment
 import com.easy_pro_code.panda.HomeFlow.presentations.myAccount.MyAccountFragment
 import com.easy_pro_code.panda.HomeFlow.presentations.wishlist.WishListFragment
 import com.easy_pro_code.panda.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarItemView
 import com.google.android.material.navigation.NavigationBarView
 
 class HomeActivity : AppCompatActivity() {
@@ -37,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
                     .commit()
             }else if (menuItem.itemId == R.id.navigation_cartFragment){
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView,cart())
+                    .replace(R.id.fragmentContainerView,MyCartFargment())
                     .commit()
             }else if (menuItem.itemId == R.id.navigation_myAccountFragment){
                 supportFragmentManager.beginTransaction()

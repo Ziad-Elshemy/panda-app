@@ -1,6 +1,7 @@
 package com.easy_pro_code.panda.data.api.api_manager
 
 import com.easy_pro_code.panda.data.api.web_services.AuthenticationWebService
+import com.easy_pro_code.panda.data.api.web_services.CartWebService
 import com.easy_pro_code.panda.data.api.web_services.ProductWebService
 import com.sendbird.android.shadow.okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,6 +42,13 @@ class ApiManager {
         }
         fun getProductApi(): ProductWebService {
             return getInstance().create(ProductWebService::class.java)
+        }
+        fun AddCartApi(): CartWebService {
+            return getInstance().create(CartWebService::class.java)
+        }
+
+        fun getAllCartApi(): CartWebService {
+            return getInstance().create(CartWebService::class.java)
         }
     }
 }

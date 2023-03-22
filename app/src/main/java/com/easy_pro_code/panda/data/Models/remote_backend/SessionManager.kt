@@ -14,6 +14,7 @@ class SessionManager (context: Context) {
 
     companion object {
         const val USER_TOKEN = "user_token"
+        const val CART_ID = "cart_id"
         const val USER_NAME = "user_name"
         const val ROLE = "role"
         const val PHONE = "phone"
@@ -29,6 +30,12 @@ class SessionManager (context: Context) {
             }
             return sessionManager as SessionManager
         }
+    }
+
+    fun saveCartId(cartId:String){
+        val editor = prefsobj.edit()
+        editor.putString(CART_ID,cartId)
+        editor.apply()
     }
 
     fun saveAuthToken(user: UserData, phone:String) {
@@ -59,6 +66,10 @@ class SessionManager (context: Context) {
 
     fun getToken():String?{
         return prefsobj.getString(USER_TOKEN,null)
+    }
+
+    fun getCartId():String?{
+        return prefsobj.getString(CART_ID,null)
     }
 
     fun isTokenExpired():Boolean?{

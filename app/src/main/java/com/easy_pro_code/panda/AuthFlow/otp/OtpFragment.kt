@@ -16,7 +16,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.easy_pro_code.panda.AuthFragment.AuthFragment
+import com.easy_pro_code.panda.AuthFlow.AuthFragment.AuthFragment
 import com.easy_pro_code.panda.HomeFlow.HomeActivity
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
