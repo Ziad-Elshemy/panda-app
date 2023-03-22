@@ -1,13 +1,12 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.easy_pro_code.panda.HomeFlow.models.Offer
 import com.easy_pro_code.panda.databinding.CategoriesListItemBinding
-import com.easy_pro_code.panda.databinding.OffersListItemBinding
 
 class CategoryRecyclerViewAdapter  (val dataList: List<String>?)
     : ListAdapter<String, RecyclerView.ViewHolder>(CategoryDiffUtil())
@@ -21,7 +20,14 @@ class CategoryRecyclerViewAdapter  (val dataList: List<String>?)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
     {
         val item=getItem(position)
-        (holder as CategoryViewHolder).bind(item)
+        (holder as CategoryViewHolder).bind(item,onCategoryClickListener)
+    }
+
+    var onCategoryClickListener:OnCategoryClickListener?=null
+
+
+    interface OnCategoryClickListener{
+        fun onClick(category: String)
     }
 
 
@@ -39,9 +45,16 @@ class CategoryViewHolder(val binding: CategoriesListItemBinding) : RecyclerView.
         }
     }
 
-    fun bind(category: String)
+    fun bind(
+        category: String,
+        onCategoryClickListener: CategoryRecyclerViewAdapter.OnCategoryClickListener?
+    )
     {
         binding.cateName.setText(category)
+        binding.cateCardView.setOnClickListener {
+            Log.i("onCategoryClickListener",onCategoryClickListener.toString())
+            onCategoryClickListener?.onClick(category)
+        }
         binding.executePendingBindings()
     }
 }

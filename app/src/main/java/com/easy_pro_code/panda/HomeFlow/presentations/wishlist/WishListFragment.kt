@@ -18,7 +18,7 @@ import com.easy_pro_code.panda.databinding.FragmentWishListBinding
 class WishListFragment : Fragment() {
     private lateinit var viewBinding:FragmentWishListBinding
     private lateinit var wishListViewModel: WishListViewModel
-    private val wishList:List<Product> = listOf()
+    private var wishList:List<Product> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +31,16 @@ class WishListFragment : Fragment() {
     ): View? {
         viewBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_wish_list,container,false)
         val wishListAdapter=ProductsHomeRecyclerView(wishList)
+        viewBinding.notificationRv.adapter=wishListAdapter
         subscribeToLiveData(wishListAdapter)
+        wishListViewModel.getAll()
         return viewBinding.root
     }
 
     private fun subscribeToLiveData(wishListAdapter: ProductsHomeRecyclerView) {
         wishListViewModel.wishListLiveData.observe(viewLifecycleOwner){
-            wishListAdapter.submitList(it.fromWishProductToProduct())
+            wishList= it.fromWishProductToProduct()!!
+            wishListAdapter.submitList(wishList)
         }
     }
 

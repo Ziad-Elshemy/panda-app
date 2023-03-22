@@ -87,13 +87,24 @@
     <fragment
         tools:layout="@layout/fragment_cart"
         android:id="@+id/cart"
-        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.cart"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.MyCartFargment"
         android:label="cart" />
     <fragment
         tools:layout="@layout/fragment_product_page"
         android:id="@+id/productPageFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.productPage.ProductPageFragment"
-        android:label="ProductPageFragment" />
+        android:label="ProductPageFragment" >
+        <argument
+            android:name="product"
+            app:argType="com.easy_pro_code.panda.HomeFlow.models.Product"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="offer"
+            app:argType="com.easy_pro_code.panda.HomeFlow.models.Offer"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_search_results"
         android:id="@+id/categoriesFragment2"

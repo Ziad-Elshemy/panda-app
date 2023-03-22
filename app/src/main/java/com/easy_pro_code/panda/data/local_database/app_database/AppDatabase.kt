@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.easy_pro_code.panda.data.Models.local_database.WishProduct
 import com.easy_pro_code.panda.data.local_database.WishListDao
 
-@Database(entities = [WishProduct::class], version = 1)
+@Database(entities = [WishProduct::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun wishListDao(): WishListDao
     companion object{

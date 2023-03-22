@@ -1,3 +1,7 @@
 package com.easy_pro_code.panda.HomeFlow.models
 
-data class Offer(val product: Product,val newPrice:String)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Offer(val product: Product,val newPrice:String): Parcelable

@@ -7,5 +7,5 @@ import retrofit2.http.Headers
 interface CategoryWebService {
     @GET("category")
     @Headers("authorization:Basic UIOIKMJOYWRtaW46cGFzc3dvcmQ=")
-    fun getAllCategories():CategoryResponse
+    suspend fun getAllCategories():CategoryResponse
 }

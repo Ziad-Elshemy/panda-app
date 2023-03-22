@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class WishProduct(
-    @PrimaryKey val productId: String? = null,
+    @PrimaryKey val productId: String,
     @ColumnInfo(name = "category") val category: String? = null,
     @ColumnInfo(name = "price") val price: String? = null,
     @ColumnInfo(name = "title") val title: String? = null,

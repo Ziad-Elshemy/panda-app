@@ -33,6 +33,16 @@ fun List<OffersItem>?.fromOfferToProduct(): List<Offer>? = this?.map {
     )
 }
 
+fun Product.fromProductItemToWishProduct():WishProduct=
+    WishProduct(
+        productId = this.id.toString(),
+        category=this.category,
+        price=this.price,
+        title=this.title,
+        image=this.image,
+        rate=this.rate
+    )
+
 
 fun List<WishProduct>?.fromWishProductToProduct(): List<Product>? = this?.map {
     Product(

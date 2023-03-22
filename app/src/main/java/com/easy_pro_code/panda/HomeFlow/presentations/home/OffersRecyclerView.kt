@@ -20,7 +20,16 @@ class OffersRecyclerView (val dataList: List<Offer>?)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
     {
         val item=getItem(position)
-        (holder as OfferViewHolder).bind(item)
+        (holder as OfferViewHolder).bind(item,onOfferClickListener)
+    }
+
+    var onOfferClickListener:OnOfferClickListener?=null
+
+
+    interface OnOfferClickListener{
+        fun onClick(offer: Offer)
+        fun onCheck(offer: Offer)
+        fun onUnCheck(offer: Offer)
     }
 
 
@@ -38,11 +47,19 @@ class OfferViewHolder(val binding: OffersListItemBinding) : RecyclerView.ViewHol
         }
     }
 
-    fun bind(offer: Offer)
+    fun bind(offer: Offer, onOfferClickListener: OffersRecyclerView.OnOfferClickListener?)
     {
         binding.offerName.setText(offer.product.title)
         binding.offerPrice.setText(offer.newPrice)
         binding.offerOldPrice.setText(offer.product.price)
+        binding.frame2.setOnClickListener{
+            onOfferClickListener?.onClick(offer)
+        }
+        binding.favIcon.setOnCheckedChangeListener{
+                checkBox,isChecked->
+            if (isChecked) onOfferClickListener?.onCheck(offer)
+            else onOfferClickListener?.onUnCheck(offer)
+        }
         binding.executePendingBindings()
     }
 }

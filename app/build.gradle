@@ -27,6 +27,7 @@ android {
 //
     buildTypes {
         debug{
+            //
             manifestPlaceholders=[userCleartextTraffic:"true"]
 
             buildConfigField "String","MAPS_API_KEY",testMapsApiKey
@@ -109,7 +110,8 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha11"
 
     //room
+    implementation "androidx.room:room-ktx:2.5.0"
     implementation "androidx.room:room-runtime:2.5.0"
     kapt "androidx.room:room-compiler:2.5.0"
-
+    //
 }

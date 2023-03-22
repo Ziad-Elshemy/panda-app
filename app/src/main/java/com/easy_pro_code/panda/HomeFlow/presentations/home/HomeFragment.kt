@@ -9,15 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.denzcoskun.imageslider.models.SlideModel
 import com.easy_pro_code.panda.HomeFlow.models.*
 import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.Product
-import com.easy_pro_code.panda.HomeFlow.models.toProduct
 import com.easy_pro_code.panda.HomeFlow.view_model.HomeViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
 import com.easy_pro_code.panda.R
@@ -26,6 +31,7 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class HomeFragment : Fragment() {
@@ -88,6 +94,7 @@ class HomeFragment : Fragment() {
         binding.offersRv.adapter=offersAdapter
         val categoriesAdapter=CategoryRecyclerViewAdapter(categoryList)
         binding.categoriesRv.adapter=categoriesAdapter
+        setAdapterClickListener(productsAdapter,offersAdapter,categoriesAdapter)
         subscribeToLiveData(productsAdapter,offersAdapter,categoriesAdapter)
         homeViewModel.getAllProducts()
 
@@ -102,6 +109,62 @@ class HomeFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    private fun setAdapterClickListener(
+        productsAdapter: ProductsHomeRecyclerView,
+        offersAdapter: OffersRecyclerView,
+        categoriesAdapter: CategoryRecyclerViewAdapter
+    ) {
+        productsAdapter.onProductClickListener=object :ProductsHomeRecyclerView.OnProductClickListener{
+            override fun onClick(product: Product) {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
+                        product = product,
+                        offer = null
+                    )
+                )
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
+
+            }
+
+            override fun onCheck(product: Product) {
+                homeViewModel.addToWishList(product)
+            }
+
+            override fun onUnCheck(product: Product) {
+                homeViewModel.removeFromWishList(product)
+            }
+
+        }
+
+        offersAdapter.onOfferClickListener=object :OffersRecyclerView.OnOfferClickListener{
+            override fun onClick(offer: Offer) {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
+                    product = null,
+                    offer = offer
+                )
+                )
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
+
+            }
+
+            override fun onCheck(offer: Offer) {
+                homeViewModel.addToWishList(offer.product)
+            }
+
+            override fun onUnCheck(offer: Offer) {
+                homeViewModel.removeFromWishList(offer.product)
+            }
+
+        }
+
+        categoriesAdapter.onCategoryClickListener=object :CategoryRecyclerViewAdapter.OnCategoryClickListener{
+            override fun onClick(category: String) {
+                Log.i("onCategoryClickListener",category)
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCategoriesFragment2(category))
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
+            }
+        }
     }
 
 
@@ -174,4 +237,11 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=true
     }
+    }
+
+
