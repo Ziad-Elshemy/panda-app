@@ -1,4 +1,4 @@
-package com.easy_pro_code.panda.AuthFragment
+package com.easy_pro_code.panda.AuthFlow.AuthFragment
 
 import android.os.Bundle
 import android.util.Log

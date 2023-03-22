@@ -13,7 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.AuthFlow.Model.LoginViewModel
-import com.easy_pro_code.panda.AuthFragment.AuthFragment
+import com.easy_pro_code.panda.AuthFlow.AuthFragment.AuthFragment
 import com.easy_pro_code.panda.HomeFlow.HomeActivity
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_backend.UserData
@@ -55,6 +55,7 @@ class LoginFragment : AuthFragment() {
         binding.skip.setOnClickListener {
             val intent = Intent(requireContext(),HomeActivity::class.java)
             startActivity(intent)
+            requireActivity().finish()
 
         }
 

@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.myAccount
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
@@ -47,10 +49,18 @@ class MyAccountFragment : Fragment() {
             binding.editAccountBtn.isVisible=false
             binding.myOrdersBtn.isVisible=false
             binding.support2Btn.isVisible=false
+            binding.logoutBtn.isVisible=false
+
+            binding.Divider1.isVisible=false
+            binding.Divider2.isVisible=false
+            binding.Divider3.isVisible=false
+            binding.Divider4.isVisible=false
+            binding.Divider10.isVisible=false
 
             binding.loginBtn.setOnClickListener {
 //            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToLoginFragment2()
 //            findNavController().navigate(action)
+
 
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
@@ -78,6 +88,9 @@ class MyAccountFragment : Fragment() {
 
             binding.loginBtn.isVisible=false
             binding.signupBtn.isVisible = false
+
+            binding.Divider1.isVisible=false
+            binding.Divider10.isVisible=false
 //            binding.signupBtn.setOnClickListener {
 ////            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToSignUpFragment2()
 ////            findNavController().navigate(action)
@@ -111,6 +124,24 @@ class MyAccountFragment : Fragment() {
             }
             binding.support2Btn.setOnClickListener {
                 Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
+            }
+
+            binding.logoutBtn.setOnClickListener {
+                val view = layoutInflater.inflate(R.layout.logout_dialog,null)
+                val logoutBoxBuilder = AlertDialog.Builder(requireContext()).setView(view).create()
+                logoutBoxBuilder.show()
+                val cancelButton: Button = view.findViewById(R.id.btn_cancel)
+                cancelButton.setOnClickListener {
+                    logoutBoxBuilder.dismiss()
+                }
+                val okButton: Button = view.findViewById(R.id.btn_ok)
+                okButton.setOnClickListener {
+                    sessionManager.deleteData()
+
+                    val intent = Intent(requireContext(),MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
             }
 
         }
