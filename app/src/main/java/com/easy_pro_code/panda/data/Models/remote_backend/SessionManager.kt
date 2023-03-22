@@ -45,6 +45,8 @@ class SessionManager (context: Context) {
        // editor.putStringSet(ROLE, user.roles?.toSet())
         editor.putString(EMAIL, user.email)
         editor.putString(PHONE, phone)
+        Log.i("USER_TOKEN",user.token.toString())
+        editor.putString(USER_TOKEN , user.token)
         user.id?.let { editor.putString(ID, it) }
         editor.putString(
             EXPIRE_DATE,
@@ -71,6 +73,7 @@ class SessionManager (context: Context) {
     fun getCartId():String?{
         return prefsobj.getString(CART_ID,null)
     }
+
 
     fun isTokenExpired():Boolean?{
         val current = LocalDateTime.now(ZoneId.of("UTC"))

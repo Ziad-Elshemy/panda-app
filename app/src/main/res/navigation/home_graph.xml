@@ -11,14 +11,8 @@
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.home.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_wishListFragment"
-            app:destination="@id/wishListFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_categories1Fragment"
-            app:destination="@id/categories1Fragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_myAccountFragment2"
-            app:destination="@id/myAccountFragment2" />
+            android:id="@+id/action_homeFragment_to_productPageFragment"
+            app:destination="@id/productPageFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_wish_list"
@@ -34,5 +28,64 @@
         tools:layout="@layout/fragment_my_account"
         android:id="@+id/myAccountFragment2"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.myAccount.MyAccountFragment"
-        android:label="MyAccountFragment" />
+        android:label="MyAccountFragment" >
+        <action
+            android:id="@+id/action_myAccountFragment2_to_loginFragment2"
+            app:destination="@id/loginFragment2" />
+        <action
+            android:id="@+id/action_myAccountFragment2_to_signUpFragment2"
+            app:destination="@id/signUpFragment2" />
+        <action
+            android:id="@+id/action_myAccountFragment2_to_myWalletFragment"
+            app:destination="@id/myWalletFragment" />
+        <action
+            android:id="@+id/action_myAccountFragment2_to_editMyAccountFragment"
+            app:destination="@id/editMyAccountFragment" />
+        <action
+            android:id="@+id/action_myAccountFragment2_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
+        <action
+            android:id="@+id/action_myAccountFragment2_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_about"
+        android:id="@+id/aboutFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.About.AboutFragment"
+        android:label="AboutFragment" />
+    <fragment
+        tools:layout="@layout/fragment_login"
+        android:id="@+id/loginFragment2"
+        android:name="com.easy_pro_code.panda.AuthFlow.login.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        tools:layout="@layout/fragment_my_wallet"
+        android:id="@+id/myWalletFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.myWallet.MyWalletFragment"
+        android:label="MyWalletFragment" />
+    <fragment
+        tools:layout="@layout/fragment_sign_up"
+        android:id="@+id/signUpFragment2"
+        android:name="com.easy_pro_code.panda.AuthFlow.signUp.SignUpFragment"
+        android:label="SignUpFragment" />
+    <fragment
+        tools:layout="@layout/fragment_edit_my_account"
+        android:id="@+id/editMyAccountFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.editMyAccount.EditMyAccountFragment"
+        android:label="EditMyAccountFragment" />
+    <fragment
+        tools:layout="@layout/fragment_my_orders"
+        android:id="@+id/myOrdersFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.myOrders.MyOrdersFragment"
+        android:label="MyOrdersFragment" />
+    <fragment
+        tools:layout="@layout/fragment_cart"
+        android:id="@+id/cart"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.cart"
+        android:label="cart" />
+    <fragment
+        tools:layout="@layout/fragment_product_page"
+        android:id="@+id/productPageFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.productPage.ProductPageFragment"
+        android:label="ProductPageFragment" />
 </navigation>

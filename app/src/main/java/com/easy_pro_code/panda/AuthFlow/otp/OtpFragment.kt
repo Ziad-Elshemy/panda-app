@@ -19,11 +19,15 @@ import androidx.navigation.fragment.navArgs
 import com.easy_pro_code.panda.AuthFlow.AuthFragment.AuthFragment
 import com.easy_pro_code.panda.HomeFlow.HomeActivity
 import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.remote_backend.UserData
+import com.easy_pro_code.panda.databinding.FragmentOtpBinding
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.data.Models.remote_firebase.FirebaseUtils
-import com.easy_pro_code.panda.databinding.FragmentOtpBinding
+import com.easy_pro_code.panda.data.Models.remote_firebase.PhoneVerification
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
@@ -32,6 +36,12 @@ import java.util.concurrent.TimeUnit
 class OtpFragment : AuthFragment() {
 
     lateinit var binding:FragmentOtpBinding
+    private lateinit var userData: UserData
+    private lateinit var phoneData: PhoneVerification
+    lateinit var mVerificationId: String
+    val otpFragmentArgs:OtpFragmentArgs by navArgs()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +49,11 @@ class OtpFragment : AuthFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_otp,container,false)
+
+        userData=otpFragmentArgs.userData
+        phoneData=otpFragmentArgs.phoneData
+        mVerificationId=phoneData.verificationId
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 AuthUtils.manager.deleteData()
@@ -47,7 +62,7 @@ class OtpFragment : AuthFragment() {
         })
 
         val args: OtpFragmentArgs by navArgs()
-        val verficationId: String = args.verficationId
+        val verficationId: String = args.phoneData.verificationId
         Log.i("michael", verficationId)
 
 
@@ -58,6 +73,7 @@ class OtpFragment : AuthFragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s.toString().length == 6) {
                     verifyPhoneNumber(verficationId, binding.pinViewOtpCode.text.toString())
+
                 }
             }
 
@@ -69,45 +85,38 @@ class OtpFragment : AuthFragment() {
         return binding.root
     }
 
-    private fun verifyPhoneNumber(verificationId: String, code: String)
-    {
-        //val code = codeVerification()
-        Log.i("Error", code)
-        if(code.length == 6 && TextUtils.isDigitsOnly(code))
-        {
-            loadingState()
-
+    private fun verifyPhoneNumber(verificationId: String, code: String) {
+        if (code.length == 6 && TextUtils.isDigitsOnly(code)) {
             val credential = PhoneAuthProvider.getCredential(verificationId, code)
-            FirebaseUtils.auth.signInWithCredential(credential).addOnCompleteListener {
-                if (it.isSuccessful)
-                {
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
-                    runBlocking {
-                        delay(3000)
-                        signedInSuccessful()
-
-                    }
-                    //successStart()
-                }else{
-                    //EditHere
-                    errorState()
+            Firebase.auth.signInWithCredential(credential).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    AuthUtils.manager.saveAuthToken(userData,phoneData.phoneNumber)
+                    Log.i("Phone", "TokenSaved")
+                    val homeIntent = Intent(requireContext(), HomeActivity::class.java)
+                    startActivity(homeIntent)
+                    requireActivity().finish()
+                } else {
+                    Toast.makeText(requireContext(), "Enter Valid Code", Toast.LENGTH_LONG).show()
                 }
 
             }
-        }
-        else{
+        } else {
             Log.i("Error", "Error code")
         }
     }
+
     private fun signedInSuccessful() {
         binding.progressBarLoadingOtpVerification.visibility = View.GONE
         val intent=Intent(requireContext(),HomeActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
     override fun successState(verificationId: String, token: PhoneAuthProvider.ForceResendingToken)
     {
         Toast.makeText(requireContext(), "Welcome", Toast.LENGTH_LONG).show()
+        /// by navArgs
+
+//        AuthUtils.manager.saveAuthToken(user,phoneNumber)
+
     }
 
     override fun errorState() {

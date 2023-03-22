@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_homeFragment"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/home_icon"
         android:title="Home"  />
     <item
-        android:id="@+id/navigation_favoriteFragment"
+        android:id="@+id/wishListFragment"
         android:icon="@drawable/favorite_icon"
         android:title="WishList" />
     <item
-        android:id="@+id/navigation_categoriesFragment"
+        android:id="@+id/categories1Fragment"
         android:icon="@drawable/categories"
         android:title="Categories" />
     <item
-        android:id="@+id/navigation_cartFragment"
+        android:id="@+id/cart"
         android:icon="@drawable/cart"
         android:title="Cart" />
 
     <item
-        android:id="@+id/navigation_myAccountFragment"
+        android:id="@+id/myAccountFragment2"
         android:icon="@drawable/my_account"
         android:title="My Account" />
 
