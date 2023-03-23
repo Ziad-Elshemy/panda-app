@@ -11,19 +11,34 @@
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.home.HomeFragment"
         android:label="HomeFragment" >
         <action
+            android:id="@+id/action_homeFragment_to_myAccountFragment2"
+            app:destination="@id/myAccountFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoriesFragment2"
+            app:destination="@id/categoriesFragment2" />
+        <action
             android:id="@+id/action_homeFragment_to_productPageFragment"
             app:destination="@id/productPageFragment" />
+
     </fragment>
     <fragment
         tools:layout="@layout/fragment_wish_list"
         android:id="@+id/wishListFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.wishlist.WishListFragment"
-        android:label="WishListFragment" />
+        android:label="WishListFragment" >
+        <action
+            android:id="@+id/action_wishListFragment_to_productPageFragment"
+            app:destination="@id/productPageFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_categories1"
         android:id="@+id/categories1Fragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.categories1.Categories1Fragment"
-        android:label="Categories1Fragment" />
+        android:label="Categories1Fragment" >
+        <action
+            android:id="@+id/action_categories1Fragment_to_categoriesFragment2"
+            app:destination="@id/categoriesFragment2" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_my_account"
         android:id="@+id/myAccountFragment2"
@@ -88,6 +103,15 @@
             app:destination="@id/emptyCartFragment" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_empty_cart"
+        android:id="@+id/emptyCartFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.EmptyCartFragment"
+        android:label="EmptyCartFragment" >
+        <action
+            android:id="@+id/action_emptyCartFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
         tools:layout="@layout/fragment_product_page"
         android:id="@+id/productPageFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.productPage.ProductPageFragment"
@@ -110,13 +134,6 @@
         android:label="CategoriesFragment2" >
         <argument android:name="category" />
     </fragment>
-    <fragment
-        tools:layout="@layout/fragment_empty_cart"
-        android:id="@+id/emptyCartFragment"
-        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.EmptyCartFragment"
-        android:label="EmptyCartFragment" >
-        <action
-            android:id="@+id/action_emptyCartFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+
+
 </navigation>

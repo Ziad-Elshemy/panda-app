@@ -1,21 +1,21 @@
 package com.easy_pro_code.panda.data.Models.remote_backend
 
+import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class AddCartRequest(
 
 	@field:SerializedName("Items")
-	val items: List<ProductItemsItemRequest?>? = null,
+	val items: List<ItemsItemResponse?>? = null,
 
 	@field:SerializedName("userId")
 	val userId: String? = null
 ) : Parcelable
 
 @Parcelize
-data class ProductItemsItemRequest(
+data class ItemsItem(
 
 	@field:SerializedName("productId")
 	val productId: String? = null,
