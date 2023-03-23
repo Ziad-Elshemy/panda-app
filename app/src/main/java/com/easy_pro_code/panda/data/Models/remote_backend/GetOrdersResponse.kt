@@ -12,7 +12,7 @@ data class GetOrdersResponse(
 ) : Parcelable
 
 @Parcelize
-data class ItemsItem(
+data class OrderItemsItem(
 
 	@field:SerializedName("productId")
 	val productId: ProductId? = null,
@@ -87,17 +87,17 @@ data class OrdersItem(
 	val userId: UserId? = null,
 
 	@field:SerializedName("Cart")
-	val cart: Cart? = null
+	val cart: OrderCart? = null
 ) : Parcelable
 
 @Parcelize
-data class Cart(
+data class OrderCart(
 
 	@field:SerializedName("__v")
 	val v: Int? = null,
 
 	@field:SerializedName("Items")
-	val items: List<ItemsItem?>? = null,
+	val items: List<OrderItemsItem?>? = null,
 
 	@field:SerializedName("_id")
 	val id: String? = null,

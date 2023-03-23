@@ -2,9 +2,8 @@ package com.easy_pro_code.panda.data.api.web_services
 
 import com.easy_pro_code.panda.HomeFlow.view_model.GetCartById
 import com.easy_pro_code.panda.data.Models.remote_backend.AddCartRequest
-import com.easy_pro_code.panda.data.Models.remote_backend.Cart
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
-import retrofit2.Response
 import retrofit2.http.*
 
 interface CartWebService {
@@ -14,7 +13,7 @@ interface CartWebService {
     suspend fun addCart(
         @Body product : AddCartRequest,
         @Header("token")token:String?= AuthUtils.manager.getToken()
-    ): Cart
+    ): OrderCart
 
 
     @GET("cart/product/{reqId}")

@@ -28,6 +28,8 @@ class MyOrdersFragment : Fragment() {
 
     var list:List<Order>?= listOf()
 
+    var orderList:List<Order>?= listOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +40,11 @@ class MyOrdersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_my_orders,container,false)
-        ordersViewModel.getAllOrders()
         val adapter = MyOrdersAdapter(
             ReviewButtonClickListener {
             Toast.makeText(requireContext(),"Coming Soon",Toast.LENGTH_LONG).show()
         },list!!)
+
 
 
         binding.ordersRv.adapter=adapter
@@ -50,38 +52,61 @@ class MyOrdersFragment : Fragment() {
         adapter.submitList(list)
 
         ordersViewModel.orderLiveData.observe(viewLifecycleOwner)
-        {
-            it?.let {
+        { it ->
+
+            it?.orders.let {
                     response ->
-                 response.orders?.map {
+                val orders= mutableListOf<Order>()
+                 response?.map {
                     orderItem->
-                     it.orders?.map {
-                      itemsItem ->
-                         list = itemsItem?.cart?.items?.map {
-                         Order(
-                             id = it?.productId?.id.toString(),
-                             imageId = it?.productId?.image.toString(),
-                             name = it?.productId?.title.toString(),
-                             price = it?.productId?.price.toString(),
+                     orderItem?.cart?.items?.map {
+                         productItemResponse->
+                         orders.add(
+                             Order(
+                                 id = productItemResponse?.productId?.id.toString(),
+                                 imageId = "productItemResponse?.productId?.image.toString()",
+                                 name = productItemResponse?.productId?.title.toString(),
+                                 price = productItemResponse?.productId?.price.toString(),
 //                         imageId = itemsItem?.productId?.image.toString(),
 //                        name = itemsItem?.productId?.title.toString(),
 //                        price = itemsItem?.productId?.price.toString(),
-                             completed = "pending"
+                                 completed = "pending"
+                             )
                          )
 
                      }
-
-                }
-                adapter.submitList(list)
-
-                Log.i("orderrrrrrrrrrrrrrrrrr",list.toString())
             }
+                orderList=orders.toList()
+
+
+                binding.count.text =  "(${orderList?.size.toString()} items)"
             }
+            adapter.submitList(orderList)
 
 
 
         }
+        ordersViewModel.getAllOrders()
         return binding.root
     }
 
 }
+
+
+//it.orders?.map {
+//    itemsItem ->
+//    list = itemsItem?.cart?.items?.map {
+//        it?.productId.let {
+//            Order(
+//                id = it?.id.toString(),
+//                imageId = it?.image.toString(),
+//                name = it?.title.toString(),
+//                price = it?.price.toString(),
+////                         imageId = itemsItem?.productId?.image.toString(),
+////                        name = itemsItem?.productId?.title.toString(),
+////                        price = itemsItem?.productId?.price.toString(),
+//                completed = "pending"
+//            )
+//        }
+//    }
+//}

@@ -8,25 +8,25 @@ import com.google.gson.annotations.SerializedName
 data class AddCartRequest(
 
 	@field:SerializedName("cart")
-	val cart: Cart? = null
+	val cart: OrderCart? = null
 ) : Parcelable
 
 @Parcelize
 data class Cart(
 
-	@field:SerializedName("__v")
+    @field:SerializedName("__v")
 	val v: Int? = null,
 
-	@field:SerializedName("Items")
-	val items: List<ItemsItem?>? = null,
+    @field:SerializedName("Items")
+	val items: List<OrderItemsItem?>? = null,
 
-	@field:SerializedName("_id")
+    @field:SerializedName("_id")
 	val id: String? = null,
 
-	@field:SerializedName("userId")
+    @field:SerializedName("userId")
 	val userId: String? = null,
 
-	@field:SerializedName("Date")
+    @field:SerializedName("Date")
 	val date: String? = null
 ) : Parcelable
 

@@ -11,12 +11,12 @@ import com.easy_pro_code.panda.R
 import androidx.lifecycle.ViewModelProvider
 import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
 import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
-import com.easy_pro_code.panda.data.Models.remote_backend.Cart
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
 
 class ProductPageFragment:Fragment() {
     lateinit var viewBinding:FragmentProductPageBinding
     private lateinit var  addCartViewModel: AddCartViewModel
-    lateinit var cart: Cart
+    lateinit var cart: OrderCart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
