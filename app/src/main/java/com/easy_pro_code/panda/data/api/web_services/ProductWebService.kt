@@ -17,4 +17,5 @@ interface ProductWebService {
     @POST("products/category")
     @Headers("authorization:Basic UIOIKMJOYWRtaW46cGFzc3dvcmQ=")
     suspend fun getAllProductsByCategory(@Body category: GetAllProductsByCategoryRequest):GetAllProductsByCategoryResponse
+
 }

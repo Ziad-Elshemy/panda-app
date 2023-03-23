@@ -91,7 +91,25 @@
         tools:layout="@layout/fragment_product_page"
         android:id="@+id/productPageFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.productPage.ProductPageFragment"
-        android:label="ProductPageFragment" />
+        android:label="ProductPageFragment" >
+        <argument
+            android:name="product"
+            app:argType="com.easy_pro_code.panda.HomeFlow.models.Product"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="offer"
+            app:argType="com.easy_pro_code.panda.HomeFlow.models.Offer"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_search_results"
+        android:id="@+id/categoriesFragment2"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.categories2.CategoriesFragment2"
+        android:label="CategoriesFragment2" >
+        <argument android:name="category" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_empty_cart"
         android:id="@+id/emptyCartFragment"

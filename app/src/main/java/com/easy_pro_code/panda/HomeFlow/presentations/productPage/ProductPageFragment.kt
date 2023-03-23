@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import com.easy_pro_code.panda.R
 import androidx.lifecycle.ViewModelProvider
 import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
-import com.easy_pro_code.panda.R
-import com.easy_pro_code.panda.data.Models.remote_backend.Cart
 import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
 
 class ProductPageFragment:Fragment() {
-
-    lateinit var binding: FragmentProductPageBinding
+    lateinit var viewBinding:FragmentProductPageBinding
     private lateinit var  addCartViewModel: AddCartViewModel
-    lateinit var cart: Cart
-    var number = binding.dropdownMenuNumOfItems
+    lateinit var cart: OrderCart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +27,23 @@ class ProductPageFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_product_page,container,false)
+        viewBinding=DataBindingUtil.inflate(layoutInflater,R.layout.fragment_product_page,container,false)
+        val args:ProductPageFragmentArgs by navArgs()
+        val product=args.product
+        val offer=args.offer
+        var number = viewBinding.dropdownMenuNumOfItems
 
-
-
+        if (product!=null){
+            viewBinding.totalPriceET.setText(product.price)
+            viewBinding.productDetailsTv.setText(product.title)
+            viewBinding.categoryTitleTv.setText(product.category)
+            viewBinding.rateText1.setText(product.rate.toString())
+        }else if(offer!=null){
+            viewBinding.totalPriceET.setText(offer.product.price)
+            viewBinding.productDetailsTv.setText(offer.product.title)
+            viewBinding.categoryTitleTv.setText(offer.product.category)
+            viewBinding.rateText1.setText(offer.product.rate.toString())
+        }
+        return viewBinding.root
     }
 }

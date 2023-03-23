@@ -22,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/my_order_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/my_orders_image" />
@@ -29,7 +30,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/itemName"
+            android:id="@+id/my_order_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -40,7 +41,7 @@
             app:layout_constraintTop_toTopOf="@id/image_card" />
 
         <TextView
-            android:id="@+id/itemPrice"
+            android:id="@+id/my_order_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -48,10 +49,10 @@
             android:text="YER 30,000"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@id/image_card"
-            app:layout_constraintTop_toBottomOf="@id/itemName" />
+            app:layout_constraintTop_toBottomOf="@id/my_order_name" />
 
         <TextView
-            android:id="@+id/completed"
+            android:id="@+id/completed_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -59,23 +60,22 @@
             android:text="Completed"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@id/image_card"
-            app:layout_constraintTop_toBottomOf="@id/itemPrice" />
+            app:layout_constraintTop_toBottomOf="@id/my_order_price" />
 
 
-        <TextView
-            android:id="@+id/rate1"
-            android:layout_width="90dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/review_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:cornerRadius="15dp"
+            android:textAllCaps="false"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/background_rate"
             android:gravity="center"
             android:text="Review Now"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/itemPrice"
-            app:layout_constraintTop_toBottomOf="@id/completed"
-
+            app:layout_constraintStart_toStartOf="@id/my_order_price"
+            app:layout_constraintTop_toBottomOf="@id/completed_tv"
             />
 
 

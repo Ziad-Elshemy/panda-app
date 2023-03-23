@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.AuthFlow.splash
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import com.easy_pro_code.panda.MainActivity
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.databinding.ActivitySplashBinding
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
 
