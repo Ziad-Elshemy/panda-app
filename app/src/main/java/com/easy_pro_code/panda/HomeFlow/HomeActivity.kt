@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
-import com.easy_pro_code.panda.HomeFlow.presentations.cart.cart
 import com.easy_pro_code.panda.HomeFlow.presentations.categories1.Categories1Fragment
 import com.easy_pro_code.panda.HomeFlow.presentations.home.HomeFragment
 import com.easy_pro_code.panda.HomeFlow.presentations.myAccount.MyAccountFragment

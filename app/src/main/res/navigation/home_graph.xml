@@ -81,11 +81,24 @@
     <fragment
         tools:layout="@layout/fragment_cart"
         android:id="@+id/cart"
-        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.cart"
-        android:label="cart" />
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.MyCartFargment"
+        android:label="cart" >
+        <action
+            android:id="@+id/action_cart_to_emptyCartFragment"
+            app:destination="@id/emptyCartFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_product_page"
         android:id="@+id/productPageFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.productPage.ProductPageFragment"
         android:label="ProductPageFragment" />
+    <fragment
+        tools:layout="@layout/fragment_empty_cart"
+        android:id="@+id/emptyCartFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.EmptyCartFragment"
+        android:label="EmptyCartFragment" >
+        <action
+            android:id="@+id/action_emptyCartFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

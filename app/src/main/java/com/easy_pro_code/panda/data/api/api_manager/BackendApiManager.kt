@@ -43,9 +43,9 @@ class ApiManager {
         fun getProductApi(): ProductWebService {
             return getInstance().create(ProductWebService::class.java)
         }
-        fun AddCartApi(): CartWebService {
-            return getInstance().create(CartWebService::class.java)
-        }
+//        fun AddCartApi(): CartWebService {
+//            return getInstance().create(CartWebService::class.java)
+//        }
 
         fun getAllCartApi(): CartWebService {
             return getInstance().create(CartWebService::class.java)
