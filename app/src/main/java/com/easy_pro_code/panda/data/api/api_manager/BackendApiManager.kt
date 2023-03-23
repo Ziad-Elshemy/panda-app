@@ -1,6 +1,9 @@
 package com.easy_pro_code.panda.data.api.api_manager
 
 import com.easy_pro_code.panda.data.api.web_services.AuthenticationWebService
+import com.easy_pro_code.panda.data.api.web_services.CategoryWebService
+import com.easy_pro_code.panda.data.api.web_services.OffersWebService
+import com.easy_pro_code.panda.data.api.web_services.CartWebService
 import com.easy_pro_code.panda.data.api.web_services.OrderWebService
 import com.easy_pro_code.panda.data.api.web_services.ProductWebService
 import com.sendbird.android.shadow.okhttp3.OkHttpClient
@@ -48,5 +51,20 @@ class ApiManager {
             return getInstance().create(OrderWebService::class.java)
         }
 
+
+        fun getOfferApi(): OffersWebService {
+            return getInstance().create(OffersWebService::class.java)
+        }
+
+        fun getCategoryApi(): CategoryWebService {
+            return getInstance().create(CategoryWebService::class.java)
+        }
+        fun AddCartApi(): CartWebService {
+            return getInstance().create(CartWebService::class.java)
+        }
+
+        fun getAllCartApi(): CartWebService {
+            return getInstance().create(CartWebService::class.java)
+        }
     }
 }

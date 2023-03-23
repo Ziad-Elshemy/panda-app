@@ -74,4 +74,23 @@
     <string name="new_products">New products</string>
     <string name="have_been_added_new_products_in_section_the_fashion">Have been added new products in section the fashion</string>
     <string name="_15_mar_2023">15 Mar 2023</string>
+    <string name="my_cart">My Cart</string>
+    <string name="your_panda_">"Your Panda cart is empty "</string>
+    <string name="subtotal_2_">Subtotal (2 Items)</string>
+    <string name="shipping_fe">Shipping Fee</string>
+    <string name="yer_930_00">"YER 930.00 "</string>
+    <string name="yer_50_00">YER 50.00</string>
+    <string name="total">Total</string>
+    <string name="deliver_to">Deliver To</string>
+    <string name="yer_980_00">YER 980.00</string>
+    <string name="get_it_by">Get it by</string>
+    <string name="locationToDeliver">السالمية</string>
+    <string name="tuesday_mar_7">Tuesday, Mar 7</string>
+    <string name="use_my_wallet_credit_100_yer">Use my wallet credit 100 YER</string>
+    <string name="enter_promo_code">Enter Promo Code</string>
+    <string name="apply">Apply</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="check_out">Check Out</string>
+    <string name="select_a_payment_method">Select a Payment method</string>
+    <string name="add_a_credit_or_debit_card">Add a Credit or debit card</string>
 </resources>

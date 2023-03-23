@@ -33,5 +33,5 @@ data class ProductsItem(
 	val image: String? = null,
 
 	@field:SerializedName("rate")
-	val rate:String?=null
+	val rate:Int?=null
 ) : Parcelable

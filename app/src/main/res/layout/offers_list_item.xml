@@ -41,16 +41,25 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/offer_img" />
 
-                    <ImageView
+                    <CheckBox
                         android:id="@+id/fav_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="34dp"
                         android:layout_gravity="end"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/baseline_favorite_border_24" />
+                        android:elevation="10dp"
+                        android:button="@drawable/fav_ic_selector"
+                        app:useMaterialThemeColors="false"/>
 
                 </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frame_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frame"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
                     android:id="@+id/offer_name"
@@ -63,7 +72,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/frame" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/offer_old_price"
@@ -115,6 +124,7 @@
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
