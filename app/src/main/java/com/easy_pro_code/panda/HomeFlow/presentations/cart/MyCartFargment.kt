@@ -11,6 +11,7 @@ import com.easy_pro_code.panda.HomeFlow.models.CartModel
 import com.easy_pro_code.panda.HomeFlow.models.toCart
 import com.easy_pro_code.panda.HomeFlow.view_model.GetCartViewModel
 import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.databinding.FragmentCartBinding
 
 class MyCartFargment : Fragment() {
@@ -18,7 +19,7 @@ class MyCartFargment : Fragment() {
     lateinit var binding: FragmentCartBinding
     private lateinit var getAllCartViewModel : GetCartViewModel
     private val cartList : List<CartModel> = listOf()
-
+    val sessionManager = AuthUtils.manager
    private lateinit var  cartModel :CartModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

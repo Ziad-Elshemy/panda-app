@@ -7,27 +7,11 @@ import com.google.gson.annotations.SerializedName
 @Parcelize
 data class AddCartRequest(
 
-	@field:SerializedName("cart")
-	val cart: Cart? = null
-) : Parcelable
-
-@Parcelize
-data class Cart(
-
-	@field:SerializedName("__v")
-	val v: Int? = null,
-
 	@field:SerializedName("Items")
-	val items: List<ItemsItem?>? = null,
-
-	@field:SerializedName("_id")
-	val id: String? = null,
+	val items: List<ItemsItemResponse?>? = null,
 
 	@field:SerializedName("userId")
-	val userId: String? = null,
-
-	@field:SerializedName("Date")
-	val date: String? = null
+	val userId: String? = null
 ) : Parcelable
 
 @Parcelize
@@ -37,8 +21,5 @@ data class ItemsItem(
 	val productId: String? = null,
 
 	@field:SerializedName("Number")
-	val number: Int? = null,
-
-	@field:SerializedName("_id")
-	val id: String? = null
+	val number: Int? = null
 ) : Parcelable
