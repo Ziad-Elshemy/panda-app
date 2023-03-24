@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easy_pro_code.panda.HomeFlow.models.CartModel
+import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
 import com.easy_pro_code.panda.data.Models.remote_backend.GetCartById
 import com.easy_pro_code.panda.data.api.api_manager.ApiManager
 import kotlinx.coroutines.async

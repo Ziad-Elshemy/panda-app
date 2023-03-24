@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.easy_pro_code.panda.HomeFlow.models.CartModel
-import com.easy_pro_code.panda.HomeFlow.models.toCart
+import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
 import com.easy_pro_code.panda.HomeFlow.view_model.GetCartViewModel
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
@@ -20,10 +19,10 @@ class MyCartFargment : Fragment() {
 
     lateinit var binding: FragmentCartBinding
     private lateinit var getAllCartViewModel : GetCartViewModel
-    private val cartList : List<CartModel> = listOf()
+    private val cartList : List<MyCartModel> = listOf()
     val sessionManager = AuthUtils.manager
-    private lateinit var  cartModel :CartModel
-    var list: List<CartModel>? = listOf()
+    private lateinit var  cartModel :MyCartModel
+    var list: List<MyCartModel>? = listOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +57,7 @@ class MyCartFargment : Fragment() {
                             cartsItem ->
                         list = cartsItem?.items?.map {
                                 productResponse->
-                            CartModel(
+                            MyCartModel(
                                 price = "YER "+productResponse?.productId?.price.toString()+".00",
                                 title= productResponse?.productId?.title.toString(),
                                 userId = cartsItem.userId.toString(),

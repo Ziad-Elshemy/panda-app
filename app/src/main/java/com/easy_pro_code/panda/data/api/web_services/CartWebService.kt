@@ -1,8 +1,8 @@
 package com.easy_pro_code.panda.data.api.web_services
 
-import com.easy_pro_code.panda.HomeFlow.view_model.GetCartById
 import com.easy_pro_code.panda.data.Models.remote_backend.AddCartRequest
 import com.easy_pro_code.panda.data.Models.remote_backend.AddCartResponse
+import com.easy_pro_code.panda.data.Models.remote_backend.GetCartById
 import com.easy_pro_code.panda.data.Models.remote_backend.UpdateCartResponse
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import retrofit2.Response
