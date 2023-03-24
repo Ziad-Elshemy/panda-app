@@ -20,7 +20,6 @@ class EmptyCartFragment : Fragment() {
 
     lateinit var binding:FragmentEmptyCartBinding
 
-    lateinit var recyclerCategories:RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +28,9 @@ class EmptyCartFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_empty_cart,container,false)
 
+
         binding.btnContinueShopping.setOnClickListener {
-            findNavController().navigate(EmptyCartFragmentDirections.actionEmptyCartFragmentToHomeFragment())
+           findNavController().navigate(EmptyCartFragmentDirections.actionEmptyCartFragmentToHomeFragment())
         }
 
         return binding.root

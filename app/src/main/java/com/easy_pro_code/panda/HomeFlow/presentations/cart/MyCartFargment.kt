@@ -45,13 +45,15 @@ class MyCartFargment : Fragment() {
         subscribeToLiveData(cartAdapter)
         getAllCartViewModel.getAllCarts()
 
+        //binding.dateValue.text = cartModel.date
+
         binding.checkOutBtn.setOnClickListener {
             createCartViewModel.createOrder()
             createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner){
                 if (it?.success.toString().equals("order is done")){
-                    Toast.makeText(requireContext(),"Order Add Successfully :)",Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(),"Order Add Successfully :)",Toast.LENGTH_SHORT).show()
                 }else{
-                    Toast.makeText(requireContext(),"Sorry, Failed to Create Order! :(",Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(),"Sorry, Failed to Create Order! :(",Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -73,20 +75,22 @@ class MyCartFargment : Fragment() {
                             cartsItem ->
                         list = cartsItem?.items?.map {
                                 productResponse->
-                            MyCartModel(
-                                price = "YER "+productResponse?.productId?.price.toString()+".00",
-                                title= productResponse?.productId?.title.toString(),
+                            val myCartModel = MyCartModel(
+                                price = productResponse?.productId?.price?.toInt() ,
+                                title = productResponse?.productId?.title.toString(),
                                 userId = cartsItem.userId.toString(),
                                 image = null,
-                                count= 5,
+                                count = productResponse?.number,
                                 productId = productResponse?.productId?.id.toString(),
                                 cartId = cartsItem.id.toString(),
                                 date = cartsItem.date.toString()
                             )
+                            myCartModel
                         }
                     }
                     cartAdapter.submitList(list)
                     Log.e("Ziad Adapter data",list?.size.toString())
+                    Log.e("userId" , AuthUtils.manager.fetchData().id.toString())
                 }
             }
         }

@@ -19,16 +19,16 @@
                     >
 
                         <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mycarts_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical"
+                            android:id="@+id/mycarts_rv"
+                            android:layout_width="match_parent"
+                            android:layout_height="350dp"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical"
                             android:padding="10dp"
                             app:layout_constraintTop_toTopOf="parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             tools:listitem="@layout/item_cart"
                             />
 
@@ -168,7 +168,7 @@
                             app:layout_constraintTop_toBottomOf="@id/divider4" />
 
                         <TextView
-                            android:id="@+id/getitby_value"
+                            android:id="@+id/date_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
@@ -201,7 +201,7 @@
                             android:checked="true"
                             android:switchMinWidth="56dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/getitby_value"
+                            app:layout_constraintTop_toBottomOf="@+id/date_value"
                             />
 
                         <androidx.cardview.widget.CardView
