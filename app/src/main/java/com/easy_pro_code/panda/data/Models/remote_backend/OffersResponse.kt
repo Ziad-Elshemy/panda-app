@@ -32,3 +32,4 @@ data class OffersItem(
 	@field:SerializedName("createDate")
 	val createDate: String? = null
 ) : Parcelable
+

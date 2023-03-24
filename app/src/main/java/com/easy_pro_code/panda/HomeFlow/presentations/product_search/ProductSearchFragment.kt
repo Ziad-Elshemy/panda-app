@@ -1,6 +1,7 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.product_search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,9 +37,7 @@ class ProductSearchFragment:Fragment() {
         viewBinding=DataBindingUtil.inflate(inflater, R.layout.fragment_product_search,container,false)
         viewBinding.txtSearch.doOnTextChanged { text, start, before, count ->
             viewModel.searchForProduct(text.toString())
-            lifecycleScope.launch {
-                delay(300)
-            }
+            Log.i("products  in  search",text.toString())
         }
         val adapter=ProductSearchRecyclerViewAdapter(products)
         viewBinding.rvProductsSearch.adapter=adapter
@@ -61,6 +60,7 @@ class ProductSearchFragment:Fragment() {
     private fun subscrbeToLiveData(adapter: ProductSearchRecyclerViewAdapter) {
         viewModel.liveData.observe(viewLifecycleOwner){
             products=it.products.fromProductToProduct()
+            Log.i("products  in  search",products.toString())
             adapter.submitList(products)
         }
     }
