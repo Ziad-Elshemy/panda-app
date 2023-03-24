@@ -43,7 +43,7 @@
     <string name="language">Language</string>
     <string name="terms_and_conditions">Terms and conditions</string>
     <string name="about">About</string>
-    <string name="_3_items">(3 items)</string>
+    <string name="_3_items"></string>
     <string name="my_balance">My Balance</string>
     <string name="wallet_balance">Wallet Balance</string>
     <string name="add_balance">Add balance</string>
@@ -93,4 +93,6 @@
     <string name="check_out">Check Out</string>
     <string name="select_a_payment_method">Select a Payment method</string>
     <string name="add_a_credit_or_debit_card">Add a Credit or debit card</string>
+    <string name="selected_item">Selected item:</string>
+
 </resources>
