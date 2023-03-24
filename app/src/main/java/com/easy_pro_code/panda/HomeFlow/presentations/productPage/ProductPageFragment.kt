@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -38,8 +39,13 @@ class ProductPageFragment:Fragment() {
             viewBinding.productDetailsTv.setText(product.title)
             viewBinding.categoryTitleTv.setText(product.category)
             viewBinding.rateText1.setText(product.rate.toString())
+            viewBinding.newTotalPriceET.isVisible=false
+            viewBinding.pricesLineSeparator1.isVisible=false
+            viewBinding.newPriceCurrencyText.isVisible=false
+
         }else if(offer!=null){
             viewBinding.totalPriceET.setText(offer.product.price)
+            viewBinding.newTotalPriceET.setText(offer.newPrice)
             viewBinding.productDetailsTv.setText(offer.product.title)
             viewBinding.categoryTitleTv.setText(offer.product.category)
             viewBinding.rateText1.setText(offer.product.rate.toString())

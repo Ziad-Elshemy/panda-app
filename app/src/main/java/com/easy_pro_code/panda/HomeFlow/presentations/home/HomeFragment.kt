@@ -9,11 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
-import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -25,7 +21,9 @@ import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.HomeFlow.view_model.HomeViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
+import com.easy_pro_code.panda.HomeFlow.view_model.WishListViewModel
 import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.local_database.WishProduct
 import com.easy_pro_code.panda.databinding.FragmentHomeBinding
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -39,12 +37,14 @@ class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
     private val suspendWindowViewModel:SuspendWindowViewModel by activityViewModels()
+    private lateinit var wishListViewModel:WishListViewModel
     private val productsList:List<Product>? = listOf()
     private val offersList:List<Offer>? = listOf()
     private val categoryList:List<String>?= listOf()
     private lateinit var edTextObj:EditText
     private var city:String=""
     private var edTextId:Int=-1
+    private var wishList:List<WishProduct>? = listOf()
 
 
 
@@ -58,6 +58,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeViewModel=ViewModelProvider(this).get(HomeViewModel::class.java)
+        wishListViewModel=ViewModelProvider(this).get(WishListViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +87,7 @@ class HomeFragment : Fragment() {
         val imageSlider = binding.imageSlider
         imageSlider.setImageList(imageList)
 
-        val productsAdapter=ProductsHomeRecyclerView(productsList)
+        val productsAdapter=ProductsHomeRecyclerView(productsList,wishList)
         binding.productRv.adapter=productsAdapter
         productsAdapter.submitList(productsList)
         val offersAdapter=OffersRecyclerView(offersList)
@@ -106,7 +107,10 @@ class HomeFragment : Fragment() {
         initPlacesSdk()
         ////calling AutoCompelete
         binding.locationDetection.setOnClickListener(startAutocompleteIntentListener)
-
+        binding.searchIcon.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductSearchFragment())
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
+        }
         return binding.root
 
     }
@@ -128,11 +132,11 @@ class HomeFragment : Fragment() {
             }
 
             override fun onCheck(product: Product) {
-                homeViewModel.addToWishList(product)
+                wishListViewModel.addToWishList(product)
             }
 
             override fun onUnCheck(product: Product) {
-                homeViewModel.removeFromWishList(product)
+                wishListViewModel.removeFromWishList(product)
             }
 
         }
@@ -149,11 +153,11 @@ class HomeFragment : Fragment() {
             }
 
             override fun onCheck(offer: Offer) {
-                homeViewModel.addToWishList(offer.product)
+                wishListViewModel.addToWishList(offer.product)
             }
 
             override fun onUnCheck(offer: Offer) {
-                homeViewModel.removeFromWishList(offer.product)
+                wishListViewModel.removeFromWishList(offer.product)
             }
 
         }
@@ -191,6 +195,10 @@ class HomeFragment : Fragment() {
 
         homeViewModel.categoryLiveData.observe(viewLifecycleOwner){
             categoriesAdapter.submitList(it.category.categoryItemToMainCategoryName())
+        }
+        wishListViewModel.wishListLiveData.observe(viewLifecycleOwner){
+            wishList=it
+            productsAdapter.submitWishList(wishList)
         }
     }
 
@@ -242,6 +250,6 @@ class HomeFragment : Fragment() {
         super.onResume()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=true
     }
-    }
+}
 
 

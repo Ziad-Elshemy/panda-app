@@ -21,25 +21,12 @@ class HomeViewModel:ViewModel() {
     val productsLiveData:MutableLiveData<GetAllProductsResponse> = MutableLiveData<GetAllProductsResponse>()
     val offersLiveData:MutableLiveData<OffersResponse> =MutableLiveData()
     val categoryLiveData:MutableLiveData<CategoryResponse> =MutableLiveData()
-    private val wishListDao= AppDatabase.getInstance().wishListDao()
-
     private val offersWebService=ApiManager.getOfferApi()
     private val productWebService=ApiManager.getProductApi()
     private val categoryWebService=ApiManager.getCategoryApi()
 
 
-    fun addToWishList(product: Product){
-        viewModelScope.launch(Dispatchers.IO) {
-            Log.i("here is produt added",product.toString())
-            wishListDao.addWishProduct(product.fromProductItemToWishProduct())
-        }
-    }
 
-    fun removeFromWishList(product: Product){
-        viewModelScope.launch(Dispatchers.IO) {
-            wishListDao.removeWishProduct(product.fromProductItemToWishProduct())
-        }
-    }
     fun getAllProducts(){
         viewModelScope.launch {
             productsLiveData.value=productWebService.getAllProducts()

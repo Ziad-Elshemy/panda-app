@@ -10,5 +10,8 @@ data class Product(
     val title: String? = null,
     val id: String? = null,
     val image: String? = null,
-    val rate:Int?=null
+    val rate:Int?=null,
+    val productVariant: ProductVariant? = null,
+    val multiImg: ProductMultiImage? = null,
+    val prands: String? = null
 ): Parcelable

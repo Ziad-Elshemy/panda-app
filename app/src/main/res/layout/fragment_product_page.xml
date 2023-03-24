@@ -238,7 +238,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/medium"
-                            android:text="Delivery by wed, 15 March"
+                            android:text="This item will be delivered in 72 hours"
                             android:textColor="@color/black"
                             android:textSize="22sp"
                             app:layout_constraintEnd_toEndOf="parent"

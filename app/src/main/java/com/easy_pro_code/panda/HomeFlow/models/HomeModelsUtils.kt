@@ -1,10 +1,8 @@
 package com.easy_pro_code.panda.HomeFlow.models
 
 import com.easy_pro_code.panda.data.Models.local_database.WishProduct
-import com.easy_pro_code.panda.data.Models.remote_backend.CategoryItem
-import com.easy_pro_code.panda.data.Models.remote_backend.OffersItem
-import com.easy_pro_code.panda.data.Models.remote_backend.OffersResponse
-import com.easy_pro_code.panda.data.Models.remote_backend.ProductsItem
+import com.easy_pro_code.panda.data.Models.remote_backend.*
+import com.google.gson.Gson
 
 fun List<ProductsItem>?.fromProductToProduct(): List<Product>? = this?.map {
         Product(
@@ -13,7 +11,10 @@ fun List<ProductsItem>?.fromProductToProduct(): List<Product>? = this?.map {
             title = it.title,
             id=it.id,
             image = it.image,
-            rate = it.rate
+            rate = it.rate,
+            productVariant = ProductVariant(it.variant),
+            multiImg = ProductMultiImage(it.multiImg),
+            prands = it.prands
         )
 }
 
@@ -27,7 +28,10 @@ fun List<OffersItem>?.fromOfferToProduct(): List<Offer>? = this?.map {
             title = product?.title,
             id=product?.id,
             image = product?.image,
-            rate = product?.rate
+            rate = product?.rate,
+            productVariant = ProductVariant(product?.variant),
+            multiImg = ProductMultiImage(product?.multiImg),
+            prands = product?.prands
         ),
         it.newPrice.toString()
     )
@@ -40,7 +44,10 @@ fun Product.fromProductItemToWishProduct():WishProduct=
         price=this.price,
         title=this.title,
         image=this.image,
-        rate=this.rate
+        rate=this.rate,
+        variant = Gson().toJson(this.productVariant,ProductVariant::class.java),
+        multiImg = Gson().toJson(this.multiImg,ProductMultiImage::class.java),
+        prands = this.prands
     )
 
 
@@ -51,7 +58,10 @@ fun List<WishProduct>?.fromWishProductToProduct(): List<Product>? = this?.map {
         title = it.title,
         id=it.productId,
         image = it.image,
-        rate = it.rate
+        rate = it.rate,
+        productVariant = Gson().fromJson(it.variant,ProductVariant::class.java),
+        multiImg = Gson().fromJson(it.multiImg,ProductMultiImage::class.java),
+        prands = it.prands
     )
 }
 
@@ -63,3 +73,9 @@ fun List<CategoryItem>?.categoryItemToMainCategoryName():List<String?>? {
     }
     return categories
 }
+
+fun List<CategoryItem>?.categoryItemToAllCategoryName():List<String>? =
+    this?.map {
+        it.title?:""
+    }
+

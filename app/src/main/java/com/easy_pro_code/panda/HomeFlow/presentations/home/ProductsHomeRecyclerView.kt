@@ -1,21 +1,21 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.home
 
-import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easy_pro_code.panda.HomeFlow.models.Product
+import com.easy_pro_code.panda.HomeFlow.models.fromProductItemToWishProduct
 import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.local_database.WishProduct
 import com.easy_pro_code.panda.databinding.ProductItemBinding
 
 class ProductsHomeRecyclerView(
-    val dataList: List<Product>?)
+    val dataList: List<Product>?,
+    var wishList: List<WishProduct>?
+)
     : ListAdapter<Product, RecyclerView.ViewHolder>(ProductDiffUtil())
     {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -27,7 +27,7 @@ class ProductsHomeRecyclerView(
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
         {
             val item=getItem(position)
-            (holder as ProductViewHolder).bind(item,onProductClickListener)
+            (holder as ProductViewHolder).bind(item,onProductClickListener,wishList)
         }
 
         var onProductClickListener:OnProductClickListener?=null
@@ -37,7 +37,11 @@ class ProductsHomeRecyclerView(
             fun onClick(product: Product)
             fun onCheck(product: Product)
             fun onUnCheck(product: Product)
+        }
 
+        fun submitWishList(wishList: List<WishProduct>?){
+            this.wishList=wishList
+            notifyDataSetChanged()
         }
 
 
@@ -57,7 +61,8 @@ class ProductsHomeRecyclerView(
 
         fun bind(
             product: Product,
-            onProductClickListener: ProductsHomeRecyclerView.OnProductClickListener?
+            onProductClickListener: ProductsHomeRecyclerView.OnProductClickListener?,
+            wishList: List<WishProduct>?
         )
         {
             binding.productName.setText(product.title)
@@ -65,8 +70,14 @@ class ProductsHomeRecyclerView(
             binding.frame2.setOnClickListener {
                 onProductClickListener?.onClick(product)
             }
+            if (wishList != null) {
+                if (product.fromProductItemToWishProduct() in wishList){
+                    binding.favIcon.isChecked=true
+                }
+            }
             binding.favIcon.setOnCheckedChangeListener{
                 checkBox,isChecked->
+                Log.i("isChecked now:",isChecked.toString())
                 if (isChecked) onProductClickListener?.onCheck(product)
                 else onProductClickListener?.onUnCheck(product)
             }

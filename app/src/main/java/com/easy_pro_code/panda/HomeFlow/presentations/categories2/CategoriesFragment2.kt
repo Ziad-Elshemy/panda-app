@@ -8,13 +8,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.navigation.fragment.navArgs
 import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.HomeFlow.models.fromProductToProduct
 import com.easy_pro_code.panda.HomeFlow.presentations.home.ProductsHomeRecyclerView
 import com.easy_pro_code.panda.HomeFlow.view_model.CategoryViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
+import com.easy_pro_code.panda.HomeFlow.view_model.WishListViewModel
 import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.local_database.WishProduct
 import com.easy_pro_code.panda.databinding.FragmentSearchResultsBinding
 
 
@@ -22,12 +25,15 @@ class CategoriesFragment2 : Fragment() {
     private lateinit var viewBinding:FragmentSearchResultsBinding
     private lateinit var categoryViewModel:CategoryViewModel
     private val suspendWindowViewModel:SuspendWindowViewModel by activityViewModels()
+    private lateinit var wishListViewModel: WishListViewModel
     private val productsList= listOf<Product>()
+    private var wishList:List<WishProduct>? = listOf()
     private lateinit var category:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         categoryViewModel=ViewModelProvider(this).get(CategoryViewModel::class.java)
+        wishListViewModel=ViewModelProvider(this).get(WishListViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +41,7 @@ class CategoriesFragment2 : Fragment() {
     ): View? {
         viewBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_search_results,container,false)
         // Inflate the layout for this fragment
-        val adapter=ProductsHomeRecyclerView(productsList)
+        val adapter=ProductsHomeRecyclerView(productsList,wishList)
         viewBinding.categories1Rv.adapter=adapter
         subscribeToLiveData(adapter)
         suspendWindowViewModel.progressBar(true)
@@ -49,6 +55,9 @@ class CategoriesFragment2 : Fragment() {
         categoryViewModel.productsLiveData.observe(viewLifecycleOwner){
             suspendWindowViewModel.progressBar(false)
             adapter.submitList(it.categoryProducts.fromProductToProduct())
+        }
+        wishListViewModel.wishListLiveData.observe(viewLifecycleOwner){
+            wishList=it
         }
     }
 

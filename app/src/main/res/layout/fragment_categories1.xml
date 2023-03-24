@@ -7,43 +7,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".HomeFlow.presentations.categories1.CategoriesFragment1"
+        android:padding="2dp"
         >
 
 
-        <EditText
-            android:id="@+id/editTextSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/text_input_shadow"
-            android:drawableStart="@drawable/baseline_search_24"
-            android:ems="10"
-            android:layout_marginHorizontal="50dp"
-            android:hint="@string/what_are_you_looking_for"
-            android:inputType="text"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="15dp"
-            android:textColorHint="@color/black"
-            android:textSize="14sp"
-            android:fontFamily="@font/light"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="30dp"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingHorizontal="50dp"
+            android:paddingStart="5dp"
             android:id="@+id/categories1_rv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextSearch"
-            tools:listitem="@layout/categories_grid_list_item" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/categories_list_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

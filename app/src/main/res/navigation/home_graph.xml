@@ -19,17 +19,28 @@
         <action
             android:id="@+id/action_homeFragment_to_productPageFragment"
             app:destination="@id/productPageFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productSearchFragment"
+            app:destination="@id/productSearchFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_wish_list"
         android:id="@+id/wishListFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.wishlist.WishListFragment"
-        android:label="WishListFragment" />
+        android:label="WishListFragment" >
+        <action
+            android:id="@+id/action_wishListFragment_to_productPageFragment"
+            app:destination="@id/productPageFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_categories1"
         android:id="@+id/categories1Fragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.categories1.Categories1Fragment"
-        android:label="Categories1Fragment" />
+        android:label="Categories1Fragment" >
+        <action
+            android:id="@+id/action_categories1Fragment_to_categoriesFragment2"
+            app:destination="@id/categoriesFragment2" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_my_account"
         android:id="@+id/myAccountFragment2"
@@ -111,5 +122,15 @@
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.categories2.CategoriesFragment2"
         android:label="CategoriesFragment2" >
         <argument android:name="category" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/product_search_item"
+        android:id="@+id/productSearchFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.product_search.ProductSearchFragment"
+        android:label="ProductSearchFragment" >
+        <action
+            android:id="@+id/action_productSearchFragment_to_productPageFragment"
+            app:destination="@id/productPageFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
 </navigation>
