@@ -1,5 +1,8 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.home
 
+import android.graphics.BitmapFactory
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -49,6 +52,23 @@ class OfferViewHolder(val binding: OffersListItemBinding) : RecyclerView.ViewHol
 
     fun bind(offer: Offer, onOfferClickListener: OffersRecyclerView.OnOfferClickListener?)
     {
+
+
+        try {
+            val base64String = offer.product.image
+            val decodedString = Base64.decode(base64String, Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            binding.driverInfoImage.setImageBitmap(decodedByte)
+        }
+        catch (E:Exception){
+            Log.i("Mokhtar",  offer.product.image.toString())
+
+        }
+
+
+
+
+
         binding.offerName.setText(offer.product.title)
         binding.offerPrice.setText(offer.newPrice)
         binding.offerOldPrice.setText(offer.product.price)

@@ -1,8 +1,15 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.home
 
+import android.content.res.Resources
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -65,6 +72,18 @@ class ProductsHomeRecyclerView(
             wishList: List<WishProduct>?
         )
         {
+
+            try {
+                val base64String = product.image
+                val decodedString = Base64.decode(base64String, Base64.DEFAULT)
+                val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                binding.driverInfoImage.setImageBitmap(decodedByte)
+            }
+            catch (E:Exception){
+                Log.i("ABANOUB",product.image.toString())
+
+            }
+
             binding.productName.setText(product.title)
             binding.productPrice.setText(product.price)
             binding.frame2.setOnClickListener {

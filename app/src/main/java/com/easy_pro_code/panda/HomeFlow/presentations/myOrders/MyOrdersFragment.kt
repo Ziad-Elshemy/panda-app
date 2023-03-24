@@ -1,21 +1,17 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.myOrders
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.easy_pro_code.panda.HomeFlow.models.Order
 import com.easy_pro_code.panda.HomeFlow.view_model.OrdersViewModel
 import com.easy_pro_code.panda.R
-import com.easy_pro_code.panda.data.Models.remote_backend.ProductId
 import com.easy_pro_code.panda.databinding.FragmentMyOrdersBinding
 
 
@@ -64,7 +60,7 @@ class MyOrdersFragment : Fragment() {
                          orders.add(
                              Order(
                                  id = productItemResponse?.productId?.id.toString(),
-                                 imageId = "productItemResponse?.productId?.image.toString()",
+                                 imageId = productItemResponse?.productId?.image.toString(),
                                  name = productItemResponse?.productId?.title.toString(),
                                  price = productItemResponse?.productId?.price.toString(),
 //                         imageId = itemsItem?.productId?.image.toString(),

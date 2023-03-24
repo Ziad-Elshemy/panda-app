@@ -40,6 +40,7 @@ data class ProductId(
 
 	@field:SerializedName("Image")
 	val image: String? = null
+
 ) : Parcelable
 
 @Parcelize
