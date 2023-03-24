@@ -22,7 +22,7 @@ interface CartWebService {
     @Headers("authorization:Basic UIOIKMJOYWRtaW46cGFzc3dvcmQ=")
     suspend fun getCarts(
         @Path("reqId") cardId:String = AuthUtils.manager.getCartId()!!,
-       // @Path("reqId") cardId:String = "6419b093ac076d646e6a6ebe" ,
+//        @Path("reqId") cardId:String = "641cab173411912d4c4ce02d" ,
         @Header("x-access-token")token:String= AuthUtils.manager.getToken()?:""
 
     ) : GetCartById

@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
 import com.easy_pro_code.panda.HomeFlow.view_model.GetCartViewModel
+import com.easy_pro_code.panda.HomeFlow.view_model.OrdersViewModel
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.databinding.FragmentCartBinding
@@ -19,15 +21,18 @@ class MyCartFargment : Fragment() {
 
     lateinit var binding: FragmentCartBinding
     private lateinit var getAllCartViewModel : GetCartViewModel
-    private val cartList : List<MyCartModel> = listOf()
+    private lateinit var createCartViewModel : OrdersViewModel
+    private var cartList : List<MyCartModel> = listOf()
     val sessionManager = AuthUtils.manager
-    private lateinit var  cartModel :MyCartModel
     var list: List<MyCartModel>? = listOf()
 
+
+    private lateinit var  cartModel :MyCartModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getAllCartViewModel =ViewModelProvider(this).get(GetCartViewModel::class.java)
+        createCartViewModel =ViewModelProvider(this).get(OrdersViewModel::class.java)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -39,6 +44,17 @@ class MyCartFargment : Fragment() {
         cartAdapter.submitList(cartList)
         subscribeToLiveData(cartAdapter)
         getAllCartViewModel.getAllCarts()
+
+        binding.checkOutBtn.setOnClickListener {
+            createCartViewModel.createOrder()
+            createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner){
+                if (it?.success.toString().equals("order is done")){
+                    Toast.makeText(requireContext(),"Order Add Successfully :)",Toast.LENGTH_SHORT)
+                }else{
+                    Toast.makeText(requireContext(),"Sorry, Failed to Create Order! :(",Toast.LENGTH_SHORT)
+                }
+            }
+        }
 
     return binding.root
     }
@@ -73,11 +89,7 @@ class MyCartFargment : Fragment() {
                     Log.e("Ziad Adapter data",list?.size.toString())
                 }
             }
-
-
-
         }
-
     }
 
 
