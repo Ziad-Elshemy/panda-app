@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easy_pro_code.panda.HomeFlow.models.CartModel
+import com.easy_pro_code.panda.data.Models.remote_backend.GetCartById
 import com.easy_pro_code.panda.data.api.api_manager.ApiManager
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class GetCartViewModel : ViewModel() {
@@ -17,7 +19,9 @@ class GetCartViewModel : ViewModel() {
     fun getAllCarts(){
         viewModelScope.launch {
             try {
-            getcartsLiveData.value = getCartWebService.getCarts()
+                val test=async { getCartWebService.getCarts() }
+                getcartsLiveData.value = test.await()
+                Log.e("Ziad Cart VM",test.await().toString())
             }   catch (ex:java.lang.Exception){
                 Log.i("ex from get Carts ",ex.message!!)
             }

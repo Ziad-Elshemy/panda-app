@@ -16,12 +16,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
 import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
 import com.easy_pro_code.panda.data.Models.remote_backend.Cart
-import com.easy_pro_code.panda.data.Models.remote_backend.SessionManager
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
 
 class ProductPageFragment:Fragment() {
     lateinit var viewBinding:FragmentProductPageBinding
     private lateinit var  addCartViewModel: AddCartViewModel
+    lateinit var cart: OrderCart
     val sessionManager = AuthUtils.manager
     var pos:Int = 0
 
@@ -88,8 +89,6 @@ class ProductPageFragment:Fragment() {
             viewBinding.categoryTitleTv.setText(offer.product.category)
             viewBinding.rateText1.setText(offer.product.rate.toString())
         }
-
-
         return viewBinding.root
     }
 }

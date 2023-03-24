@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/notCartLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            >
+
+            <TextView
+                android:id="@+id/my_cart"
+                android:layout_width="57dp"
+                android:layout_height="19dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="146dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="32dp"
+                android:text="@string/my_cart"
+                android:textAppearance="@style/my_cart"
+                android:gravity="top"
+                />
+
+            <ImageView
+                android:id="@+id/panda_2_1"
+                android:layout_width="288dp"
+                android:layout_height="232dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="28dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="84dp"
+                android:background="@drawable/panda_2_1"
+                android:src="@drawable/panda_cart"
+                />
+
+            <TextView
+                android:id="@+id/your_panda_"
+                android:layout_width="237dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="69dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/your_panda_"
+                android:textAppearance="@style/your_panda_"
+                android:gravity="top"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinueShopping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="Continue Shopping"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/radius_background"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
