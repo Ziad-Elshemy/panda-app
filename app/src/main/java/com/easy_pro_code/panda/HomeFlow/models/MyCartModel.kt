@@ -1,6 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.models
 
-data class CartModel(
+data class MyCartModel(
     val price: String? = null,
     val title: String? = null,
     val userId: String? = null,

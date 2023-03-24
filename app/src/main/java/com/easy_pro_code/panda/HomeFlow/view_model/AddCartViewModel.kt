@@ -20,9 +20,9 @@ class AddCartViewModel : ViewModel() {
                 AddCartRequest(
                     userId = userId ,
                     items = listOf(ItemsItemResponse(
-                        productId = productId ,
-                        number = number
-                    ))
+                    productId = productId ,
+                    number = number
+                ))
                 )
             )
         }
