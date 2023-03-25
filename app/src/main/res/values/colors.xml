@@ -12,5 +12,6 @@
     <color name="yellow">#FFEB3B</color>
     <color name="lightGrey">#F8F8F8</color>
     <color name="lightgrey">#DADDE0</color>
+    <color name="divider_color">#FF494949</color>
 
 </resources>
