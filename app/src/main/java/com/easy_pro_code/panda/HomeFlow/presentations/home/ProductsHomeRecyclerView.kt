@@ -101,9 +101,12 @@ class ProductsHomeRecyclerView(
                 else onProductClickListener?.onUnCheck(product)
             }
 
+            binding.driverInfoImage.setOnClickListener {
+                onProductClickListener?.onClick(product)
+            }
+            binding.rate1.setText(product.rate.toString())
+            binding.rate2.setText(product.rate.toString())
             binding.executePendingBindings()
-
-
         }
     }
 

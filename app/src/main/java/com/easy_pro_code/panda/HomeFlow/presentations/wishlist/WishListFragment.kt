@@ -67,7 +67,7 @@ class WishListFragment : Fragment() {
             wishList=it
             wishListAdapter.submitList(wishList.fromWishProductToProduct())
             wishListAdapter.submitWishList(wishList)
-            viewBinding.count.setText(wishList?.size.toString())
+            viewBinding.count.setText("("+wishList?.size.toString()+" items)")
         }
     }
 

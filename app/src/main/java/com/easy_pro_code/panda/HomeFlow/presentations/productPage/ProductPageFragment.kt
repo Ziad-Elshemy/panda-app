@@ -1,6 +1,8 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.productPage
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import com.easy_pro_code.panda.data.Models.remote_backend.Cart
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.HomeFlow.models.Product
 
 class ProductPageFragment:Fragment() {
@@ -71,14 +74,25 @@ class ProductPageFragment:Fragment() {
             viewBinding.newPriceCurrencyText.isVisible=false
 
 
-
         }else if(offer!=null){
             selectedProduct=offer.product
             viewBinding.totalPriceET.setText(offer.product.price)
             viewBinding.newTotalPriceET.setText(offer.newPrice)
+            viewBinding.rateIcon1.setText(offer.product.rate.toString())
             viewBinding.reviewsSubTitleText.setText(offer.product.title)
             viewBinding.categoryTitleTv.setText(offer.product.category)
             viewBinding.rateText1.setText(offer.product.rate.toString())
+        }
+
+        try {
+            val base64String = selectedProduct.image
+            val decodedString = Base64.decode(base64String, Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            viewBinding.productImage.setImageBitmap(decodedByte)
+        }
+        catch (E:Exception){
+            Log.i("Mokhtar",  selectedProduct.image.toString())
+
         }
 
 
@@ -87,13 +101,18 @@ class ProductPageFragment:Fragment() {
 
             if (sessionManager.getCartId() == null){
                 Log.i("Michael" , pos.toString())
-                Log.i("selectedProduct page:",AuthUtils.manager.fetchData().id.toString()+",  pID:"+selectedProduct?.id.toString()+",  pos:"+pos.toString())
-                addCartViewModel.addToCart(AuthUtils.manager.fetchData().id.toString(),selectedProduct?.id.toString(),pos)
-                addCartViewModel.cartsLiveData.observe(viewLifecycleOwner){
-                    sessionManager.saveCartId(it.cart?.id.toString())
-                    Log.i("Michael",it.cart?.id.toString())
+                if(AuthUtils.manager.fetchData().id==null){
+                    findNavController().popBackStack()
+                    Toast.makeText(requireContext(), "please login first", Toast.LENGTH_SHORT).show()
+                }else{
+                    Log.i("selectedProduct page:",AuthUtils.manager.fetchData().id.toString()+",  pID:"+selectedProduct?.id.toString()+",  pos:"+pos.toString())
+                    addCartViewModel.addToCart(AuthUtils.manager.fetchData().id.toString(),selectedProduct?.id.toString(),pos)
+                    addCartViewModel.cartsLiveData.observe(viewLifecycleOwner){
+                        sessionManager.saveCartId(it.cart?.id.toString())
+                        Log.i("Michael",it.cart?.id.toString())
+                    }
+                    Toast.makeText(requireContext(), "Add To Cart", Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(requireContext(), "Add To Cart", Toast.LENGTH_SHORT).show()
             }
             else{
                 addCartViewModel.updateCart(pos ,selectedProduct?.id.toString())
