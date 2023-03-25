@@ -22,8 +22,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="10dp">
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="15dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cate_card_view"

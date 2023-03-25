@@ -65,14 +65,13 @@ class OfferViewHolder(val binding: OffersListItemBinding) : RecyclerView.ViewHol
 
         }
 
-
-
-
-
         binding.offerName.setText(offer.product.title)
         binding.offerPrice.setText(offer.newPrice)
         binding.offerOldPrice.setText(offer.product.price)
         binding.frame2.setOnClickListener{
+            onOfferClickListener?.onClick(offer)
+        }
+        binding.driverInfoImage.setOnClickListener {
             onOfferClickListener?.onClick(offer)
         }
         binding.favIcon.setOnCheckedChangeListener{
@@ -80,6 +79,9 @@ class OfferViewHolder(val binding: OffersListItemBinding) : RecyclerView.ViewHol
             if (isChecked) onOfferClickListener?.onCheck(offer)
             else onOfferClickListener?.onUnCheck(offer)
         }
+        binding.rate1.setText(offer.product.rate.toString())
+        binding.rate2.setText(offer.product.rate.toString())
+
         binding.executePendingBindings()
     }
 }

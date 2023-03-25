@@ -15,7 +15,7 @@ data class GetOrdersResponse(
 data class OrderItemsItem(
 
 	@field:SerializedName("productId")
-	val productId: ProductsItem? = null,
+	val productId: OrderProductId? = null,
 
 	@field:SerializedName("Number")
 	val number: Int? = null,
