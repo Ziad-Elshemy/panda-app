@@ -28,9 +28,9 @@ class AddCartViewModel : ViewModel() {
         }
     }
 
-    fun updateCart (){
+    fun updateCart (number: Int , productId: String){
         viewModelScope.launch {
-            updateCartLiveDate.value =cartWebService.updateCart()
+            updateCartLiveDate.value =cartWebService.updateCart(updateCartRequest = UpdateCartRequest(productId,number))
         }
 
     }

@@ -32,8 +32,6 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
             View.OnClickListener {
                 notifyItemRemoved(position)
             })
-
-
     }
 
 }
@@ -53,7 +51,7 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
             //name
             binding.cateName.text=cart.title
             //price
-            binding.priceDisplay.text=cart.price.toString()
+            binding.priceDisplay.text="YER ${cart.price.toString()}.00"
             //count
             binding.numberOfProduct.text =cart.count.toString()
 
@@ -64,7 +62,7 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
                         cart.count = cart.count!! - 1
                         binding.numberOfProduct.text = cart.count.toString()
                         val newPrice = cart.price!! * cart.count!!
-                        binding.priceDisplay.text = newPrice.toString()
+                        binding.priceDisplay.text = "YER ${newPrice}.00"
                     }
 
 
@@ -74,7 +72,7 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
                     cart.count = cart.count!! + 1
                     binding.numberOfProduct.text =cart.count.toString()
                     val newPrice = cart.price!! * cart.count!!
-                    binding.priceDisplay.text=newPrice.toString()
+                    binding.priceDisplay.text="YER ${newPrice}.00"
                 })
 
 

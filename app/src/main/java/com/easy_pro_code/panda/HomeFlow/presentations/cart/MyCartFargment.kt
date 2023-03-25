@@ -19,14 +19,12 @@ import com.easy_pro_code.panda.databinding.FragmentCartBinding
 
 class MyCartFargment : Fragment() {
 
-    lateinit var binding: FragmentCartBinding
+    private lateinit var  binding: FragmentCartBinding
     private lateinit var getAllCartViewModel : GetCartViewModel
     private lateinit var createCartViewModel : OrdersViewModel
     private var cartList : List<MyCartModel> = listOf()
     val sessionManager = AuthUtils.manager
     var list: List<MyCartModel>? = listOf()
-
-
     private lateinit var  cartModel :MyCartModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +43,6 @@ class MyCartFargment : Fragment() {
         subscribeToLiveData(cartAdapter)
         getAllCartViewModel.getAllCarts()
 
-        //binding.dateValue.text = cartModel.date
 
         binding.checkOutBtn.setOnClickListener {
             createCartViewModel.createOrder()
@@ -68,7 +65,7 @@ class MyCartFargment : Fragment() {
                 findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
             }
             else{
-                //            Log.e("Ziad Adapter live data",it.toString())
+                //Log.e("Ziad Adapter live data",it.toString())
                 it.carts.let {
                         cartsListResponse->
                     cartsListResponse?.map {

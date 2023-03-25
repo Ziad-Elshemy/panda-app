@@ -72,7 +72,7 @@ class ProductPageFragment:Fragment() {
                 Toast.makeText(requireContext(), "Add To Cart", Toast.LENGTH_SHORT).show()
             }
             else{
-                addCartViewModel.updateCart()
+                addCartViewModel.updateCart(pos ,product?.id.toString())
                 Toast.makeText(requireContext(), "Update Cart", Toast.LENGTH_SHORT).show()
 
             }

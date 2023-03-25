@@ -29,6 +29,7 @@ interface CartWebService {
     @Headers("authorization:Basic UIOIKMJOYWRtaW46cGFzc3dvcmQ=")
     suspend fun updateCart(
         @Path("reqId") cardId:String = AuthUtils.manager.getCartId()!!,
+        @Body updateCartRequest : UpdateCartRequest ,
         @Header("x-access-token")token:String= AuthUtils.manager.getToken()?:""
         ): UpdateCartResponse
 
