@@ -18,7 +18,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp">
 
 <!--        <androidx.cardview.widget.CardView-->
 <!--            android:id="@+id/cate_card_view"-->
