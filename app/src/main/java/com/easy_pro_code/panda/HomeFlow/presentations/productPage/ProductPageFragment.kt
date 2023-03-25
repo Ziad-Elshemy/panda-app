@@ -1,25 +1,37 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.productPage
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.ContextWrapper
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.Environment
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
-import com.easy_pro_code.panda.R
 import androidx.lifecycle.ViewModelProvider
-import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
-import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
-import com.easy_pro_code.panda.data.Models.remote_backend.Cart
-import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
-import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
-import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.easy_pro_code.panda.HomeFlow.models.Product
+import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
+import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
+import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
+import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
+import com.sendbird.android.constant.StringSet.title
+import java.io.File
+import java.io.FileOutputStream
 
 class ProductPageFragment:Fragment() {
     lateinit var viewBinding:FragmentProductPageBinding
@@ -158,37 +170,30 @@ class ProductPageFragment:Fragment() {
         }
 
         viewBinding.downloadIcon.setOnClickListener{
-            saveToGallery()
+
+            val drawable = viewBinding.productImage.getDrawable() as BitmapDrawable
+            val bitmap = drawable.bitmap
+            val cw = ContextWrapper(requireContext())
+            // path to /data/data/yourapp/app_data/imageDir
+            val directory: File = cw.getDir("download", Context.MODE_PRIVATE)
+            // Create imageDir
+            val mypath = File(directory, title + ".jpg")
+
+            val fos: FileOutputStream
+            try {
+                fos = FileOutputStream(mypath)
+                // Use the compress method on the BitMap object to write image to the OutputStream
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
+                fos.close()
+                Toast.makeText(requireContext(), "Download", Toast.LENGTH_SHORT).show()
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
         }
 
         return viewBinding.root
     }
 
-    private fun saveToGallery() {
-        val bitmapDrawable = viewBinding.productImage.getDrawable() as BitmapDrawable
-        val bitmap = bitmapDrawable.bitmap
-        var outputStream: FileOutputStream? = null
-        val file = Environment.getExternalStorageDirectory()
-        val dir = File(file.absolutePath + "/MyPics")
-        dir.mkdirs()
-        val filename = String.format("%d.png", System.currentTimeMillis())
-        val outFile = File(dir, filename)
-        try {
-            outputStream = FileOutputStream(outFile)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-        try {
-            outputStream!!.flush()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        try {
-            outputStream!!.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+
 
 }

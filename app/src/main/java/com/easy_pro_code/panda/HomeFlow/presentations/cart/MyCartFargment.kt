@@ -29,7 +29,8 @@ class MyCartFargment : Fragment() {
     var list: List<MyCartModel>? = listOf()
 
     val createAddressViewModel:CreateAddressViewModel by activityViewModels()
-
+    var total=0
+    var totalAfterDiscount =0
 
     private lateinit var  cartModel :MyCartModel
 
@@ -52,7 +53,6 @@ class MyCartFargment : Fragment() {
         }else {
             subscribeToLiveData(cartAdapter)
             getAllCartViewModel.getAllCarts()
-
             binding.checkOutBtn.setOnClickListener {
                 createCartViewModel.createOrder()
                 createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
@@ -73,6 +73,14 @@ class MyCartFargment : Fragment() {
             }
         }
 
+        binding.applyBtn.setOnClickListener {
+            if (binding.enterPromoCode.getText().toString().equals("panda20")){
+                binding.promoCodeActiveted.visibility = View.VISIBLE
+                totalAfterDiscount = (total*0.8).toInt()
+                binding.totalPrice.setText("YER "+totalAfterDiscount.toString()+".00")
+            }
+        }
+
         binding.addACreditCart.setOnClickListener {
             Toast.makeText(requireContext(), "Soon :)", Toast.LENGTH_SHORT).show()
         }
@@ -88,7 +96,7 @@ class MyCartFargment : Fragment() {
             }
             else{
 
-                var total=0
+
                 //            Log.e("Ziad Adapter live data",it.toString())
                 it.carts.let {
                         cartsListResponse->
