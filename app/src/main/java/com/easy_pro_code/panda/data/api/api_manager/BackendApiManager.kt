@@ -1,11 +1,6 @@
 package com.easy_pro_code.panda.data.api.api_manager
 
-import com.easy_pro_code.panda.data.api.web_services.AuthenticationWebService
-import com.easy_pro_code.panda.data.api.web_services.CategoryWebService
-import com.easy_pro_code.panda.data.api.web_services.OffersWebService
-import com.easy_pro_code.panda.data.api.web_services.CartWebService
-import com.easy_pro_code.panda.data.api.web_services.OrderWebService
-import com.easy_pro_code.panda.data.api.web_services.ProductWebService
+import com.easy_pro_code.panda.data.api.web_services.*
 import com.sendbird.android.shadow.okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -65,6 +60,10 @@ class ApiManager {
 
         fun getAllCartApi(): CartWebService {
             return getInstance().create(CartWebService::class.java)
+        }
+
+        fun getCreateAddressApi(): CreateAddressWebService {
+            return getInstance().create(CreateAddressWebService::class.java)
         }
     }
 }

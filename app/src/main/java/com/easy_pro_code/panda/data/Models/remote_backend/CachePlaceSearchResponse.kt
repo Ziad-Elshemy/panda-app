@@ -5,10 +5,20 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class CreateAddressWithoutCacheRequest(
+data class CachePlaceSearchResponse(
 
-	@field:SerializedName("userId")
-	val userId: String? = null,
+	@field:SerializedName("orders")
+	val orders: Orders? = null
+) : Parcelable
+
+@Parcelize
+data class Orders(
+
+	@field:SerializedName("__v")
+	val v: Int? = null,
+
+	@field:SerializedName("_id")
+	val id: String? = null,
 
 	@field:SerializedName("Location")
 	val location: Location? = null,

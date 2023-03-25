@@ -19,6 +19,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.easy_pro_code.panda.HomeFlow.models.*
 import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.Product
+import com.easy_pro_code.panda.HomeFlow.view_model.CreateAddressViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.HomeViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.WishListViewModel
@@ -34,6 +35,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
 
+    private var data: Place? = null
     private lateinit var binding:FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
     private val suspendWindowViewModel:SuspendWindowViewModel by activityViewModels()
@@ -45,6 +47,8 @@ class HomeFragment : Fragment() {
     private var city:String=""
     private var edTextId:Int=-1
     private var wishList:List<WishProduct>? = listOf()
+
+    private  val createAddressViewModel:CreateAddressViewModel by activityViewModels()
 
 
 
@@ -200,6 +204,16 @@ class HomeFragment : Fragment() {
             wishList=it
             productsAdapter.submitWishList(wishList)
         }
+
+        createAddressViewModel.createAddressWithCacheLiveData.observe(viewLifecycleOwner){
+            createAddressViewModel.deliveryLocation=data?.name
+            Log.i("with cache",data?.name.toString())
+        }
+
+        createAddressViewModel.createAddressWithoutCacheLiveData.observe(viewLifecycleOwner){
+            createAddressViewModel.deliveryLocation=data?.name
+            Log.i("without cache",data?.name.toString())
+        }
     }
 
 
@@ -207,7 +221,8 @@ class HomeFragment : Fragment() {
     private fun startAutocompleteIntent(){
         val fields = listOf(
             Place.Field.ADDRESS_COMPONENTS,
-            Place.Field.LAT_LNG, Place.Field.VIEWPORT,
+            Place.Field.LAT_LNG,
+            Place.Field.VIEWPORT,
             Place.Field.NAME,
             Place.Field.ADDRESS)
         // Start the autocomplete intent.
@@ -235,13 +250,19 @@ class HomeFragment : Fragment() {
 //        viewBinding.edFrom.setOnClickListener(startAutocompleteIntentListener)
         hideSuspendWindow()
         if(result.resultCode == Activity.RESULT_OK ){
-            val data= result?.data?.let { Autocomplete.getPlaceFromIntent(it) }
+            data= result?.data?.let { Autocomplete.getPlaceFromIntent(it) }
             Log.i("PLACE: ", data?.address.toString())
             val address=data?.address.toString().replace(" ","").split(",")
             val country= address[address.size-1]
             Log.i("city: ", city)
             if (this.city==city && country=="Egypt"){
                 changeEditTextDataAndTripPoints(data)
+                val latLng=data?.latLng
+                createAddressViewModel.checkAddress(
+                    lat = latLng?.latitude.toString(),
+                    lng = latLng?.longitude.toString(),
+                    address = data?.name.toString()
+                )
             }
         }
     }
