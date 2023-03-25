@@ -32,6 +32,8 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
             View.OnClickListener {
                 notifyItemRemoved(position)
             })
+
+
     }
 
 }

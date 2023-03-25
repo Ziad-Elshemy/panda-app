@@ -1,25 +1,35 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.productPage
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
-import com.easy_pro_code.panda.R
 import androidx.lifecycle.ViewModelProvider
-import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
-import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
-import com.easy_pro_code.panda.data.Models.remote_backend.Cart
-import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
-import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
-import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.easy_pro_code.panda.HomeFlow.models.Product
+import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
+import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
+import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
+import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
+import java.io.File
+import java.io.FileOutputStream
+
 
 class ProductPageFragment:Fragment() {
     lateinit var viewBinding:FragmentProductPageBinding
@@ -34,6 +44,7 @@ class ProductPageFragment:Fragment() {
         super.onCreate(savedInstanceState)
         addCartViewModel= ViewModelProvider(this).get(AddCartViewModel::class.java)
     }
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -98,9 +109,56 @@ class ProductPageFragment:Fragment() {
             else{
                 addCartViewModel.updateCart(pos ,selectedProduct?.id.toString())
                 Toast.makeText(requireContext(), "Update Cart", Toast.LENGTH_SHORT).show()
-
             }
+
+            val view = layoutInflater.inflate(R.layout.cart_dialog,null)
+            val cartBoxBuilder = AlertDialog.Builder(requireContext()).setView(view).create()
+            cartBoxBuilder.show()
+            val continueShoppingButton: Button = view.findViewById(R.id.continueToShopping)
+            continueShoppingButton.setOnClickListener {
+                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToHomeFragment())
+                cartBoxBuilder.dismiss()
+            }
+            val yesButton: Button = view.findViewById(R.id.yes)
+            yesButton.setOnClickListener {
+                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToCart())
+                cartBoxBuilder.dismiss()
+            }
+
         }
+
+        viewBinding.downloadIcon.setOnClickListener{
+            saveToGallery()
+        }
+
         return viewBinding.root
     }
+
+    private fun saveToGallery() {
+        val bitmapDrawable = viewBinding.productImage.getDrawable() as BitmapDrawable
+        val bitmap = bitmapDrawable.bitmap
+        var outputStream: FileOutputStream? = null
+        val file = Environment.getExternalStorageDirectory()
+        val dir = File(file.absolutePath + "/MyPics")
+        dir.mkdirs()
+        val filename = String.format("%d.png", System.currentTimeMillis())
+        val outFile = File(dir, filename)
+        try {
+            outputStream = FileOutputStream(outFile)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        try {
+            outputStream!!.flush()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        try {
+            outputStream!!.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 }
