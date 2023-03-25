@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
+import com.easy_pro_code.panda.HomeFlow.view_model.CreateAddressViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.GetCartViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.OrdersViewModel
 import com.easy_pro_code.panda.R
@@ -26,6 +28,8 @@ class MyCartFargment : Fragment() {
     val sessionManager = AuthUtils.manager
     var list: List<MyCartModel>? = listOf()
 
+    val createAddressViewModel:CreateAddressViewModel by activityViewModels()
+
 
     private lateinit var  cartModel :MyCartModel
 
@@ -38,7 +42,7 @@ class MyCartFargment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart, container, false)
-
+        binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
         val cartAdapter = CartRecyclerView(cartList)
         binding.mycartsRv.adapter=cartAdapter
         cartAdapter.submitList(cartList)
@@ -79,6 +83,8 @@ class MyCartFargment : Fragment() {
                 findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
             }
             else{
+
+                var total=0
                 //            Log.e("Ziad Adapter live data",it.toString())
                 it.carts.let {
                         cartsListResponse->
@@ -96,14 +102,25 @@ class MyCartFargment : Fragment() {
                                 cartId = cartsItem.id.toString(),
                                 date = cartsItem.date.toString()
                             )
+                            total+=productResponse?.productId?.price?.toInt()!!
                             myCartModel
                         }
                     }
                     cartAdapter.submitList(list)
                     Log.e("Ziad Adapter data",list?.size.toString())
                     Log.e("userId" , AuthUtils.manager.fetchData().id.toString())
+                    binding.subtotalPrice.setText("YER "+total.toString()+".00")
+                    var shipping=0
+                    if (total<1000)  {
+                        shipping=50* list?.size!!
+                        binding.shippingFeePrice.setText("YER "+shipping.toString()+".00")
+                    }
+                    else binding.shippingFeePrice.setText("free")
+                    binding.totalPrice.setText("YER "+(total+shipping).toString()+".00")
                 }
+
             }
+
         }
     }
 
