@@ -5,6 +5,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.ui.graphics.Paint
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -68,6 +69,7 @@ class OfferViewHolder(val binding: OffersListItemBinding) : RecyclerView.ViewHol
         binding.offerName.setText(offer.product.title)
         binding.offerPrice.setText(offer.newPrice)
         binding.offerOldPrice.setText(offer.product.price)
+        binding.offerOldPrice.paintFlags = binding.offerOldPrice.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
         binding.frame2.setOnClickListener{
             onOfferClickListener?.onClick(offer)
         }
