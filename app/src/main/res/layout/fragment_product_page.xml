@@ -17,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/add_to_cart_btn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/add_to_cart_btn">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -30,31 +30,30 @@
                     android:id="@+id/productEditTextSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="50dp"
+                    android:layout_marginTop="30dp"
                     android:background="@drawable/text_input_shadow"
                     android:drawableStart="@drawable/baseline_search_24"
                     android:ems="10"
-                    android:layout_marginHorizontal="50dp"
-                    app:queryHint="@string/what_are_you_looking_for"
-                    app:iconifiedByDefault="false"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/bold"
                     android:inputType="text"
                     android:paddingHorizontal="16dp"
                     android:textColorHint="@color/black_gray"
                     android:textSize="16sp"
-                    android:fontFamily="@font/light"
+                    app:iconifiedByDefault="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="30dp" />
+                    app:queryHint="@string/what_are_you_looking_for" />
 
 
                 <TextView
                     android:id="@+id/rate_icon1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/background_rate"
                     android:drawableRight="@drawable/baseline_star_24"
                     android:fontFamily="@font/regular"
@@ -62,21 +61,21 @@
                     android:paddingHorizontal="10dp"
                     android:text="3.7"
                     android:textColor="@color/white"
-                    app:layout_constraintTop_toBottomOf="@id/productEditTextSearch"
-                    app:layout_constraintEnd_toStartOf="@id/rate_text1" />
+                    app:layout_constraintEnd_toStartOf="@id/rate_text1"
+                    app:layout_constraintTop_toBottomOf="@id/productEditTextSearch" />
 
                 <TextView
                     android:id="@+id/rate_text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
                     android:fontFamily="@font/light"
                     android:text="(174)"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintTop_toBottomOf="@id/productEditTextSearch"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productEditTextSearch" />
 
                 <TextView
                     android:id="@+id/category_title_tv"
@@ -120,8 +119,8 @@
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/download_icon"
-                    app:layout_constraintStart_toEndOf="@id/product_image"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/product_image"
                     app:layout_constraintTop_toTopOf="@id/product_image" />
 
                 <ImageView
@@ -130,93 +129,90 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/baseline_favorite_border_24"
-                    app:layout_constraintStart_toEndOf="@id/product_image"
+                    app:layout_constraintBottom_toTopOf="@id/share_icon"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/download_icon"
-                    app:layout_constraintBottom_toTopOf="@id/share_icon" />
+                    app:layout_constraintStart_toEndOf="@id/product_image"
+                    app:layout_constraintTop_toBottomOf="@id/download_icon" />
 
                 <ImageView
                     android:id="@+id/share_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="50dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="50dp"
                     android:src="@drawable/share_icon"
-                    app:layout_constraintStart_toEndOf="@id/product_image"
+                    app:layout_constraintBottom_toBottomOf="@id/product_image"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/product_image" />
+                    app:layout_constraintStart_toEndOf="@id/product_image" />
 
                 <TextView
                     android:id="@+id/price_currency_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="YER"
-                    android:textColor="@color/black"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
-                    android:textSize="11sp"
                     android:fontFamily="@font/light"
-                    app:layout_constraintTop_toBottomOf="@id/product_image"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:text="YER"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/product_image" />
 
                 <TextView
                     android:id="@+id/total_price_ET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/medium"
                     android:text="488.00"
                     android:textColor="@color/black"
-                    android:layout_marginLeft="4dp"
                     android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@id/price_currency_text"
+                    app:layout_constraintTop_toBottomOf="@id/product_image" />
+
+                <View
+                    android:id="@+id/prices_line_separator1"
+                    android:layout_width="14dp"
+                    android:layout_height="4dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="9dp"
+                    android:background="@android:color/black"
+                    app:layout_constraintStart_toEndOf="@id/total_price_ET"
+                    app:layout_constraintTop_toBottomOf="@+id/product_image" />
+
+                <TextView
+                    android:id="@+id/new_price_currency_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/light"
+                    android:text="YER"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toEndOf="@id/prices_line_separator1"
+                    app:layout_constraintTop_toBottomOf="@id/product_image" />
+
+                <TextView
+                    android:id="@+id/new_total_price_ET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:fontFamily="@font/medium"
-                    app:layout_constraintTop_toBottomOf="@id/product_image"
-                    app:layout_constraintStart_toEndOf="@id/price_currency_text" />
-
-            <View
-                android:id="@+id/prices_line_separator1"
-                android:layout_width="14dp"
-                android:layout_height="4dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginStart="15dp"
-                android:background="@android:color/black"
-                app:layout_constraintStart_toEndOf="@id/total_price_ET"
-                app:layout_constraintTop_toBottomOf="@+id/product_image"
-                />
-
-            <TextView
-                android:id="@+id/new_price_currency_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="YER"
-                android:textColor="@color/black"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="3dp"
-                android:textSize="11sp"
-                android:fontFamily="@font/light"
-                app:layout_constraintTop_toBottomOf="@id/product_image"
-                app:layout_constraintStart_toEndOf="@id/prices_line_separator1"
-                />
-
-            <TextView
-                android:id="@+id/new_total_price_ET"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="488.00"
-                android:textColor="@color/black"
-                android:layout_marginLeft="4dp"
-                android:textSize="16sp"
-                android:fontFamily="@font/medium"
-                app:layout_constraintTop_toBottomOf="@id/product_image"
-                app:layout_constraintStart_toEndOf="@id/new_price_currency_text"
-                />
+                    android:text="488.00"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@id/new_price_currency_text"
+                    app:layout_constraintTop_toBottomOf="@id/product_image" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/payment_method1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:elevation="20dp"
-                    android:layout_marginEnd="60dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginEnd="60dp"
+                    android:elevation="20dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="8dp"
@@ -240,7 +236,7 @@
                             android:fontFamily="@font/medium"
                             android:text="This item will be delivered in 72 hours"
                             android:textColor="@color/black"
-                            android:textSize="22sp"
+                            android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
 
@@ -252,43 +248,26 @@
                     android:id="@+id/product_Details_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/regular"
-                    android:text="Details"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/medium"
+                    android:text="Descriptions"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/payment_method1" />
 
+                <!--                here is details -->
 
-                <TextView
-                    android:id="@+id/product_Reviews_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/regular"
-                    android:text="Reviews"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@id/productEditTextSearch"
-                    app:layout_constraintTop_toBottomOf="@id/payment_method1" />
+                <!--                <View-->
+                <!--                    android:id="@+id/product_line_separator1"-->
+                <!--                    android:layout_width="185dp"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    android:layout_marginTop="4dp"-->
+                <!--                    android:background="@android:color/darker_gray"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/product_Details_tv" />-->
 
-                <View
-                    android:id="@+id/product_line_separator1"
-                    android:layout_width="185dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@android:color/darker_gray"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/product_Details_tv" />
-
-                <View
-                    android:id="@+id/product_line_separator2"
-                    android:layout_width="185dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@android:color/darker_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/product_Details_tv" />
+                <!--                here is details 1  -->
 
                 <!--    <TextView-->
                 <!--        android:id="@+id/rate_icon2"-->
@@ -326,26 +305,61 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="5dp"
-                    android:textAlignment="textStart"
-                    android:text="Panda mission is to simplify and improve the lives of people and build an awesome organization that inspires the lives of people and build an awesome organization that inspires."
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:fontFamily="@font/regular"
+                    android:text="Panda mission is to simplify and improve the lives of people and build an awesome organization that inspires the lives of people and build an awesome organization that inspires."
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black_gray"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/product_line_separator1" />
+                    app:layout_constraintTop_toBottomOf="@+id/product_Details_tv" />
+
+
+                <View
+                    android:id="@+id/product_line_separator1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="50dp"
+                    android:background="@color/divider_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reviews_sub_title_text" />
+
+
+                <TextView
+                    android:id="@+id/product_Reviews_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/medium"
+                    android:text="Reviews"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reviews_sub_title_text" />
+
+                <!--                <View-->
+                <!--                    android:id="@+id/product_line_separator2"-->
+                <!--                    android:layout_width="185dp"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    android:layout_marginTop="4dp"-->
+                <!--                    android:background="@android:color/darker_gray"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/reviews_sub_title_text" />-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/product_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_marginBottom="10dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/product_line_separator2"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:listitem="@layout/reviews_list_item"
-                    android:layout_marginBottom="10dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/product_Reviews_tv"
+                    tools:listitem="@layout/reviews_list_item" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -357,42 +371,42 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_black_stroke_background"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/add_to_cart_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
             <Spinner
                 android:id="@+id/dropdown_menu_num_of_items"
                 style="@style/Widget.AppCompat.DropDownItem.Spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/black"
                 android:layout_gravity="center"
+                android:backgroundTint="@color/black"
                 android:contentDescription="Number of items"
                 android:spinnerMode="dropdown"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/add_to_cart_btn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
 
         <Button
             android:id="@+id/add_to_cart_btn"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="60dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_background"
             android:fontFamily="@font/regular"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="50dp"
             android:text="Add to Cart"
             android:textColor="@color/white"
-            android:layout_marginHorizontal="50dp"
-            android:textSize="19sp"
-            app:layout_constraintStart_toEndOf="@id/menu_num_of_items_container"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/menu_num_of_items_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
