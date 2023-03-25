@@ -45,6 +45,7 @@ class SessionManager (context: Context) {
        // editor.putStringSet(ROLE, user.roles?.toSet())
         editor.putString(EMAIL, user.email)
         editor.putString(PHONE, phone)
+        editor.putString(USER_NAME,user.userName)
         Log.i("USER_TOKEN",user.token.toString())
         editor.putString(USER_TOKEN , user.token)
         user.id?.let { editor.putString(ID, it) }

@@ -1,6 +1,8 @@
 package com.easy_pro_code.panda.HomeFlow.view_model
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,9 +21,8 @@ class GetCartViewModel : ViewModel() {
     fun getAllCarts(){
         viewModelScope.launch {
             try {
-                val test=async { getCartWebService.getCarts() }
-                getcartsLiveData.value = test.await()
-                Log.e("Ziad Cart VM",test.await().toString())
+                getcartsLiveData.value = getCartWebService.getCarts()
+                Log.e("Ziad Cart VM","hi")
             }   catch (ex:java.lang.Exception){
                 Log.i("ex from get Carts ",ex.message!!)
             }

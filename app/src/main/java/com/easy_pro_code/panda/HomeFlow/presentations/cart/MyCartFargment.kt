@@ -25,6 +25,8 @@ class MyCartFargment : Fragment() {
     private var cartList : List<MyCartModel> = listOf()
     val sessionManager = AuthUtils.manager
     var list: List<MyCartModel>? = listOf()
+
+
     private lateinit var  cartModel :MyCartModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,17 +42,29 @@ class MyCartFargment : Fragment() {
         val cartAdapter = CartRecyclerView(cartList)
         binding.mycartsRv.adapter=cartAdapter
         cartAdapter.submitList(cartList)
-        subscribeToLiveData(cartAdapter)
-        getAllCartViewModel.getAllCarts()
+        if (AuthUtils.manager.getCartId() == null){
+            Toast.makeText(requireContext(),"Please, Add Item First",Toast.LENGTH_SHORT).show()
+            findNavController().popBackStack()
+        }else {
+            subscribeToLiveData(cartAdapter)
+            getAllCartViewModel.getAllCarts()
 
-
-        binding.checkOutBtn.setOnClickListener {
-            createCartViewModel.createOrder()
-            createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner){
-                if (it?.success.toString().equals("order is done")){
-                    Toast.makeText(requireContext(),"Order Add Successfully :)",Toast.LENGTH_SHORT).show()
-                }else{
-                    Toast.makeText(requireContext(),"Sorry, Failed to Create Order! :(",Toast.LENGTH_SHORT).show()
+            binding.checkOutBtn.setOnClickListener {
+                createCartViewModel.createOrder()
+                createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
+                    if (it?.success.toString().equals("order is done")) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Order Add Successfully :)",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Sorry, Failed to Create Order! :(",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         }
@@ -65,7 +79,7 @@ class MyCartFargment : Fragment() {
                 findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
             }
             else{
-                //Log.e("Ziad Adapter live data",it.toString())
+                //            Log.e("Ziad Adapter live data",it.toString())
                 it.carts.let {
                         cartsListResponse->
                     cartsListResponse?.map {
