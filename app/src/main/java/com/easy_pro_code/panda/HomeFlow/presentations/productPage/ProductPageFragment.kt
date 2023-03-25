@@ -19,6 +19,7 @@ import com.easy_pro_code.panda.data.Models.remote_backend.Cart
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
 import androidx.core.view.isVisible
+import com.easy_pro_code.panda.HomeFlow.models.Product
 
 class ProductPageFragment:Fragment() {
     lateinit var viewBinding:FragmentProductPageBinding
@@ -26,6 +27,8 @@ class ProductPageFragment:Fragment() {
     lateinit var cart: OrderCart
     val sessionManager = AuthUtils.manager
     var pos:Int = 0
+
+    lateinit var selectedProduct:Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,14 +60,35 @@ class ProductPageFragment:Fragment() {
                 Toast.makeText(requireContext() ,"Please select number of product", Toast.LENGTH_SHORT).show()
             }
         }
+        if (product!=null){
+            selectedProduct=product
+            viewBinding.totalPriceET.setText(product.price)
+            viewBinding.reviewsSubTitleText.setText(product.title)
+            viewBinding.categoryTitleTv.setText(product.category)
+            viewBinding.rateText1.setText(product.rate.toString())
+            viewBinding.newTotalPriceET.isVisible=false
+            viewBinding.pricesLineSeparator1.isVisible=false
+            viewBinding.newPriceCurrencyText.isVisible=false
 
-        //
+
+
+        }else if(offer!=null){
+            selectedProduct=offer.product
+            viewBinding.totalPriceET.setText(offer.product.price)
+            viewBinding.newTotalPriceET.setText(offer.newPrice)
+            viewBinding.reviewsSubTitleText.setText(offer.product.title)
+            viewBinding.categoryTitleTv.setText(offer.product.category)
+            viewBinding.rateText1.setText(offer.product.rate.toString())
+        }
+
+
         //add cart button
         viewBinding.addToCartBtn.setOnClickListener{
 
             if (sessionManager.getCartId() == null){
                 Log.i("Michael" , pos.toString())
-                addCartViewModel.addToCart(AuthUtils.manager.fetchData().id.toString(),product?.id.toString(),pos)
+                Log.i("selectedProduct page:",AuthUtils.manager.fetchData().id.toString()+",  pID:"+selectedProduct?.id.toString()+",  pos:"+pos.toString())
+                addCartViewModel.addToCart(AuthUtils.manager.fetchData().id.toString(),selectedProduct?.id.toString(),pos)
                 addCartViewModel.cartsLiveData.observe(viewLifecycleOwner){
                     sessionManager.saveCartId(it.cart?.id.toString())
                     Log.i("Michael",it.cart?.id.toString())
@@ -72,28 +96,10 @@ class ProductPageFragment:Fragment() {
                 Toast.makeText(requireContext(), "Add To Cart", Toast.LENGTH_SHORT).show()
             }
             else{
-                addCartViewModel.updateCart(pos ,product?.id.toString())
+                addCartViewModel.updateCart(pos ,selectedProduct?.id.toString())
                 Toast.makeText(requireContext(), "Update Cart", Toast.LENGTH_SHORT).show()
 
             }
-         }
-
-
-        if (product!=null){
-            viewBinding.totalPriceET.setText(product.price)
-            viewBinding.productDetailsTv.setText(product.title)
-            viewBinding.categoryTitleTv.setText(product.category)
-            viewBinding.rateText1.setText(product.rate.toString())
-            viewBinding.newTotalPriceET.isVisible=false
-            viewBinding.pricesLineSeparator1.isVisible=false
-            viewBinding.newPriceCurrencyText.isVisible=false
-
-        }else if(offer!=null){
-            viewBinding.totalPriceET.setText(offer.product.price)
-            viewBinding.newTotalPriceET.setText(offer.newPrice)
-            viewBinding.productDetailsTv.setText(offer.product.title)
-            viewBinding.categoryTitleTv.setText(offer.product.category)
-            viewBinding.rateText1.setText(offer.product.rate.toString())
         }
         return viewBinding.root
     }
