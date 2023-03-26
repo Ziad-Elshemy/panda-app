@@ -1,16 +1,21 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.cart
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
 import com.easy_pro_code.panda.HomeFlow.view_model.CreateAddressViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.GetCartViewModel
@@ -18,6 +23,11 @@ import com.easy_pro_code.panda.HomeFlow.view_model.OrdersViewModel
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.databinding.FragmentCartBinding
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MyCartFargment : Fragment() {
 
@@ -28,11 +38,11 @@ class MyCartFargment : Fragment() {
     private lateinit var createCartViewModel : OrdersViewModel
     private var cartList : List<MyCartModel> = listOf()
     val sessionManager = AuthUtils.manager
-    private lateinit var edTextObj:EditText
+    private lateinit var edTextObj: EditText
     private var edTextId:Int=-1
 
     var list: List<MyCartModel>? = listOf()
-    lateinit var navBar:BottomNavigationView
+    lateinit var navBar: BottomNavigationView
 
     val createAddressViewModel:CreateAddressViewModel by activityViewModels()
     var total=0
@@ -62,10 +72,6 @@ class MyCartFargment : Fragment() {
         cartAdapter.submitList(cartList)
         initPlacesSdk()
         binding.deliverToValue.setOnClickListener(startAutocompleteIntentListener)
-
-    var total : Int = 0
-
-
 
 
         if (AuthUtils.manager.getCartId() == null){
