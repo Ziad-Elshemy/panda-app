@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.easy_pro_code.panda.HomeFlow.models.Order
 import com.easy_pro_code.panda.HomeFlow.view_model.OrdersViewModel
@@ -38,7 +39,7 @@ class MyOrdersFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_my_orders,container,false)
         val adapter = MyOrdersAdapter(
             ReviewButtonClickListener {
-            Toast.makeText(requireContext(),"Coming Soon",Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.action_myOrdersFragment_to_reviewFragment)
         },list!!)
 
 

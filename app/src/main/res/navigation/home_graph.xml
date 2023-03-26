@@ -94,7 +94,11 @@
         tools:layout="@layout/fragment_my_orders"
         android:id="@+id/myOrdersFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.myOrders.MyOrdersFragment"
-        android:label="MyOrdersFragment" />
+        android:label="MyOrdersFragment" >
+        <action
+            android:id="@+id/action_myOrdersFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_cart"
         android:id="@+id/cart"
@@ -157,6 +161,14 @@
             android:id="@+id/action_productSearchFragment_to_productPageFragment"
             app:destination="@id/productPageFragment"
             app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.Review.ReviewFragment"
+        android:label="ReviewFragment" >
+        <argument
+            android:name="productId"
+            app:argType="string" />
     </fragment>
 
 

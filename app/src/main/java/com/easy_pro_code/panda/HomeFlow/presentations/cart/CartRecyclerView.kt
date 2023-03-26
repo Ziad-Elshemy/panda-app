@@ -2,6 +2,9 @@ package com.easy_pro_code.panda.HomeFlow.presentations.cart
 
 import android.R
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +53,16 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
 
         fun bind(cart: MyCartModel)
         {
+            try {
+                val base64String = cart.image
+                val decodedString = Base64.decode(base64String, Base64.DEFAULT)
+                val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                binding.driverInfoImage.setImageBitmap(decodedByte)
+            }
+            catch (E:Exception){
+                Log.i("ABANOUB",cart.image.toString())
+
+            }
             //name
             binding.cateName.text=cart.title
             //price
