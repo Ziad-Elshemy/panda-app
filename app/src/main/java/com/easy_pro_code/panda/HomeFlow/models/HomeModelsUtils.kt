@@ -11,7 +11,7 @@ fun List<ProductsItem>?.fromProductToProduct(): List<Product>? = this?.map {
             title = it.title,
             id=it.id,
             image = it.image,
-            rate = it.rate,
+            rate = it.rate?:5,
             productVariant = ProductVariant(it.variant),
             multiImg = ProductMultiImage(it.multiImg),
             prands = it.prands
@@ -28,7 +28,7 @@ fun List<OffersItem>?.fromOfferToProduct(): List<Offer>? = this?.map {
             title = product?.title,
             id=product?.id,
             image = product?.image,
-            rate = product?.rate,
+            rate = product?.rate?:5,
             productVariant = ProductVariant(product?.variant),
             multiImg = ProductMultiImage(product?.multiImg),
             prands = product?.prands
@@ -37,6 +37,24 @@ fun List<OffersItem>?.fromOfferToProduct(): List<Offer>? = this?.map {
     )
 }
 
+fun List<ProductsItem>?.fromPhoneToProduct(): List<Phone>? = this?.map {
+    Phone(
+        Product(
+            category = it?.category,
+            price = it?.price,
+            title = it?.title,
+            id=it?.id,
+            image = it?.image,
+            rate = it?.rate?:5,
+            productVariant = ProductVariant(it?.variant),
+            multiImg = ProductMultiImage(it?.multiImg),
+            prands = it?.prands
+        )
+    )
+}
+
+
+
 fun Product.fromProductItemToWishProduct():WishProduct=
     WishProduct(
         productId = this.id.toString(),
@@ -44,7 +62,7 @@ fun Product.fromProductItemToWishProduct():WishProduct=
         price=this.price,
         title=this.title,
         image=this.image,
-        rate=this.rate,
+        rate=this.rate?:5,
         variant = Gson().toJson(this.productVariant,ProductVariant::class.java),
         multiImg = Gson().toJson(this.multiImg,ProductMultiImage::class.java),
         prands = this.prands
@@ -58,7 +76,7 @@ fun List<WishProduct>?.fromWishProductToProduct(): List<Product>? = this?.map {
         title = it.title,
         id=it.productId,
         image = it.image,
-        rate = it.rate,
+        rate = it.rate?:5,
         productVariant = Gson().fromJson(it.variant,ProductVariant::class.java),
         multiImg = Gson().fromJson(it.multiImg,ProductMultiImage::class.java),
         prands = it.prands

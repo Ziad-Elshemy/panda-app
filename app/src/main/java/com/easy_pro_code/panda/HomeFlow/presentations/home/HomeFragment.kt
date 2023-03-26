@@ -19,10 +19,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.easy_pro_code.panda.HomeFlow.models.*
 import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.Product
-import com.easy_pro_code.panda.HomeFlow.view_model.CreateAddressViewModel
-import com.easy_pro_code.panda.HomeFlow.view_model.HomeViewModel
-import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
-import com.easy_pro_code.panda.HomeFlow.view_model.WishListViewModel
+import com.easy_pro_code.panda.HomeFlow.view_model.*
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.local_database.WishProduct
 import com.easy_pro_code.panda.databinding.FragmentHomeBinding
@@ -38,10 +35,12 @@ class HomeFragment : Fragment() {
     private var data: Place? = null
     private lateinit var binding:FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var categoryViewModel: CategoryViewModel
     private val suspendWindowViewModel:SuspendWindowViewModel by activityViewModels()
     private lateinit var wishListViewModel:WishListViewModel
     private val productsList:List<Product>? = listOf()
     private val offersList:List<Offer>? = listOf()
+    private val phonesList:List<Phone>? = listOf()
     private val categoryList:List<String>?= listOf()
     private lateinit var edTextObj:EditText
     private var city:String=""
@@ -63,6 +62,7 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         homeViewModel=ViewModelProvider(this).get(HomeViewModel::class.java)
         wishListViewModel=ViewModelProvider(this).get(WishListViewModel::class.java)
+        categoryViewModel=ViewModelProvider(this).get(CategoryViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,12 +99,16 @@ class HomeFragment : Fragment() {
         binding.offersRv.adapter=offersAdapter
         val categoriesAdapter=CategoryRecyclerViewAdapter(categoryList)
         binding.categoriesRv.adapter=categoriesAdapter
-        setAdapterClickListener(productsAdapter,offersAdapter,categoriesAdapter)
-        subscribeToLiveData(productsAdapter,offersAdapter,categoriesAdapter)
+        val phonesAdapter = PhonesRecyclerView(phonesList)
+        binding.phonesRv.adapter=phonesAdapter
+        setAdapterClickListener(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter)
+        subscribeToLiveData(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter)
         homeViewModel.getAllProducts()
 
         homeViewModel.getAllOffers()
         homeViewModel.getAllCategories()
+
+        categoryViewModel.getProductByCategory("Phones")
         suspendWindowViewModel.progressBar(true)
 
         //// initial plasces
@@ -122,13 +126,15 @@ class HomeFragment : Fragment() {
     private fun setAdapterClickListener(
         productsAdapter: ProductsHomeRecyclerView,
         offersAdapter: OffersRecyclerView,
-        categoriesAdapter: CategoryRecyclerViewAdapter
+        categoriesAdapter: CategoryRecyclerViewAdapter,
+        phonesAdapter: PhonesRecyclerView
     ) {
         productsAdapter.onProductClickListener=object :ProductsHomeRecyclerView.OnProductClickListener{
             override fun onClick(product: Product) {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
                         product = product,
-                        offer = null
+                        offer = null,
+                        phone = null
                     )
                 )
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
@@ -149,7 +155,8 @@ class HomeFragment : Fragment() {
             override fun onClick(offer: Offer) {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
                     product = null,
-                    offer = offer
+                    offer = offer,
+                    phone = null
                 )
                 )
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
@@ -162,6 +169,28 @@ class HomeFragment : Fragment() {
 
             override fun onUnCheck(offer: Offer) {
                 wishListViewModel.removeFromWishList(offer.product)
+            }
+
+        }
+
+        phonesAdapter.onPhoneClickListener=object :PhonesRecyclerView.OnPhoneClickListener{
+            override fun onClick(phone: Phone) {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
+                    product = null,
+                    offer = null,
+                    phone = phone
+                )
+                )
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
+
+            }
+
+            override fun onCheck(phone: Phone) {
+                wishListViewModel.addToWishList(phone.product)
+            }
+
+            override fun onUnCheck(phone: Phone) {
+                wishListViewModel.removeFromWishList(phone.product)
             }
 
         }
@@ -186,7 +215,8 @@ class HomeFragment : Fragment() {
     private fun subscribeToLiveData(
         productsAdapter: ProductsHomeRecyclerView,
         offersAdapter: OffersRecyclerView,
-        categoriesAdapter: CategoryRecyclerViewAdapter
+        categoriesAdapter: CategoryRecyclerViewAdapter,
+        phonesAdapter: PhonesRecyclerView
     ) {
         homeViewModel.productsLiveData.observe(viewLifecycleOwner){
             suspendWindowViewModel.progressBar(false)
@@ -195,6 +225,10 @@ class HomeFragment : Fragment() {
 
         homeViewModel.offersLiveData.observe(viewLifecycleOwner){
             offersAdapter.submitList(it.offers.fromOfferToProduct())
+        }
+
+        categoryViewModel.productsLiveData.observe(viewLifecycleOwner){
+            phonesAdapter.submitList(it.categoryProducts.fromPhoneToProduct())
         }
 
         homeViewModel.categoryLiveData.observe(viewLifecycleOwner){

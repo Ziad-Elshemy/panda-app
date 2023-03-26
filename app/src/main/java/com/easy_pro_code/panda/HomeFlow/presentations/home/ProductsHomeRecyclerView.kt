@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.home
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -48,7 +49,6 @@ class ProductsHomeRecyclerView(
 
         fun submitWishList(wishList: List<WishProduct>?){
             this.wishList=wishList
-            notifyDataSetChanged()
         }
 
 

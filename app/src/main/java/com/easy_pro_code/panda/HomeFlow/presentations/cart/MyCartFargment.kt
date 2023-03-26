@@ -21,12 +21,18 @@ import com.easy_pro_code.panda.databinding.FragmentCartBinding
 
 class MyCartFargment : Fragment() {
 
+    private var data: Place? = null
+    private var city:String=""
     private lateinit var  binding: FragmentCartBinding
     private lateinit var getAllCartViewModel : GetCartViewModel
     private lateinit var createCartViewModel : OrdersViewModel
     private var cartList : List<MyCartModel> = listOf()
     val sessionManager = AuthUtils.manager
+    private lateinit var edTextObj:EditText
+    private var edTextId:Int=-1
+
     var list: List<MyCartModel>? = listOf()
+    lateinit var navBar:BottomNavigationView
 
     val createAddressViewModel:CreateAddressViewModel by activityViewModels()
     var total=0
@@ -34,10 +40,17 @@ class MyCartFargment : Fragment() {
 
     private lateinit var  cartModel :MyCartModel
 
+    var startAutocompleteIntentListener =
+        View.OnClickListener { view: View ->
+            edTextObj= view as EditText
+            startAutocompleteIntent()
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getAllCartViewModel =ViewModelProvider(this).get(GetCartViewModel::class.java)
         createCartViewModel =ViewModelProvider(this).get(OrdersViewModel::class.java)
+
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,31 +60,33 @@ class MyCartFargment : Fragment() {
         val cartAdapter = CartRecyclerView(cartList)
         binding.mycartsRv.adapter=cartAdapter
         cartAdapter.submitList(cartList)
+        initPlacesSdk()
+        binding.deliverToValue.setOnClickListener(startAutocompleteIntentListener)
+
+    var total : Int = 0
+
+
+
+
         if (AuthUtils.manager.getCartId() == null){
             Toast.makeText(requireContext(),"Please, Add Item First",Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         }else {
             subscribeToLiveData(cartAdapter)
             getAllCartViewModel.getAllCarts()
+
             binding.checkOutBtn.setOnClickListener {
                 createCartViewModel.createOrder()
                 createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
-                    if (it?.success.toString().equals("order is done")) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Order Add Successfully :)",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if (it?.success.toString().equals("order is done")) { Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Sorry, Failed to Create Order! :(",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(requireContext(), "Sorry, Failed to Create Order! :(", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+
         }
+
 
         binding.applyBtn.setOnClickListener {
             if (binding.enterPromoCode.getText().toString().equals("panda20")){
@@ -117,8 +132,17 @@ class MyCartFargment : Fragment() {
                             total+=productResponse?.productId?.price?.toInt()!!
                             myCartModel
                         }
+                        list?.forEach {
+                            total += it.price!!
+                            Log.e("Ziad Total",total.toString())
+                        }
+                        binding.subtotalPrice.setText(total.toString())
                     }
                     cartAdapter.submitList(list)
+                    navBar = requireActivity().findViewById(R.id.bottom_nav)
+                    navBar.getOrCreateBadge(R.id.cart).number = list?.size!!
+
+
                     Log.e("Ziad Adapter data",list?.size.toString())
                     Log.e("userId" , AuthUtils.manager.fetchData().id.toString())
                     binding.subtotalPrice.setText("YER "+total.toString()+".00")
@@ -135,6 +159,56 @@ class MyCartFargment : Fragment() {
 
         }
     }
+    private fun startAutocompleteIntent(){
+        val fields = listOf(
+            Place.Field.ADDRESS_COMPONENTS,
+            Place.Field.LAT_LNG,
+            Place.Field.VIEWPORT,
+            Place.Field.NAME,
+            Place.Field.ADDRESS)
+        // Start the autocomplete intent.
+        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields )
+            .build(requireActivity())
+        registerForActivityResult.launch(intent)
+    }
+    private val registerForActivityResult=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result->
+//        viewBinding.edFrom.setOnClickListener(startAutocompleteIntentListener)
+        hideSuspendWindow()
+        if(result.resultCode == Activity.RESULT_OK ){
+            data= result?.data?.let { Autocomplete.getPlaceFromIntent(it) }
+            Log.i("PLACE: ", data?.address.toString())
+            val address=data?.address.toString().replace(" ","").split(",")
+            val country= address[address.size-1]
+            Log.i("city: ", city)
+            if (this.city==city && country=="Egypt"){
+                changeEditTextDataAndTripPoints(data)
+                val latLng=data?.latLng
+                createAddressViewModel.checkAddress(
+                    lat = latLng?.latitude.toString(),
+                    lng = latLng?.longitude.toString(),
+                    address = data?.name.toString()
+                )
+            }
+        }
+    }
+    private fun hideSuspendWindow(){
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+    private fun changeEditTextDataAndTripPoints(data: Place?) {
+        edTextId=edTextObj.id
+        edTextObj.setText(data?.name.toString())
+    }
+    private fun initPlacesSdk() {
+        // Initialize the SDK
+        Places.initialize(requireContext().applicationContext,MAPS_API_KEY)
+        // Create a new PlacesClient instance
+        Places.createClient(requireContext())
+    }
+
+
+
+
 
 
 }
