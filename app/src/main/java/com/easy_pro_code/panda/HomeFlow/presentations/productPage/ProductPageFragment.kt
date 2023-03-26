@@ -110,6 +110,7 @@ class ProductPageFragment : Fragment() {
         }
         viewBinding.variantColorContainer.isVisible=false
         viewBinding.variantSizeContainer.isVisible=false
+        viewBinding.otherVariantsContainer.isVisible=false
         val map= hashMapOf<String,String>()
         selectedProduct.productVariant?.variant?.forEach{
 
@@ -124,6 +125,7 @@ class ProductPageFragment : Fragment() {
                 }
                 variantColor.submitList(it.value)
             }else if(it?.key?.lowercase()=="size"){
+                viewBinding.variantSizeContainer.isVisible=true
                 val variantSize=VariantSizeRecyclerViewAdapter()
                 viewBinding.rvVariantSize.adapter=variantSize
                 variantSize.onVariantSizeClickListener=object :VariantSizeRecyclerViewAdapter.OnVariantSizeClickListener{
@@ -141,8 +143,9 @@ class ProductPageFragment : Fragment() {
         }
 
         if (map.size!=0){
+            viewBinding.otherVariantsContainer.isVisible=true
             val variantOther=VariantOtherRecyclerViewAdapter(map)
-            viewBinding.otherVariants.adapter=variantOther
+            viewBinding.rvOtherVariants.adapter=variantOther
         }
 
 
@@ -196,16 +199,16 @@ class ProductPageFragment : Fragment() {
             )
 
         )
-//        try {
-//            val base64String = selectedProduct.image
-//            val decodedString = Base64.decode(base64String, Base64.DEFAULT)
-//            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-//            viewBinding.productImage.setImageBitmap(decodedByte)
-//        } catch (E: Exception) {
-//            Log.i("Mokhtar", selectedProduct.image.toString())
-//
-//        }
-        val imageSlider = viewBinding.productImage
+        try {
+            val base64String = selectedProduct.image
+            val decodedString = Base64.decode(base64String, Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            viewBinding.productImage.setImageBitmap(decodedByte)
+        } catch (E: Exception) {
+            Log.i("Mokhtar", selectedProduct.image.toString())
+
+        }
+        val imageSlider = viewBinding.productImageSlider
         imageSlider.setImageList(imageList)
         return viewBinding.root
     }
