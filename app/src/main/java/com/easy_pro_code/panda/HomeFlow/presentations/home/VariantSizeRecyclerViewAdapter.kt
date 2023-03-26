@@ -53,6 +53,8 @@ class VariantSizeViewHolder(val binding: VariantSizeItemBinding) : RecyclerView.
             //change Size
             onVariantSizeClickListener?.onClick(size)
         }
+
+        binding.sizeName.setText(size)
     }
 }
 

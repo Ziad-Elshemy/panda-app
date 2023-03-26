@@ -58,31 +58,29 @@ class MyAccountFragment : Fragment() {
             binding.Divider10.isVisible=false
 
             binding.loginBtn.setOnClickListener {
-//            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToLoginFragment2()
-//            findNavController().navigate(action)
-
+              //  findNavController().navigate(MyAccountFragmentDirections.actionMyAccountFragment2ToLoginFragment2())
 
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
 
-                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
-                    false
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible = false
             }
 
             binding.language2Btn.setOnClickListener {
                 Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
             }
             binding.termsAndConditionsBtn.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://easyprocode.com/"))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"))
                 startActivity(intent)
             }
             binding.aboutBtn.setOnClickListener {
                 val action = MyAccountFragmentDirections.actionMyAccountFragment2ToAboutFragment()
                 findNavController().navigate(action)
-                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
-                    false
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible = false
             }
+
+
 
         }else {
 
@@ -124,6 +122,19 @@ class MyAccountFragment : Fragment() {
             }
             binding.support2Btn.setOnClickListener {
                 Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
+            }
+
+            binding.language2Btn.setOnClickListener {
+                Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
+            }
+            binding.termsAndConditionsBtn.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"))
+                startActivity(intent)
+            }
+            binding.aboutBtn.setOnClickListener {
+                val action = MyAccountFragmentDirections.actionMyAccountFragment2ToAboutFragment()
+                findNavController().navigate(action)
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible = false
             }
 
             binding.logoutBtn.setOnClickListener {

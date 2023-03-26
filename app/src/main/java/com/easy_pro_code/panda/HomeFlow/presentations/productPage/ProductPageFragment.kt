@@ -1,7 +1,14 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.productPage
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,37 +16,43 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
-import com.easy_pro_code.panda.R
 import androidx.lifecycle.ViewModelProvider
-import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
-import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
-import com.easy_pro_code.panda.data.Models.remote_backend.Cart
-import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
-import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.denzcoskun.imageslider.models.SlideModel
 import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantColorRecyclerViewAdapter
 import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantOtherRecyclerViewAdapter
 import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantSizeRecyclerViewAdapter
+import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
+import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
+import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
+import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
+import com.sendbird.android.constant.StringSet.title
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
 
-class ProductPageFragment : Fragment() {
-    lateinit var viewBinding: FragmentProductPageBinding
-    private lateinit var addCartViewModel: AddCartViewModel
+class ProductPageFragment:Fragment() {
+    lateinit var viewBinding:FragmentProductPageBinding
+    private lateinit var  addCartViewModel: AddCartViewModel
     lateinit var cart: OrderCart
     val sessionManager = AuthUtils.manager
-    var pos: Int = 0
+    var pos:Int = 0
 
-    lateinit var selectedProduct: Product
+    lateinit var selectedProduct:Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addCartViewModel = ViewModelProvider(this).get(AddCartViewModel::class.java)
+        addCartViewModel= ViewModelProvider(this).get(AddCartViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -71,20 +84,12 @@ class ProductPageFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.selected_item) + " " + number[position],
-                    Toast.LENGTH_SHORT
-                ).show()
+                //Toast.makeText(requireContext(), getString(R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
                 pos = number[position].toInt()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                Toast.makeText(
-                    requireContext(),
-                    "Please select number of product",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), "Please select number of product", Toast.LENGTH_SHORT).show()
             }
         }
         if (product != null) {
@@ -126,21 +131,23 @@ class ProductPageFragment : Fragment() {
         }
         viewBinding.variantColorContainer.isVisible=false
         viewBinding.variantSizeContainer.isVisible=false
+        viewBinding.otherVariantsContainer.isVisible=false
         val map= hashMapOf<String,String>()
         selectedProduct.productVariant?.variant?.forEach{
 
             if(it?.key?.lowercase()=="color"){
                 viewBinding.variantColorContainer.isVisible=true
-                val variantColor=VariantColorRecyclerViewAdapter()
+                val variantColor= VariantColorRecyclerViewAdapter()
                 viewBinding.rvVariantColor.adapter=variantColor
-                variantColor.onVariantColorClickListener=object :VariantColorRecyclerViewAdapter.OnVariantColorClickListener{
+                variantColor.onVariantColorClickListener=object : VariantColorRecyclerViewAdapter.OnVariantColorClickListener{
                     override fun onClick(color: String) {
                         viewBinding.colorName.setText(color)
                     }
                 }
                 variantColor.submitList(it.value)
             }else if(it?.key?.lowercase()=="size"){
-                val variantSize=VariantSizeRecyclerViewAdapter()
+                viewBinding.variantSizeContainer.isVisible=true
+                val variantSize= VariantSizeRecyclerViewAdapter()
                 viewBinding.rvVariantSize.adapter=variantSize
                 variantSize.onVariantSizeClickListener=object :VariantSizeRecyclerViewAdapter.OnVariantSizeClickListener{
                     override fun onClick(size: String) {
@@ -157,8 +164,9 @@ class ProductPageFragment : Fragment() {
         }
 
         if (map.size!=0){
-            val variantOther=VariantOtherRecyclerViewAdapter(map)
-            viewBinding.otherVariants.adapter=variantOther
+            viewBinding.otherVariantsContainer.isVisible=true
+            val variantOther= VariantOtherRecyclerViewAdapter(map)
+            viewBinding.rvOtherVariants.adapter=variantOther
         }
 
 
@@ -190,10 +198,73 @@ class ProductPageFragment : Fragment() {
             } else {
                 addCartViewModel.updateCart(pos, selectedProduct.id.toString())
                 Toast.makeText(requireContext(), "Update Cart", Toast.LENGTH_SHORT).show()
-
             }
+
+            val view = layoutInflater.inflate(R.layout.cart_dialog,null)
+            val cartBoxBuilder = AlertDialog.Builder(requireContext()).setView(view).create()
+            cartBoxBuilder.show()
+            val continueShoppingButton: Button = view.findViewById(R.id.continueToShopping)
+            continueShoppingButton.setOnClickListener {
+                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToHomeFragment())
+                cartBoxBuilder.dismiss()
+            }
+            val yesButton: Button = view.findViewById(R.id.yes)
+            yesButton.setOnClickListener {
+                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToCart())
+                cartBoxBuilder.dismiss()
+            }
+
         }
 
+        viewBinding.downloadIcon.setOnClickListener{
+
+
+            //          val cw = ContextWrapper(requireContext())
+//            // path to /data/data/yourapp/app_data/imageDir
+//            val directory: File = cw.getDir("Download", Context.MODE_PRIVATE)
+//            // Create imageDir
+//            if (!directory.exists()){
+//                directory.mkdir()
+//            }
+
+
+            runBlocking(Dispatchers.IO){
+
+                val drawable = viewBinding.productImage.getDrawable() as BitmapDrawable
+                val bitmap = drawable.bitmap
+
+                val downloadFolder =Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+
+                val mypath = File(downloadFolder?.absolutePath+"/panda")
+                if (!mypath.exists()){
+                    mypath.mkdir()
+                }
+
+                val fileName = String.format("%dMichael.jpg", System.currentTimeMillis())
+                val outFile: File = File(mypath, fileName)
+//                if (!outFile.exists()){
+//                    outFile.createNewFile()
+//                }
+                val fos: FileOutputStream
+                try {
+                    fos = FileOutputStream(outFile)
+                    // Use the compress method on the BitMap object to write image to the OutputStream
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                    fos.flush()
+                    fos.close()
+                    //  Toast.makeText(requireContext(), "Download", Toast.LENGTH_SHORT).show()
+
+//                val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+//                intent.setData(Uri.fromFile(outFile))
+                    MediaScannerConnection.scanFile(requireContext(), arrayOf(outFile.toString()), null, null)
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+
+        }
 
         val imageList = ArrayList<SlideModel>()
 
@@ -212,17 +283,21 @@ class ProductPageFragment : Fragment() {
             )
 
         )
-//        try {
-//            val base64String = selectedProduct.image
-//            val decodedString = Base64.decode(base64String, Base64.DEFAULT)
-//            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-//            viewBinding.productImage.setImageBitmap(decodedByte)
-//        } catch (E: Exception) {
-//            Log.i("Mokhtar", selectedProduct.image.toString())
-//
-//        }
-        val imageSlider = viewBinding.productImage
+        try {
+            val base64String = selectedProduct.image
+            val decodedString = Base64.decode(base64String, Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            viewBinding.productImage.setImageBitmap(decodedByte)
+        } catch (E: Exception) {
+            Log.i("Mokhtar", selectedProduct.image.toString())
+
+        }
+        val imageSlider = viewBinding.productImageSlider
         imageSlider.setImageList(imageList)
+
         return viewBinding.root
     }
+
+
+
 }

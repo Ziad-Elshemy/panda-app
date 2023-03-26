@@ -94,5 +94,7 @@
     <string name="select_a_payment_method">Select a Payment method</string>
     <string name="add_a_credit_or_debit_card">Add a Credit or debit card</string>
     <string name="selected_item">Selected item:</string>
+    <string name="continue_to_shopping">Shopping more</string>
+    <string name="yes">Yes</string>
 
 </resources>

@@ -108,6 +108,11 @@ class MyOrdersFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_my_orders,container,false)
         val adapter = MyOrderItemsAdapter(list!!)
 
+        //todo mokhtar
+//        val adapter = MyOrdersAdapter(
+//            ReviewButtonClickListener {
+//                findNavController().navigate(R.id.action_myOrdersFragment_to_reviewFragment)
+//            },list!!)
         binding.ordersRv.adapter=adapter
 
         adapter.submitList(list)

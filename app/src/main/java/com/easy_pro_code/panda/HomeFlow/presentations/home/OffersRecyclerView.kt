@@ -75,11 +75,11 @@ class OfferViewHolder(val binding: OffersListItemBinding) : RecyclerView.ViewHol
         binding.driverInfoImage.setOnClickListener {
             onOfferClickListener?.onClick(offer)
         }
-        binding.favIcon.setOnCheckedChangeListener{
-                checkBox,isChecked->
-            if (isChecked) onOfferClickListener?.onCheck(offer)
-            else onOfferClickListener?.onUnCheck(offer)
-        }
+//        binding.favIcon.setOnCheckedChangeListener{
+//                checkBox,isChecked->
+//            if (isChecked) onOfferClickListener?.onCheck(offer)
+//            else onOfferClickListener?.onUnCheck(offer)
+//        }
         binding.rate1.setText(offer.product.rate.toString())
         binding.rate2.setText(offer.product.rate.toString())
 

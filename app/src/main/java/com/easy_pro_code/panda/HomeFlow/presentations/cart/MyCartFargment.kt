@@ -37,14 +37,16 @@ class MyCartFargment : Fragment() {
     private lateinit var getAllCartViewModel : GetCartViewModel
     private lateinit var createCartViewModel : OrdersViewModel
     private var cartList : List<MyCartModel> = listOf()
-    val sessionManager = AuthUtils.manager
-    private lateinit var edTextObj:EditText
+//    val sessionManager = AuthUtils.manager
+    private lateinit var edTextObj: EditText
     private var edTextId:Int=-1
 
     var list: List<MyCartModel>? = listOf()
-    lateinit var navBar:BottomNavigationView
+    lateinit var navBar: BottomNavigationView
 
     val createAddressViewModel:CreateAddressViewModel by activityViewModels()
+    var total=0
+    var totalAfterDiscount =0
 
     private lateinit var  cartModel :MyCartModel
 
@@ -58,33 +60,37 @@ class MyCartFargment : Fragment() {
         super.onCreate(savedInstanceState)
         getAllCartViewModel =ViewModelProvider(this).get(GetCartViewModel::class.java)
         createCartViewModel =ViewModelProvider(this).get(OrdersViewModel::class.java)
-
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart, container, false)
+
         binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
         val cartAdapter = CartRecyclerView(cartList)
         binding.mycartsRv.adapter=cartAdapter
         cartAdapter.submitList(cartList)
         initPlacesSdk()
+
         binding.deliverToValue.setOnClickListener(startAutocompleteIntentListener)
-
-    var total : Int = 0
-
-
 
 
         if (AuthUtils.manager.getCartId() == null){
             Toast.makeText(requireContext(),"Please, Add Item First",Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         }else {
+
+            ////Cart Logic
             subscribeToLiveData(cartAdapter)
+
+            ///Getting all products in cart
             getAllCartViewModel.getAllCarts()
 
             binding.checkOutBtn.setOnClickListener {
+                ///Transfer Cart to order
                 createCartViewModel.createOrder()
+
+                ///Data Observation to Api
                 createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
                     if (it?.success.toString().equals("order is done")) { Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
                     } else {
@@ -96,9 +102,23 @@ class MyCartFargment : Fragment() {
         }
 
 
+        binding.applyBtn.setOnClickListener {
+            if (binding.enterPromoCode.getText().toString().equals("panda20")){
+                binding.promoCodeActiveted.visibility = View.VISIBLE
+                totalAfterDiscount = (total*0.8).toInt()
+                binding.totalPrice.setText("YER "+totalAfterDiscount.toString()+".00")
+            }
+        }
+
+        binding.addACreditCart.setOnClickListener {
+            Toast.makeText(requireContext(), "Soon :)", Toast.LENGTH_SHORT).show()
+        }
+
     return binding.root
     }
 
+
+    ////Cart Logic Impl
     private fun subscribeToLiveData(cartAdapter:CartRecyclerView){
         getAllCartViewModel.getcartsLiveData.observe(viewLifecycleOwner){
 
@@ -107,7 +127,7 @@ class MyCartFargment : Fragment() {
             }
             else{
 
-                var total=0
+
                 //            Log.e("Ziad Adapter live data",it.toString())
                 it.carts.let {
                         cartsListResponse->
@@ -155,6 +175,8 @@ class MyCartFargment : Fragment() {
 
         }
     }
+
+    ///////Auto Complete Fragment Components
     private fun startAutocompleteIntent(){
         val fields = listOf(
             Place.Field.ADDRESS_COMPONENTS,
