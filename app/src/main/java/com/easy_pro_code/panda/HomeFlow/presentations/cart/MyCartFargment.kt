@@ -37,7 +37,7 @@ class MyCartFargment : Fragment() {
     private lateinit var getAllCartViewModel : GetCartViewModel
     private lateinit var createCartViewModel : OrdersViewModel
     private var cartList : List<MyCartModel> = listOf()
-    val sessionManager = AuthUtils.manager
+//    val sessionManager = AuthUtils.manager
     private lateinit var edTextObj: EditText
     private var edTextId:Int=-1
 
@@ -60,17 +60,18 @@ class MyCartFargment : Fragment() {
         super.onCreate(savedInstanceState)
         getAllCartViewModel =ViewModelProvider(this).get(GetCartViewModel::class.java)
         createCartViewModel =ViewModelProvider(this).get(OrdersViewModel::class.java)
-
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart, container, false)
+
         binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
         val cartAdapter = CartRecyclerView(cartList)
         binding.mycartsRv.adapter=cartAdapter
         cartAdapter.submitList(cartList)
         initPlacesSdk()
+
         binding.deliverToValue.setOnClickListener(startAutocompleteIntentListener)
 
 
@@ -78,11 +79,18 @@ class MyCartFargment : Fragment() {
             Toast.makeText(requireContext(),"Please, Add Item First",Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         }else {
+
+            ////Cart Logic
             subscribeToLiveData(cartAdapter)
+
+            ///Getting all products in cart
             getAllCartViewModel.getAllCarts()
 
             binding.checkOutBtn.setOnClickListener {
+                ///Transfer Cart to order
                 createCartViewModel.createOrder()
+
+                ///Data Observation to Api
                 createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
                     if (it?.success.toString().equals("order is done")) { Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
                     } else {
@@ -109,6 +117,8 @@ class MyCartFargment : Fragment() {
     return binding.root
     }
 
+
+    ////Cart Logic Impl
     private fun subscribeToLiveData(cartAdapter:CartRecyclerView){
         getAllCartViewModel.getcartsLiveData.observe(viewLifecycleOwner){
 
@@ -165,6 +175,8 @@ class MyCartFargment : Fragment() {
 
         }
     }
+
+    ///////Auto Complete Fragment Components
     private fun startAutocompleteIntent(){
         val fields = listOf(
             Place.Field.ADDRESS_COMPONENTS,

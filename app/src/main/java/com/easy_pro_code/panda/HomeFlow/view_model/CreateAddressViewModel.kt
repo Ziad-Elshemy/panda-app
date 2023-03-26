@@ -17,7 +17,7 @@ class CreateAddressViewModel:ViewModel() {
     private val placeWebService=CacheApiManager.getPlaceSearch()
     private val createAddressWebService=ApiManager.getCreateAddressApi()
 
-    var deliveryLocation:String?=null
+    var deliveryLocation:String?="Detect your Location"
 
     fun checkAddress(lat:String,lng:String,address:String){
         viewModelScope.launch {

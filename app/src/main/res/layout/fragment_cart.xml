@@ -50,6 +50,7 @@
                             android:text="@string/subtotal_2_"
                             android:textAppearance="@style/subtotal_2_"
                             app:layout_constraintEnd_toStartOf="@+id/subtotal_price"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/divider1" />
 
                         <TextView
@@ -57,13 +58,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginStart="15dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="8dp"
                             android:text="@string/shipping_fe"
                             android:textAppearance="@style/shipping_fe"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/subtotal_txt"
-                            tools:ignore="MissingConstraints"
-                            tools:layout_editor_absoluteX="31dp" />
+                            tools:ignore="MissingConstraints" />
 
                         <TextView
                             android:id="@+id/subtotal_price"
@@ -138,7 +139,10 @@
                             tools:layout_editor_absoluteX="31dp"
                             tools:ignore="MissingConstraints" />
 
-                        <TextView
+                        <EditText
+                            android:editable="false"
+                            android:textSize="15sp"
+                            android:singleLine="true"
                             android:id="@+id/deliverTo_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -150,8 +154,7 @@
                             android:text="@string/locationToDeliver"
                             android:textAppearance="@style/total"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/total_price"
-                            tools:ignore="MissingConstraints" />
+                            app:layout_constraintTop_toBottomOf="@id/total_price" />
 
                         <TextView
                             android:id="@+id/total_price"
@@ -198,29 +201,29 @@
                             app:layout_constraintTop_toBottomOf="@id/divider4"
                             />
 
-                        <TextView
-                            android:id="@+id/use_my_wallet"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginStart="28dp"
-                            android:layout_marginTop="24dp"
-                            android:text="@string/use_my_wallet_credit_100_yer"
-                            android:textAppearance="@style/use_my_wall"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/getitby_txt" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/use_my_wallet"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_alignParentTop="true"-->
+<!--                            android:layout_marginStart="28dp"-->
+<!--                            android:layout_marginTop="24dp"-->
+<!--                            android:text="@string/use_my_wallet_credit_100_yer"-->
+<!--                            android:textAppearance="@style/use_my_wall"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/getitby_txt" />-->
 
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/switch_wallet"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginEnd="25dp"
-                            android:checked="true"
-                            android:switchMinWidth="56dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/date_value"
-                            />
+<!--                        <com.google.android.material.switchmaterial.SwitchMaterial-->
+<!--                            android:id="@+id/switch_wallet"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="12dp"-->
+<!--                            android:layout_marginEnd="25dp"-->
+<!--                            android:checked="true"-->
+<!--                            android:switchMinWidth="56dp"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/date_value"-->
+<!--                            />-->
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardViewApply"
@@ -228,7 +231,7 @@
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="20dp"
                             app:cardElevation="10dp"
-                            app:layout_constraintTop_toBottomOf="@+id/use_my_wallet"
+                            app:layout_constraintTop_toBottomOf="@+id/getitby_txt"
                             android:padding="20dp"
                             android:layout_margin="20dp"
                             android:background="@drawable/rectagle_4"
