@@ -71,6 +71,8 @@ class MyCartFargment : Fragment() {
         initPlacesSdk()
         binding.deliverToValue.setOnClickListener(startAutocompleteIntentListener)
 
+    var total : Int = 0
+
 
 
 
@@ -84,22 +86,15 @@ class MyCartFargment : Fragment() {
             binding.checkOutBtn.setOnClickListener {
                 createCartViewModel.createOrder()
                 createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
-                    if (it?.success.toString().equals("order is done")) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Order Add Successfully :)",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if (it?.success.toString().equals("order is done")) { Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Sorry, Failed to Create Order! :(",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(requireContext(), "Sorry, Failed to Create Order! :(", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+
         }
+
 
     return binding.root
     }
@@ -133,6 +128,11 @@ class MyCartFargment : Fragment() {
                             total+=productResponse?.productId?.price?.toInt()!!
                             myCartModel
                         }
+                        list?.forEach {
+                            total += it.price!!
+                            Log.e("Ziad Total",total.toString())
+                        }
+                        binding.subtotalPrice.setText(total.toString())
                     }
                     cartAdapter.submitList(list)
                     navBar = requireActivity().findViewById(R.id.bottom_nav)

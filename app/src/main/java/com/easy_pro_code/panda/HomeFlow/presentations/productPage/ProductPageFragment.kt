@@ -56,6 +56,7 @@ class ProductPageFragment : Fragment() {
         val args: ProductPageFragmentArgs by navArgs()
         val product = args.product
         val offer = args.offer
+        val phone = args.phone
 
         //Spinner Value
         val number = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
@@ -88,6 +89,7 @@ class ProductPageFragment : Fragment() {
         }
         if (product != null) {
             selectedProduct = product
+            viewBinding.productTitleTv.setText(product.title)
             viewBinding.totalPriceET.setText(product.price)
             viewBinding.reviewsSubTitleText.setText(product.title)
             viewBinding.categoryTitleTv.setText(product.category)
@@ -99,6 +101,7 @@ class ProductPageFragment : Fragment() {
 
         } else if (offer != null) {
             selectedProduct = offer.product
+            viewBinding.productTitleTv.setText(offer.product.title)
             viewBinding.totalPriceET.setText(offer.product.price)
             viewBinding.newTotalPriceET.setText(offer.newPrice)
             viewBinding.rateIcon1.setText((offer.product.rate.toString()))
@@ -106,6 +109,19 @@ class ProductPageFragment : Fragment() {
             viewBinding.categoryTitleTv.setText(offer.product.category)
             viewBinding.rateText1.setText((offer.product.rate).toString())
             viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+
+        } else if (phone != null) {
+            selectedProduct = phone.product
+            viewBinding.productTitleTv.setText(phone.product.title)
+            viewBinding.totalPriceET.setText(phone.product.price)
+            viewBinding.newTotalPriceET.isVisible= false
+            viewBinding.pricesLineSeparator1.isVisible = false
+            viewBinding.newPriceCurrencyText.isVisible = false
+            viewBinding.rateIcon1.setText((phone.product.rate.toString()))
+            viewBinding.reviewsSubTitleText.setText(phone.product.title)
+            viewBinding.categoryTitleTv.setText(phone.product.category)
+            viewBinding.rateText1.setText((phone.product.rate).toString())
+//            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 
         }
         viewBinding.variantColorContainer.isVisible=false

@@ -37,6 +37,24 @@ fun List<OffersItem>?.fromOfferToProduct(): List<Offer>? = this?.map {
     )
 }
 
+fun List<ProductsItem>?.fromPhoneToProduct(): List<Phone>? = this?.map {
+    Phone(
+        Product(
+            category = it?.category,
+            price = it?.price,
+            title = it?.title,
+            id=it?.id,
+            image = it?.image,
+            rate = it?.rate?:5,
+            productVariant = ProductVariant(it?.variant),
+            multiImg = ProductMultiImage(it?.multiImg),
+            prands = it?.prands
+        )
+    )
+}
+
+
+
 fun Product.fromProductItemToWishProduct():WishProduct=
     WishProduct(
         productId = this.id.toString(),
