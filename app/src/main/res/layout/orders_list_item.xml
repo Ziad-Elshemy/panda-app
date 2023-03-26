@@ -30,7 +30,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginVertical="20dp"
+                android:layout_marginVertical="35dp"
                 android:src="@drawable/notification_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -41,21 +41,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/regular"
                 android:text="Order Number: "
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 app:layout_constraintStart_toEndOf="@id/cart_imageView"
                 app:layout_constraintTop_toTopOf="@id/cart_imageView"
-                app:layout_constraintBottom_toBottomOf="@id/cart_imageView"/>
+                />
 
             <TextView
                 android:id="@+id/order_num_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/regular"
                 android:maxLines="3"
                 android:text="1"
@@ -63,7 +61,35 @@
                 android:textSize="22sp"
                 app:layout_constraintStart_toEndOf="@id/title_textView"
                 app:layout_constraintTop_toTopOf="@id/cart_imageView"
-                app:layout_constraintBottom_toBottomOf="@id/cart_imageView" />
+                 />
+
+            <TextView
+                android:id="@+id/num_of_items_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/regular"
+                android:text="Num of Items: "
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:layout_constraintStart_toEndOf="@id/cart_imageView"
+                app:layout_constraintTop_toBottomOf="@id/title_textView"
+                />
+
+            <TextView
+                android:id="@+id/items_num_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/regular"
+                android:maxLines="3"
+                android:text="2"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:layout_constraintStart_toEndOf="@id/num_of_items_textView"
+                app:layout_constraintTop_toTopOf="@id/num_of_items_textView"
+                />
 
 
 

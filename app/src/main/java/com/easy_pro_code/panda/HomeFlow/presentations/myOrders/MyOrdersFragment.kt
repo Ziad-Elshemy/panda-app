@@ -139,8 +139,8 @@ class MyOrdersFragment : Fragment() {
                 val items = OrderItems(
                     orderList.get(order)
                 )
-                //todo navigate to the order items fragment
-//                findNavController().navigate()
+                // todo navigate to the order items fragment
+                findNavController().navigate(MyOrdersFragmentDirections.actionMyOrdersFragmentToMyOrderItemsFragment(items))
             }
         }
 

@@ -159,7 +159,11 @@
         tools:layout="@layout/fragment_my_order_items"
         android:id="@+id/myOrderItemsFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.myOrders.MyOrderItemsFragment"
-        android:label="MyOrderItemsFragment" />
+        android:label="MyOrderItemsFragment" >
+        <argument
+            android:name="order_items"
+            app:argType="com.easy_pro_code.panda.HomeFlow.models.OrderItems" />
+    </fragment>
 
 
 </navigation>

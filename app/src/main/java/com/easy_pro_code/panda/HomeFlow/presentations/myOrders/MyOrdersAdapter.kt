@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easy_pro_code.panda.HomeFlow.models.Order
+import com.easy_pro_code.panda.HomeFlow.models.OrderItems
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderItemsItem
 import com.easy_pro_code.panda.databinding.MyOrdersListItemBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
 
 
-class MyOrdersAdapter(val click:ReviewButtonClickListener,val orderList:List<Order>) : ListAdapter<Order,RecyclerView.ViewHolder>(OrdersDiffUtil())  {
+class MyOrdersAdapter(val click:ReviewButtonClickListener,val orderList:List<OrderItemsItem?>) : ListAdapter<OrderItemsItem,RecyclerView.ViewHolder>(OrderItemsDiffUtil())  {
 
 
 
@@ -42,14 +44,14 @@ class OrderViewHolder(val binding:MyOrdersListItemBinding) : RecyclerView.ViewHo
         }
     }
 
-    fun bind(orderModel:Order,click:ReviewButtonClickListener){
+    fun bind(orderModel:OrderItemsItem,click:ReviewButtonClickListener){
 //        binding.myOrderImage.setImageResource(orderModel.imageId.toInt())
 
-        binding.myOrderName.text=orderModel.name
-        binding.myOrderPrice.text=orderModel.price
-        binding.completedTv.text=orderModel.completed
+        binding.myOrderName.text=orderModel.productId?.title
+        binding.myOrderPrice.text=orderModel.productId?.price
+        binding.completedTv.text=orderModel.productId?.category
 
-        val base64String = orderModel.imageId
+        val base64String = orderModel.productId?.image
         val decodedString = Base64.decode(base64String, Base64.DEFAULT)
         val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
         binding.myOrderImage.setImageBitmap(decodedByte)
@@ -75,22 +77,22 @@ class OrderViewHolder(val binding:MyOrdersListItemBinding) : RecyclerView.ViewHo
 }
 
 
-class OrdersDiffUtil : DiffUtil.ItemCallback<Order>()
+class OrderItemsDiffUtil : DiffUtil.ItemCallback<OrderItemsItem>()
 {
-    override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
+    override fun areItemsTheSame(oldItem: OrderItemsItem, newItem: OrderItemsItem): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Order, newItem: Order): Boolean
+    override fun areContentsTheSame(oldItem: OrderItemsItem, newItem: OrderItemsItem): Boolean
     {
         return oldItem.id == newItem.id
     }
 
 }
 
-class ReviewButtonClickListener(val clickListener : (order:Order)->Unit){
+class ReviewButtonClickListener(val clickListener : (order:OrderItemsItem)->Unit){
 
-    fun onClick(order:Order){
+    fun onClick(order:OrderItemsItem){
 
         clickListener(order)
     }
