@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/count"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/orders_list_item" />
+            tools:listitem="@layout/my_orders_list_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

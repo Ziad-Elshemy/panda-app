@@ -18,7 +18,7 @@ import com.easy_pro_code.panda.data.Models.remote_backend.OrderItemsItem
 import com.easy_pro_code.panda.databinding.FragmentMyOrdersBinding
 
 
-class MyOrdersFragment : Fragment() {
+class MyOrderItemsFragment : Fragment() {
 
 //    lateinit var binding:FragmentMyOrdersBinding
 //    lateinit var ordersViewModel: OrdersViewModel
@@ -105,7 +105,7 @@ class MyOrdersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_my_orders,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_my_order_items,container,false)
         val adapter = MyOrderItemsAdapter(list!!)
 
         binding.ordersRv.adapter=adapter
