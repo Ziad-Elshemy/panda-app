@@ -35,12 +35,14 @@ class HomeFragment : Fragment() {
     private var data: Place? = null
     private lateinit var binding:FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var categoryViewModel: CategoryViewModel
+    private lateinit var electronicCategoryViewModel: CategoryViewModel
+    private lateinit var phoneCategoryViewModel: CategoryViewModel
     private val suspendWindowViewModel:SuspendWindowViewModel by activityViewModels()
     private lateinit var wishListViewModel:WishListViewModel
     private val productsList:List<Product>? = listOf()
     private val offersList:List<Offer>? = listOf()
     private val phonesList:List<Phone>? = listOf()
+    private val electronicsList:List<Electronics>? = listOf()
     private val categoryList:List<String>?= listOf()
     private lateinit var edTextObj:EditText
     private var city:String=""
@@ -62,7 +64,8 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         homeViewModel=ViewModelProvider(this).get(HomeViewModel::class.java)
         wishListViewModel=ViewModelProvider(this).get(WishListViewModel::class.java)
-        categoryViewModel=ViewModelProvider(this).get(CategoryViewModel::class.java)
+        electronicCategoryViewModel=ViewModelProvider(this).get(CategoryViewModel::class.java)
+        phoneCategoryViewModel=ViewModelProvider(this).get(CategoryViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,15 +103,18 @@ class HomeFragment : Fragment() {
         val categoriesAdapter=CategoryRecyclerViewAdapter(categoryList)
         binding.categoriesRv.adapter=categoriesAdapter
         val phonesAdapter = PhonesRecyclerView(phonesList)
+        val electronicsAdapter = ElectronicsRecyclerView(electronicsList)
         binding.phonesRv.adapter=phonesAdapter
-        setAdapterClickListener(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter)
-        subscribeToLiveData(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter)
+        binding.electronicsRv.adapter=electronicsAdapter
+        setAdapterClickListener(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter,electronicsAdapter)
+        subscribeToLiveData(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter,electronicsAdapter)
         homeViewModel.getAllProducts()
 
         homeViewModel.getAllOffers()
         homeViewModel.getAllCategories()
 
-        categoryViewModel.getProductByCategory("Phones")
+        electronicCategoryViewModel.getElectronicProductByCategory("Electronics")
+        phoneCategoryViewModel.getPhoneProductByCategory("Phones")
         suspendWindowViewModel.progressBar(true)
 
         //// initial plasces
@@ -127,14 +133,16 @@ class HomeFragment : Fragment() {
         productsAdapter: ProductsHomeRecyclerView,
         offersAdapter: OffersRecyclerView,
         categoriesAdapter: CategoryRecyclerViewAdapter,
-        phonesAdapter: PhonesRecyclerView
+        phonesAdapter: PhonesRecyclerView,
+        electronicsAdapter: ElectronicsRecyclerView
     ) {
         productsAdapter.onProductClickListener=object :ProductsHomeRecyclerView.OnProductClickListener{
             override fun onClick(product: Product) {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
                         product = product,
                         offer = null,
-                        phone = null
+                        phone = null,
+                        electronics = null
                     )
                 )
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
@@ -156,7 +164,8 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
                     product = null,
                     offer = offer,
-                    phone = null
+                    phone = null,
+                    electronics = null
                 )
                 )
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
@@ -178,7 +187,8 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
                     product = null,
                     offer = null,
-                    phone = phone
+                    phone = phone,
+                    electronics = null
                 )
                 )
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
@@ -194,6 +204,31 @@ class HomeFragment : Fragment() {
             }
 
         }
+
+
+        electronicsAdapter.onElectronicClickListener=object :ElectronicsRecyclerView.OnElectronicClickListener{
+            override fun onClick(electronic: Electronics) {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
+                    product = null,
+                    offer = null,
+                    phone = null,
+                    electronics = electronic
+                )
+                )
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
+
+            }
+
+            override fun onCheck(electronic: Electronics) {
+                wishListViewModel.addToWishList(electronic.product)
+            }
+
+            override fun onUnCheck(electronic: Electronics) {
+                wishListViewModel.removeFromWishList(electronic.product)
+            }
+
+        }
+
 
         categoriesAdapter.onCategoryClickListener=object :CategoryRecyclerViewAdapter.OnCategoryClickListener{
             override fun onClick(category: String) {
@@ -216,7 +251,8 @@ class HomeFragment : Fragment() {
         productsAdapter: ProductsHomeRecyclerView,
         offersAdapter: OffersRecyclerView,
         categoriesAdapter: CategoryRecyclerViewAdapter,
-        phonesAdapter: PhonesRecyclerView
+        phonesAdapter: PhonesRecyclerView,
+        electronicsAdapter: ElectronicsRecyclerView
     ) {
         homeViewModel.productsLiveData.observe(viewLifecycleOwner){
             suspendWindowViewModel.progressBar(false)
@@ -227,8 +263,14 @@ class HomeFragment : Fragment() {
             offersAdapter.submitList(it.offers.fromOfferToProduct())
         }
 
-        categoryViewModel.productsLiveData.observe(viewLifecycleOwner){
+        phoneCategoryViewModel.phonesProductsLiveData.observe(viewLifecycleOwner){
             phonesAdapter.submitList(it.categoryProducts.fromPhoneToProduct())
+//            Log.e("Ziad Phones data: ", it.categoryProducts.toString() )
+        }
+
+        electronicCategoryViewModel.electronicsProductsLiveData.observe(viewLifecycleOwner){
+            electronicsAdapter.submitList(it.categoryProducts.fromElectronicsToProduct())
+//            Log.e("Ziad Electronics data: ", it.categoryProducts.toString() )
         }
 
         homeViewModel.categoryLiveData.observe(viewLifecycleOwner){

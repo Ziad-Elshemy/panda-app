@@ -53,6 +53,22 @@ fun List<ProductsItem>?.fromPhoneToProduct(): List<Phone>? = this?.map {
     )
 }
 
+fun List<ProductsItem>?.fromElectronicsToProduct(): List<Electronics>? = this?.map {
+    Electronics(
+        Product(
+            category = it?.category,
+            price = it?.price,
+            title = it?.title,
+            id=it?.id,
+            image = it?.image,
+            rate = it?.rate?:5,
+            productVariant = ProductVariant(it?.variant),
+            multiImg = ProductMultiImage(it?.multiImg),
+            prands = it?.prands
+        )
+    )
+}
+
 
 
 fun Product.fromProductItemToWishProduct():WishProduct=

@@ -147,6 +147,11 @@
         <action
             android:id="@+id/action_productPageFragment_to_cart"
             app:destination="@id/cart" />
+        <argument
+            android:name="electronics"
+            app:argType="com.easy_pro_code.panda.HomeFlow.models.Electronics"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_search_results"

@@ -10,11 +10,29 @@ import kotlinx.coroutines.launch
 
 class CategoryViewModel:ViewModel() {
     val productsLiveData=MutableLiveData<GetAllProductsByCategoryResponse>()
+    val phonesProductsLiveData=MutableLiveData<GetAllProductsByCategoryResponse>()
+    val electronicsProductsLiveData=MutableLiveData<GetAllProductsByCategoryResponse>()
     val productWebService=ApiManager.getProductApi()
 
     fun getProductByCategory(category:String){
         viewModelScope.launch {
             productsLiveData.value=productWebService.getAllProductsByCategory(
+                GetAllProductsByCategoryRequest(category)
+            )
+        }
+    }
+
+    fun getPhoneProductByCategory(category:String){
+        viewModelScope.launch {
+            phonesProductsLiveData.value=productWebService.getAllProductsByCategory(
+                GetAllProductsByCategoryRequest(category)
+            )
+        }
+    }
+
+    fun getElectronicProductByCategory(category:String){
+        viewModelScope.launch {
+            electronicsProductsLiveData.value=productWebService.getAllProductsByCategory(
                 GetAllProductsByCategoryRequest(category)
             )
         }

@@ -70,6 +70,7 @@ class ProductPageFragment:Fragment() {
         val product = args.product
         val offer = args.offer
         val phone = args.phone
+        val electronic = args.electronics
 
         //Spinner Value
         val number = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
@@ -126,6 +127,19 @@ class ProductPageFragment:Fragment() {
             viewBinding.reviewsSubTitleText.setText(phone.product.title)
             viewBinding.categoryTitleTv.setText(phone.product.category)
             viewBinding.rateText1.setText((phone.product.rate).toString())
+//            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+
+        }  else if (electronic != null) {
+            selectedProduct = electronic.product
+            viewBinding.productTitleTv.setText(electronic.product.title)
+            viewBinding.totalPriceET.setText(electronic.product.price)
+            viewBinding.newTotalPriceET.isVisible= false
+            viewBinding.pricesLineSeparator1.isVisible = false
+            viewBinding.newPriceCurrencyText.isVisible = false
+            viewBinding.rateIcon1.setText((electronic.product.rate.toString()))
+            viewBinding.reviewsSubTitleText.setText(electronic.product.title)
+            viewBinding.categoryTitleTv.setText(electronic.product.category)
+            viewBinding.rateText1.setText((electronic.product.rate).toString())
 //            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 
         }
