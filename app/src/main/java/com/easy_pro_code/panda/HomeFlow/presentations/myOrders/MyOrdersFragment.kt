@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.easy_pro_code.panda.HomeFlow.models.Order
 import com.easy_pro_code.panda.HomeFlow.models.OrderItems
 import com.easy_pro_code.panda.HomeFlow.view_model.OrdersViewModel
 import com.easy_pro_code.panda.R
@@ -94,7 +92,7 @@ class MyOrdersFragment : Fragment() {
 
     var list:List<String>?= listOf()
 
-    var orderList = hashMapOf<String,List<OrderItemsItem?>>()
+     var orderList = hashMapOf<String,List<OrderItemsItem?>>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,7 +104,7 @@ class MyOrdersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_my_orders,container,false)
-        val adapter = MyOrderItemsAdapter(list!!)
+        val adapter = MyOrderItemsAdapter(list!!  ,orderList )
 
         //todo mokhtar
 //        val adapter = MyOrdersAdapter(
