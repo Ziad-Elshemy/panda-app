@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.easy_pro_code.panda.data.Models.remote_backend.OrderItemsItem
 import com.easy_pro_code.panda.databinding.OrdersListItemBinding
+import java.time.LocalDate
 
 
-class MyOrderItemsAdapter(   val dataList: List<String>?)
+class MyOrderItemsAdapter(val dataList: List<String>?, val hashMap: HashMap<String, List<OrderItemsItem?>>)
     
     : ListAdapter<String, RecyclerView.ViewHolder>(StringDiffUtil())
 {
@@ -21,7 +23,11 @@ class MyOrderItemsAdapter(   val dataList: List<String>?)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
     {
         val item=getItem(position)
-        (holder as OrderItemViewHolder).bind(item,onOrderItemClickListener,position)
+        hashMap.get(item).let {
+            (holder as OrderItemViewHolder).bind(item,onOrderItemClickListener,position ,
+                it
+            )
+        }
     }
 
     var onOrderItemClickListener:OnOrderItemClickListener?=null
@@ -49,9 +55,12 @@ class OrderItemViewHolder(val binding: OrdersListItemBinding) : RecyclerView.Vie
     fun bind(
         order: String,
         onOrderItemClickListener: MyOrderItemsAdapter.OnOrderItemClickListener?,
-        position: Int
+        position: Int,
+        orderItemsItems: List<OrderItemsItem?>?
     )
     {
+        binding.DateTv.setText(LocalDate.now().toString())
+        binding.itemsNumTextView.setText(orderItemsItems?.size.toString())
         binding.orderNumTextView.setText((position + 1).toString())
         binding.orderItemCard.setOnClickListener {
             onOrderItemClickListener?.onClick(order)
