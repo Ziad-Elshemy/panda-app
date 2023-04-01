@@ -22,6 +22,8 @@ import com.easy_pro_code.panda.databinding.ActivitySplashBinding
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+
+
     lateinit var binding: ActivitySplashBinding
 
     private val loginViewModel: LoginViewModel by viewModels()

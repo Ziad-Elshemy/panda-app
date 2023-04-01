@@ -77,7 +77,9 @@ class MyCartFargment : Fragment() {
 
         if (AuthUtils.manager.getCartId() == null){
             Toast.makeText(requireContext(),"Please, Add Item First",Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack()
+          //  findNavController().popBackStack()
+            findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
+
         }else {
 
             ////Cart Logic
@@ -101,12 +103,14 @@ class MyCartFargment : Fragment() {
 
         }
 
-
         binding.applyBtn.setOnClickListener {
             if (binding.enterPromoCode.getText().toString().equals("panda20")){
                 binding.promoCodeActiveted.visibility = View.VISIBLE
                 totalAfterDiscount = (total*0.8).toInt()
                 binding.totalPrice.setText("YER "+totalAfterDiscount.toString()+".00")
+            }
+            else{
+                Toast.makeText(requireContext(), "Invalid Code", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -126,8 +130,6 @@ class MyCartFargment : Fragment() {
                 findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
             }
             else{
-
-
                 //            Log.e("Ziad Adapter live data",it.toString())
                 it.carts.let {
                         cartsListResponse->
@@ -139,7 +141,7 @@ class MyCartFargment : Fragment() {
                                 price = productResponse?.productId?.price?.toInt() ,
                                 title = productResponse?.productId?.title.toString(),
                                 userId = cartsItem.userId.toString(),
-                                image = null,
+                                image = productResponse?.productId?.image,
                                 count = productResponse?.number,
                                 productId = productResponse?.productId?.id.toString(),
                                 cartId = cartsItem.id.toString(),
@@ -152,16 +154,17 @@ class MyCartFargment : Fragment() {
                             total += it.price!!
                             Log.e("Ziad Total",total.toString())
                         }
-                        binding.subtotalPrice.setText(total.toString())
+                        binding.subtotalPrice.setText("YER "+total.toString()+".00")
                     }
+
                     cartAdapter.submitList(list)
+                    //nav_button
                     navBar = requireActivity().findViewById(R.id.bottom_nav)
                     navBar.getOrCreateBadge(R.id.cart).number = list?.size!!
 
-
                     Log.e("Ziad Adapter data",list?.size.toString())
                     Log.e("userId" , AuthUtils.manager.fetchData().id.toString())
-                    binding.subtotalPrice.setText("YER "+total.toString()+".00")
+                   binding.subtotalPrice.setText("YER "+total.toString()+".00")
                     var shipping=0
                     if (total<1000)  {
                         shipping=50* list?.size!!
@@ -223,9 +226,6 @@ class MyCartFargment : Fragment() {
         // Create a new PlacesClient instance
         Places.createClient(requireContext())
     }
-
-
-
 
 
 

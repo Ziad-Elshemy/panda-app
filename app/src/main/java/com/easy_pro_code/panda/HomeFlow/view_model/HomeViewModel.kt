@@ -15,10 +15,11 @@ import com.easy_pro_code.panda.data.api.api_manager.ApiManager
 import com.easy_pro_code.panda.data.local_database.app_database.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeViewModel:ViewModel() {
 
-    val productsLiveData:MutableLiveData<GetAllProductsResponse> = MutableLiveData<GetAllProductsResponse>()
+    val productsLiveData:MutableLiveData<GetAllProductsResponse?> = MutableLiveData<GetAllProductsResponse?>()
     val offersLiveData:MutableLiveData<OffersResponse> =MutableLiveData()
     val categoryLiveData:MutableLiveData<CategoryResponse> =MutableLiveData()
     private val offersWebService=ApiManager.getOfferApi()
@@ -29,7 +30,10 @@ class HomeViewModel:ViewModel() {
 
     fun getAllProducts(){
         viewModelScope.launch {
-            productsLiveData.value=productWebService.getAllProducts()
+            productsLiveData.value= withContext(Dispatchers.IO){
+                productWebService.getAllProducts()
+            }
+
         }
     }
 

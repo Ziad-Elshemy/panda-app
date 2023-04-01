@@ -154,6 +154,12 @@
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.categories2.CategoriesFragment2"
         android:label="CategoriesFragment2" >
         <argument android:name="category" />
+        <action
+            android:id="@+id/action_categoriesFragment2_to_productPageFragment"
+            app:destination="@id/productPageFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment2_to_productSearchFragment"
+            app:destination="@id/productSearchFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/product_search_item"
