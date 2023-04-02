@@ -22,11 +22,11 @@
         android:theme="@style/Theme.Panda"
         tools:targetApi="31">
         <activity
+            android:hardwareAccelerated="true"
             android:name=".HomeFlow.HomeActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,6 +38,7 @@
 
         </activity>
         <activity
+            android:hardwareAccelerated="true"
             android:name=".MainActivity"
             android:exported="true">
 

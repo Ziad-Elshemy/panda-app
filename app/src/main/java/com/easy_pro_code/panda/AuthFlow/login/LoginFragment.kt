@@ -22,7 +22,6 @@ import com.easy_pro_code.panda.data.Models.remote_firebase.FirebaseUtils
 import com.easy_pro_code.panda.data.Models.remote_firebase.PhoneVerification
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-
 import java.util.concurrent.TimeUnit
 
 
@@ -143,25 +142,28 @@ class LoginFragment : AuthFragment() {
 
     override fun successState(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
 
-        this.verificationId=verificationId
-        FirebaseUtils.token=token
-        val phoneData=PhoneVerification(verificationId,token,"+2"+binding.etPhoneNumber.text.toString())
+        this.verificationId = verificationId
+        FirebaseUtils.token = token
+        val phoneData =
+            PhoneVerification(verificationId, token, "+2" + binding.etPhoneNumber.text.toString())
 
-        val action = LoginFragmentDirections.actionLoginFragmentToOtpFragment(phoneData,userData)
+        val action = LoginFragmentDirections.actionLoginFragmentToOtpFragment(phoneData, userData)
         //this must be passed on argument in nav_graph <<<<---------------------------------------
 
         findNavController().navigate(action)
 
     }
+
     override fun errorState() {
         binding.progressBarLoadingPhoneAuth.visibility = View.GONE
         binding.btnLogin.visibility = View.VISIBLE
-        Log.i("Ziad: error" , "errorState")
+        Log.i("Ziad: error", "errorState")
         Toast.makeText(requireContext(), "Please try again", Toast.LENGTH_LONG).show()
     }
+
     private fun startState() {
         binding.progressBarLoadingPhoneAuth.visibility = View.GONE
-        Log.i("Ziad: error" , "startState")
+        Log.i("Ziad: error", "startState")
         binding.btnLogin.visibility = View.VISIBLE
     }
     companion object{
