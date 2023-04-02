@@ -208,25 +208,29 @@ class ProductPageFragment:Fragment() {
                         Log.i("Michael", it.cart?.id.toString())
                     }
                     Toast.makeText(requireContext(), "Add To Cart", Toast.LENGTH_SHORT).show()
+
+                    initDialog()
+
                 }
             } else {
                 addCartViewModel.updateCart(pos, selectedProduct.id.toString())
                 Toast.makeText(requireContext(), "Update Cart", Toast.LENGTH_SHORT).show()
+                initDialog()
             }
 
-            val view = layoutInflater.inflate(R.layout.cart_dialog,null)
-            val cartBoxBuilder = AlertDialog.Builder(requireContext()).setView(view).create()
-            cartBoxBuilder.show()
-            val continueShoppingButton: Button = view.findViewById(R.id.continueToShopping)
-            continueShoppingButton.setOnClickListener {
-                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToHomeFragment())
-                cartBoxBuilder.dismiss()
-            }
-            val yesButton: Button = view.findViewById(R.id.yes)
-            yesButton.setOnClickListener {
-                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToCart())
-                cartBoxBuilder.dismiss()
-            }
+//            val view = layoutInflater.inflate(R.layout.cart_dialog,null)
+//            val cartBoxBuilder = AlertDialog.Builder(requireContext()).setView(view).create()
+//            cartBoxBuilder.show()
+//            val continueShoppingButton: Button = view.findViewById(R.id.continueToShopping)
+//            continueShoppingButton.setOnClickListener {
+//                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToHomeFragment())
+//                cartBoxBuilder.dismiss()
+//            }
+//            val yesButton: Button = view.findViewById(R.id.yes)
+//            yesButton.setOnClickListener {
+//                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToCart())
+//                cartBoxBuilder.dismiss()
+//            }
 
         }
 
@@ -310,6 +314,22 @@ class ProductPageFragment:Fragment() {
         imageSlider.setImageList(imageList)
 
         return viewBinding.root
+    }
+
+    fun initDialog(){
+        val view = layoutInflater.inflate(R.layout.cart_dialog,null)
+        val cartBoxBuilder = AlertDialog.Builder(requireContext()).setView(view).create()
+        cartBoxBuilder.show()
+        val continueShoppingButton: Button = view.findViewById(R.id.continueToShopping)
+        continueShoppingButton.setOnClickListener {
+            findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToHomeFragment())
+            cartBoxBuilder.dismiss()
+        }
+        val yesButton: Button = view.findViewById(R.id.yes)
+        yesButton.setOnClickListener {
+            findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToCart())
+            cartBoxBuilder.dismiss()
+        }
     }
 
 
