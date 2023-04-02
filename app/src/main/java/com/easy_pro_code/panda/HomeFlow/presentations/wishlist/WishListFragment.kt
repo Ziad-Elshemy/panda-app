@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.HomeFlow.models.fromWishProductToProduct
-import com.easy_pro_code.panda.HomeFlow.presentations.home.HomeFragmentDirections
 import com.easy_pro_code.panda.HomeFlow.presentations.home.ProductsHomeRecyclerView
 import com.easy_pro_code.panda.HomeFlow.view_model.WishListViewModel
 import com.easy_pro_code.panda.R
@@ -32,7 +32,11 @@ class WishListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_wish_list,container,false)
-        val wishListAdapter=ProductsHomeRecyclerView(wishList.fromWishProductToProduct(),wishList)
+        val wishListAdapter=ProductsHomeRecyclerView(
+            wishList.fromWishProductToProduct(),
+            wishList,
+            lifecycleScope
+        )
         viewBinding.notificationRv.adapter=wishListAdapter
         setAdapterClickLisenter(wishListAdapter)
         subscribeToLiveData(wishListAdapter)

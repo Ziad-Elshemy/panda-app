@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.denzcoskun.imageslider.models.SlideModel
 import com.easy_pro_code.panda.HomeFlow.models.*
@@ -94,7 +95,7 @@ class HomeFragment : Fragment() {
         val imageSlider = binding.imageSlider
         imageSlider.setImageList(imageList)
 
-        val productsAdapter=ProductsHomeRecyclerView(productsList,wishList)
+        val productsAdapter=ProductsHomeRecyclerView(productsList,wishList,lifecycleScope)
         binding.productRv.adapter=productsAdapter
         productsAdapter.submitList(productsList)
         val offersAdapter=OffersRecyclerView(offersList)
@@ -256,7 +257,7 @@ class HomeFragment : Fragment() {
     ) {
         homeViewModel.productsLiveData.observe(viewLifecycleOwner){
             suspendWindowViewModel.progressBar(false)
-            productsAdapter.submitList(it.products.fromProductToProduct())
+            productsAdapter.submitList(it?.products.fromProductToProduct())
         }
 
         homeViewModel.offersLiveData.observe(viewLifecycleOwner){

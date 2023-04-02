@@ -1,28 +1,26 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.home
 
-import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.HomeFlow.models.fromProductItemToWishProduct
-import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.local_database.WishProduct
 import com.easy_pro_code.panda.databinding.ProductItemBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProductsHomeRecyclerView(
     val dataList: List<Product>?,
-    var wishList: List<WishProduct>?
+    var wishList: List<WishProduct>?,
+    val lifecycleScope: LifecycleCoroutineScope
 )
     : ListAdapter<Product, RecyclerView.ViewHolder>(ProductDiffUtil())
     {
@@ -35,7 +33,7 @@ class ProductsHomeRecyclerView(
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
         {
             val item=getItem(position)
-            (holder as ProductViewHolder).bind(item,onProductClickListener,wishList)
+            (holder as ProductViewHolder).bind(item,onProductClickListener,wishList,lifecycleScope)
         }
 
         var onProductClickListener:OnProductClickListener?=null
@@ -69,20 +67,25 @@ class ProductsHomeRecyclerView(
         fun bind(
             product: Product,
             onProductClickListener: ProductsHomeRecyclerView.OnProductClickListener?,
-            wishList: List<WishProduct>?
+            wishList: List<WishProduct>?,
+            lifecycleScope: LifecycleCoroutineScope
         )
         {
+            lifecycleScope.launch(Dispatchers.Default) {
+                try {
+                    val base64String = product.image
+                    val decodedString = Base64.decode(base64String, Base64.DEFAULT)
+                    val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                    withContext(Dispatchers.Main){
+                        binding.driverInfoImage.setImageBitmap(decodedByte)
+                    }
+                }
+                catch (E:Exception){
+                    Log.i("ABANOUB",product.image.toString())
 
-            try {
-                val base64String = product.image
-                val decodedString = Base64.decode(base64String, Base64.DEFAULT)
-                val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-                binding.driverInfoImage.setImageBitmap(decodedByte)
+                }
             }
-            catch (E:Exception){
-                Log.i("ABANOUB",product.image.toString())
 
-            }
 
             binding.productName.setText(product.title)
             binding.productPrice.setText(product.price)
