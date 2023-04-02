@@ -41,6 +41,7 @@
                         android:drawableStart="@drawable/baseline_location_on_24"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
+                        android:gravity="center"
                         android:hint="Detect the shipping location"
                         android:singleLine="true"
                         android:textAllCaps="false"

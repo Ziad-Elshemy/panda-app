@@ -19,6 +19,7 @@
             android:layout_marginTop="15dp"
             android:paddingHorizontal="10dp"
             android:paddingVertical="10dp"
+            android:gravity="center"
             android:textSize="18sp"
             android:hint="search"
             android:drawableStart="@drawable/baseline_search_24"

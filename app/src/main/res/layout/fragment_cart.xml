@@ -247,6 +247,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="10dp"
+                                            android:gravity="center"
                                             android:background="@drawable/text_input_background"
                                             android:hint="@string/enter_promo_code"
                                             android:padding="10dp"

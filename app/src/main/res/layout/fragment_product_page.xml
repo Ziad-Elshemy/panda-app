@@ -35,6 +35,7 @@
                     android:background="@drawable/text_input_shadow"
                     android:drawableStart="@drawable/baseline_search_24"
                     android:ems="10"
+                    android:gravity="center"
                     android:fontFamily="@font/bold"
                     android:inputType="text"
                     android:paddingHorizontal="16dp"
