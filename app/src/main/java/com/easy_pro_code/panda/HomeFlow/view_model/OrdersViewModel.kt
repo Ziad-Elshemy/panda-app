@@ -23,8 +23,12 @@ class OrdersViewModel:ViewModel() {
 
     fun getAllOrders(){
         viewModelScope.launch {
-            orderLiveData.value = orderWebService.getOrders(GetOrdersRequest(userId = AuthUtils.manager.fetchData().id.toString()))
-            // AuthUtils.manager.fetchData().id
+            try {
+                orderLiveData.value = orderWebService.getOrders(GetOrdersRequest(userId = AuthUtils.manager.fetchData().id.toString()))
+                // AuthUtils.manager.fetchData().id
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
     }
 

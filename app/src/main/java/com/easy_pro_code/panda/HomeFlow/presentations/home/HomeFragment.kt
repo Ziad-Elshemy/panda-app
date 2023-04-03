@@ -29,6 +29,8 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -40,10 +42,10 @@ class HomeFragment : Fragment() {
     private lateinit var phoneCategoryViewModel: CategoryViewModel
     private val suspendWindowViewModel:SuspendWindowViewModel by activityViewModels()
     private lateinit var wishListViewModel:WishListViewModel
-    private val productsList:List<Product>? = listOf()
-    private val offersList:List<Offer>? = listOf()
-    private val phonesList:List<Phone>? = listOf()
-    private val electronicsList:List<Electronics>? = listOf()
+    private var productsList:List<Product>? = listOf()
+    private var offersList:List<Offer>? = listOf()
+    private var phonesList:List<Phone>? = listOf()
+    private var electronicsList:List<Electronics>? = listOf()
     private val categoryList:List<String>?= listOf()
     private lateinit var edTextObj:EditText
     private var city:String=""
@@ -52,7 +54,7 @@ class HomeFragment : Fragment() {
 
     private  val createAddressViewModel:CreateAddressViewModel by activityViewModels()
 
-
+    var time:Long?=null
 
 
 
@@ -68,13 +70,12 @@ class HomeFragment : Fragment() {
         electronicCategoryViewModel=ViewModelProvider(this).get(CategoryViewModel::class.java)
         phoneCategoryViewModel=ViewModelProvider(this).get(CategoryViewModel::class.java)
     }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val imageList = ArrayList<SlideModel>()
+
+        Log.i("created once ......","Home")
 
         imageList.add(
             SlideModel(
@@ -109,14 +110,24 @@ class HomeFragment : Fragment() {
         binding.electronicsRv.adapter=electronicsAdapter
         setAdapterClickListener(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter,electronicsAdapter)
         subscribeToLiveData(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter,electronicsAdapter)
-        homeViewModel.getAllProducts()
-
-        homeViewModel.getAllOffers()
-        homeViewModel.getAllCategories()
-
+//        homeViewModel.getAllProducts()
+//
+//        homeViewModel.getAllOffers()
+//        homeViewModel.getAllCategories()
+//
+//
+//
         electronicCategoryViewModel.getElectronicProductByCategory("Electronics")
         phoneCategoryViewModel.getPhoneProductByCategory("Phones")
         suspendWindowViewModel.progressBar(true)
+
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
         //// initial plasces
         initPlacesSdk()
@@ -157,7 +168,6 @@ class HomeFragment : Fragment() {
             override fun onUnCheck(product: Product) {
                 wishListViewModel.removeFromWishList(product)
             }
-
         }
 
         offersAdapter.onOfferClickListener=object :OffersRecyclerView.OnOfferClickListener{
@@ -256,40 +266,62 @@ class HomeFragment : Fragment() {
         electronicsAdapter: ElectronicsRecyclerView
     ) {
         homeViewModel.productsLiveData.observe(viewLifecycleOwner){
-            suspendWindowViewModel.progressBar(false)
-            productsAdapter.submitList(it?.products.fromProductToProduct())
+            it?.let {
+                homeViewModel.dataLoadedFlag=true
+                suspendWindowViewModel.progressBar(false)
+                productsList=it.products.fromProductToProduct()
+                productsAdapter.submitList(productsList)
+            }
+
         }
 
         homeViewModel.offersLiveData.observe(viewLifecycleOwner){
-            offersAdapter.submitList(it.offers.fromOfferToProduct())
+            it?.let {
+                offersList=it.offers.fromOfferToProduct()
+                offersAdapter.submitList(offersList)
+            }
         }
 
         phoneCategoryViewModel.phonesProductsLiveData.observe(viewLifecycleOwner){
-            phonesAdapter.submitList(it.categoryProducts.fromPhoneToProduct())
+            it?.let {
+                phonesList=it.categoryProducts.fromPhoneToProduct()
+                phonesAdapter.submitList(phonesList)
+            }
 //            Log.e("Ziad Phones data: ", it.categoryProducts.toString() )
         }
 
         electronicCategoryViewModel.electronicsProductsLiveData.observe(viewLifecycleOwner){
-            electronicsAdapter.submitList(it.categoryProducts.fromElectronicsToProduct())
+            it?.let {
+                electronicsList=it.categoryProducts.fromElectronicsToProduct()
+                electronicsAdapter.submitList(electronicsList)
+            }
 //            Log.e("Ziad Electronics data: ", it.categoryProducts.toString() )
         }
 
         homeViewModel.categoryLiveData.observe(viewLifecycleOwner){
-            categoriesAdapter.submitList(it.category.categoryItemToMainCategoryName())
+            it?.let {
+                categoriesAdapter.submitList(it.category.categoryItemToMainCategoryName())
+            }
         }
         wishListViewModel.wishListLiveData.observe(viewLifecycleOwner){
-            wishList=it
-            productsAdapter.submitWishList(wishList)
+            it?.let {
+                wishList=it
+                productsAdapter.submitWishList(wishList)
+            }
         }
 
         createAddressViewModel.createAddressWithCacheLiveData.observe(viewLifecycleOwner){
-            createAddressViewModel.deliveryLocation=data?.name
-            Log.i("with cache",data?.name.toString())
+            it?.let {
+                createAddressViewModel.deliveryLocation=data?.name
+                Log.i("with cache",data?.name.toString())
+            }
         }
 
         createAddressViewModel.createAddressWithoutCacheLiveData.observe(viewLifecycleOwner){
-            createAddressViewModel.deliveryLocation=data?.name
-            Log.i("without cache",data?.name.toString())
+            it?.let {
+                createAddressViewModel.deliveryLocation=data?.name
+                Log.i("without cache",data?.name.toString())
+            }
         }
     }
 
@@ -347,6 +379,12 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=true
+        lifecycleScope.launch {
+            suspendWindowViewModel.progressBar(true)
+            delay(10)
+            binding.NestedScrollView.isVisible=true
+            suspendWindowViewModel.progressBar(!homeViewModel.dataLoadedFlag)
+        }
     }
 }
 

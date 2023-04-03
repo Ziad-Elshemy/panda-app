@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.view_model
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,32 +22,36 @@ class CreateAddressViewModel:ViewModel() {
 
     fun checkAddress(lat:String,lng:String,address:String){
         viewModelScope.launch {
-            val placeSearchResponse=async { placeWebService.placeSearch(
-                    CachePlaceSearchRequest(
-                        Location(
-                            jsonMemberLong = lng,
-                            lat=lat
+            try {
+                val placeSearchResponse=async { placeWebService.placeSearch(
+                        CachePlaceSearchRequest(
+                            Location(
+                                jsonMemberLong = lng,
+                                lat=lat
+                            )
+                        )
+                ) }
+                if (placeSearchResponse.await().orders==null){
+                    createAddressWithoutCacheLiveData.value=createAddressWebService.createAddressWithoutCache(
+                        CreateAddressWithoutCacheRequest(
+                            userId = AuthUtils.manager.fetchData().id,
+                            location = Location(
+                                jsonMemberLong = lng,
+                                lat=lat
+                            ),
+                            name = address
                         )
                     )
-            ) }
-            if (placeSearchResponse.await().orders==null){
-                createAddressWithoutCacheLiveData.value=createAddressWebService.createAddressWithoutCache(
-                    CreateAddressWithoutCacheRequest(
-                        userId = AuthUtils.manager.fetchData().id,
-                        location = Location(
-                            jsonMemberLong = lng,
-                            lat=lat
-                        ),
-                        name = address
+                }else{
+                    createAddressWithCacheLiveData.value=createAddressWebService.createAddressWithCache(
+                        CreateAddressWithCacheRequest(
+                            userId = AuthUtils.manager.fetchData().id,
+                            addressID = placeSearchResponse.await().orders?.id
+                        )
                     )
-                )
-            }else{
-                createAddressWithCacheLiveData.value=createAddressWebService.createAddressWithCache(
-                    CreateAddressWithCacheRequest(
-                        userId = AuthUtils.manager.fetchData().id,
-                        addressID = placeSearchResponse.await().orders?.id
-                    )
-                )
+                }
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
             }
         }
     }

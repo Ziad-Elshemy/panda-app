@@ -23,23 +23,35 @@ class WishListViewModel:ViewModel() {
     }
     fun getAll(){
         viewModelScope.launch {
-            Log.i("here is produt added","get all")
-            wishListLiveData=Transformations.map(wishListDao.getAll()){
-                it
+            try {
+                Log.i("here is produt added","get all")
+                wishListLiveData=Transformations.map(wishListDao.getAll()){
+                    it
+                }
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
             }
         }
     }
 
     fun addToWishList(product: Product){
         viewModelScope.launch(Dispatchers.IO) {
-            Log.i("here is produt added",product.toString())
-            wishListDao.addWishProduct(product.fromProductItemToWishProduct())
+            try {
+                Log.i("here is produt added",product.toString())
+                wishListDao.addWishProduct(product.fromProductItemToWishProduct())
+            }catch (ex:Exception){
+                 Log.i("error in product by category","error")
+            }
         }
     }
 
     fun removeFromWishList(product: Product){
         viewModelScope.launch(Dispatchers.IO) {
-            wishListDao.removeWishProduct(product.fromProductItemToWishProduct())
+            try {
+                wishListDao.removeWishProduct(product.fromProductItemToWishProduct())
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
     }
 }

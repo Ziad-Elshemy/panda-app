@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.view_model
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +14,11 @@ class Categories1ViewModel:ViewModel() {
     val categoryWebService=ApiManager.getCategoryApi()
     fun getAllCategories(){
         viewModelScope.launch {
-            liveData.value=categoryWebService.getAllCategories()
+            try {
+                liveData.value=categoryWebService.getAllCategories()
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
     }
 }

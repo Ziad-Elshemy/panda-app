@@ -13,6 +13,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.easy_pro_code.panda.AuthFlow.splash.SplashActivity

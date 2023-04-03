@@ -36,6 +36,10 @@ class ProductsHomeRecyclerView(
             (holder as ProductViewHolder).bind(item,onProductClickListener,wishList,lifecycleScope)
         }
 
+        override fun getItemCount(): Int {
+            return currentList.size
+        }
+
         var onProductClickListener:OnProductClickListener?=null
 
 

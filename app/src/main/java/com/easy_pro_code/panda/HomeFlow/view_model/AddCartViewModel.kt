@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.view_model
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,21 +17,29 @@ class AddCartViewModel : ViewModel() {
 
     fun addToCart (userId: String, productId: String, number: Int){
         viewModelScope.launch {
-            cartsLiveData.value = cartWebService.addCart(
-                AddCartRequest(
-                    userId = userId ,
-                    items = listOf(ItemsItemResponse(
-                    productId = productId ,
-                    number = number
-                ))
+            try {
+                cartsLiveData.value = cartWebService.addCart(
+                    AddCartRequest(
+                        userId = userId ,
+                        items = listOf(ItemsItemResponse(
+                        productId = productId ,
+                        number = number
+                    ))
+                    )
                 )
-            )
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
     }
 
     fun updateCart (number: Int , productId: String){
         viewModelScope.launch {
-            updateCartLiveDate.value =cartWebService.updateCart(updateCartRequest = UpdateCartRequest(productId,number))
+            try {
+                updateCartLiveDate.value =cartWebService.updateCart(updateCartRequest = UpdateCartRequest(productId,number))
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
 
     }

@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.view_model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,11 @@ class SearchViewModel:ViewModel() {
     private val webService=ApiManager.getProductApi()
     fun searchForProduct(name:String){
         viewModelScope.launch {
-            liveData.value=webService.search(SearchRequest(name))
+            try {
+                liveData.value=webService.search(SearchRequest(name))
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
     }
 }

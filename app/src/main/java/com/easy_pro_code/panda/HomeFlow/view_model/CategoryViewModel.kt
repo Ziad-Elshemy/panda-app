@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.view_model
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,29 +13,41 @@ class CategoryViewModel:ViewModel() {
     val productsLiveData=MutableLiveData<GetAllProductsByCategoryResponse>()
     val phonesProductsLiveData=MutableLiveData<GetAllProductsByCategoryResponse>()
     val electronicsProductsLiveData=MutableLiveData<GetAllProductsByCategoryResponse>()
-    val productWebService=ApiManager.getProductApi()
+    private val productWebService=ApiManager.getProductApi()
 
     fun getProductByCategory(category:String){
         viewModelScope.launch {
-            productsLiveData.value=productWebService.getAllProductsByCategory(
-                GetAllProductsByCategoryRequest(category)
-            )
+            try {
+                productsLiveData.value=productWebService.getAllProductsByCategory(
+                    GetAllProductsByCategoryRequest(category)
+                )
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
     }
 
     fun getPhoneProductByCategory(category:String){
         viewModelScope.launch {
-            phonesProductsLiveData.value=productWebService.getAllProductsByCategory(
-                GetAllProductsByCategoryRequest(category)
-            )
+            try {
+                phonesProductsLiveData.value=productWebService.getAllProductsByCategory(
+                    GetAllProductsByCategoryRequest(category)
+                )
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
     }
 
     fun getElectronicProductByCategory(category:String){
         viewModelScope.launch {
-            electronicsProductsLiveData.value=productWebService.getAllProductsByCategory(
-                GetAllProductsByCategoryRequest(category)
-            )
+            try {
+                electronicsProductsLiveData.value=productWebService.getAllProductsByCategory(
+                    GetAllProductsByCategoryRequest(category)
+                )
+            }catch (ex:Exception){
+                Log.i("error in product by category","error")
+            }
         }
     }
 }
