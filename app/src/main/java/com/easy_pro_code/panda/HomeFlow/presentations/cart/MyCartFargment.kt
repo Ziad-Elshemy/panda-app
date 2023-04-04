@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
+import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.CreateAddressViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.GetCartViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.OrdersViewModel
@@ -36,6 +37,7 @@ class MyCartFargment : Fragment() {
     private lateinit var  binding: FragmentCartBinding
     private lateinit var getAllCartViewModel : GetCartViewModel
     private lateinit var createCartViewModel : OrdersViewModel
+    private lateinit var updateCartViewModel : AddCartViewModel
     private var cartList : List<MyCartModel> = listOf()
 //    val sessionManager = AuthUtils.manager
     private lateinit var edTextObj: EditText
@@ -59,6 +61,7 @@ class MyCartFargment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getAllCartViewModel =ViewModelProvider(this).get(GetCartViewModel::class.java)
+        updateCartViewModel =ViewModelProvider(this).get(AddCartViewModel::class.java)
         createCartViewModel =ViewModelProvider(this).get(OrdersViewModel::class.java)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -87,6 +90,7 @@ class MyCartFargment : Fragment() {
 
             ///Getting all products in cart
             getAllCartViewModel.getAllCarts()
+            //Update all products in cart
 
             binding.checkOutBtn.setOnClickListener {
                 ///Transfer Cart to order
@@ -138,23 +142,19 @@ class MyCartFargment : Fragment() {
                         list = cartsItem?.items?.map {
                                 productResponse->
                             val myCartModel = MyCartModel(
-                                price = productResponse?.productId?.price?.toInt() ,
+                                price = productResponse?.productId?.price?.toInt(),
                                 title = productResponse?.productId?.title.toString(),
                                 userId = cartsItem.userId.toString(),
                                 image = productResponse?.productId?.image,
                                 count = productResponse?.number,
                                 productId = productResponse?.productId?.id.toString(),
                                 cartId = cartsItem.id.toString(),
-                                date = cartsItem.date.toString()
+                                date = cartsItem.date.toString(),
                             )
-                            total+=productResponse?.productId?.price?.toInt()!!
+                           total+=productResponse?.productId?.price?.toInt()!! * productResponse?.number!!
                             myCartModel
                         }
-                        list?.forEach {
-                            total += it.price!!
-                            Log.e("Ziad Total",total.toString())
-                        }
-                        binding.subtotalPrice.setText("YER "+total.toString()+".00")
+                       binding.subtotalPrice.setText("YER "+total.toString()+".00")
                     }
 
                     cartAdapter.submitList(list)
@@ -170,8 +170,10 @@ class MyCartFargment : Fragment() {
                         shipping=50* list?.size!!
                         binding.shippingFeePrice.setText("YER "+shipping.toString()+".00")
                     }
-                    else binding.shippingFeePrice.setText("free")
-                    binding.totalPrice.setText("YER "+(total+shipping).toString()+".00")
+                    else {
+                        binding.shippingFeePrice.setText("free")
+                        binding.totalPrice.setText("YER " + (total + shipping).toString() + ".00")
+                    }
                 }
 
             }
