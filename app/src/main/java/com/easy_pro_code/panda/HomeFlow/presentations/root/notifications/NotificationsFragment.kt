@@ -1,4 +1,4 @@
-package com.easy_pro_code.panda.HomeFlow.presentations.notifications
+package com.easy_pro_code.panda.HomeFlow.presentations.root.notifications
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
