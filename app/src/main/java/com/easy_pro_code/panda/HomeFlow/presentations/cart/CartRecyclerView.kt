@@ -53,6 +53,7 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
 
         fun bind(cart: MyCartModel)
         {
+
             try {
                 val base64String = cart.image
                 val decodedString = Base64.decode(base64String, Base64.DEFAULT)
@@ -66,7 +67,8 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
             //name
             binding.cateName.text=cart.title
             //price
-            binding.priceDisplay.text="YER ${cart.price.toString()}.00"
+            val priceTotal = cart.price!! * cart.count!!
+            binding.priceDisplay.text="YER ${priceTotal}.00"
             //count
             binding.numberOfProduct.text =cart.count.toString()
 
@@ -89,29 +91,8 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
                     val newPrice = cart.price!! * cart.count!!
                     binding.priceDisplay.text="YER ${newPrice}.00"
                 })
-
-
-
-
-
-
 //          binding.executePendingBindings()
 
-            //spinner Value
-//            val number = arrayOf( cart.count.toString() , "1", "2", "3", "4", "5", "6", "7" , "8" , "9" , "10")
-//            val spinner = binding.spinnerMenuNumOfItems
-//            val arrayAdapter = ArrayAdapter(requireContext(),R.layout.simple_spinner_item, number)
-//            spinner.adapter = arrayAdapter
-//            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-//                 //   Toast.makeText(requireContext() ,getString(com.easy_pro_code.panda.R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
-//                    pos = number[position].toInt()
-//                }
-//
-//                override fun onNothingSelected(parent: AdapterView<*>) {
-//                  //  Toast.makeText(requireContext() ,"Please select number of product", Toast.LENGTH_SHORT).show()
-//                }
-//            }
 
 
         }
@@ -127,4 +108,5 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
         }
 
     }
+
 
