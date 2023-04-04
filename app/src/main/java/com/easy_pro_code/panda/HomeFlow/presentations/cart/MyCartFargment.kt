@@ -1,8 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.cart
 
 import android.app.Activity
-import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -19,10 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
-import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
-import com.easy_pro_code.panda.HomeFlow.view_model.CreateAddressViewModel
-import com.easy_pro_code.panda.HomeFlow.view_model.GetCartViewModel
-import com.easy_pro_code.panda.HomeFlow.view_model.OrdersViewModel
+import com.easy_pro_code.panda.HomeFlow.view_model.*
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.databinding.FragmentCartBinding
@@ -35,6 +31,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MyCartFargment : Fragment() {
 
+    private var currentCart: MyCartModel?=null
+    var shipping=0
     private var data: Place? = null
     private var city:String=""
     private lateinit var  binding: FragmentCartBinding
@@ -61,6 +59,16 @@ class MyCartFargment : Fragment() {
             startAutocompleteIntent()
         }
 
+    private val suspendWindowViewModel: SuspendWindowViewModel by activityViewModels()
+
+
+
+    var currentPriceDisplay: TextView?=null
+    var currentPrice:Int?=null
+    var currentCount:Int?=null
+    private var currentProductPrice: Int?=null
+    private var currentNumberOfProduct: TextView?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getAllCartViewModel =ViewModelProvider(this).get(GetCartViewModel::class.java)
@@ -74,6 +82,7 @@ class MyCartFargment : Fragment() {
 
         binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
         val cartAdapter = CartRecyclerView(cartList)
+        setupAdapterClickListener(cartAdapter)
         binding.mycartsRv.adapter=cartAdapter
         cartAdapter.submitList(cartList)
         initPlacesSdk()
@@ -90,7 +99,7 @@ class MyCartFargment : Fragment() {
 
             ////Cart Logic
             subscribeToLiveData(cartAdapter)
-
+            suspendWindowViewModel.progressBar(true)
             ///Getting all products in cart
             getAllCartViewModel.getAllCarts()
             //Update all products in cart
@@ -135,15 +144,40 @@ class MyCartFargment : Fragment() {
     return binding.root
     }
 
+    private fun setupAdapterClickListener(cartAdapter: CartRecyclerView) {
+        cartAdapter.itemCounterChangeListener=object :CartRecyclerView.ItemCounterChangeListener{
+            override fun onCounterButtonsClickListener(
+                newCount: Int,
+                newPrice: Int,
+                priceDisplay: TextView,
+                numberOfProduct: TextView,
+                cart: MyCartModel
+            ) {
+                currentProductPrice=cart.price
+                currentCount=newCount
+                currentPriceDisplay=priceDisplay
+                currentPrice=newPrice
+                suspendWindowViewModel.progressBar(true)
+                getAllCartViewModel.updateCart(newCount,cart.productId!!)
+                currentNumberOfProduct=numberOfProduct
+                currentCart=cart
+            }
+
+        }
+    }
+
 
     ////Cart Logic Impl
     private fun subscribeToLiveData(cartAdapter:CartRecyclerView){
         getAllCartViewModel.getcartsLiveData.observe(viewLifecycleOwner){
 
             if (it.carts!!.isEmpty()){
+                suspendWindowViewModel.progressBar(false)
                 findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
             }
             else{
+                total=0
+                shipping=0
                 //            Log.e("Ziad Adapter live data",it.toString())
                 it.carts.let {
                         cartsListResponse->
@@ -174,20 +208,40 @@ class MyCartFargment : Fragment() {
 
                     Log.e("Ziad Adapter data",list?.size.toString())
                     Log.e("userId" , AuthUtils.manager.fetchData().id.toString())
-                   binding.subtotalPrice.setText("YER "+total.toString()+".00")
-                    var shipping=0
+//                   binding.subtotalPrice.setText("YER "+total.toString()+".00")
                     if (total<1000)  {
                         shipping=50* list?.size!!
                         binding.shippingFeePrice.setText("YER "+shipping.toString()+".00")
                     }
                     else {
                         binding.shippingFeePrice.setText("free")
-                        binding.totalPrice.setText("YER " + (total + shipping).toString() + ".00")
                     }
+                        binding.totalPrice.setText("YER " + (total + shipping).toString() + ".00")
                 }
-
+                suspendWindowViewModel.progressBar(false)
             }
+        }
 
+        getAllCartViewModel.updateCartLiveDate.observe(viewLifecycleOwner){
+            it?.let {
+
+                currentNumberOfProduct?.setText((currentNumberOfProduct?.text.toString().toInt()+currentCount!!).toString())
+                total+=currentCount!! * currentProductPrice!!
+                Log.i("cureeeeeeeent price isssss",currentPrice.toString())
+                currentPriceDisplay?.text = "YER ${currentPrice}.00"
+                binding.subtotalPrice.setText("YER "+total.toString()+".00")
+                if (total<1000){
+                    shipping=it.update?.items?.size!! *50
+                    binding.shippingFeePrice.setText("YER "+shipping.toString()+".00")
+                }else{
+                    shipping=0
+                    binding.shippingFeePrice.setText("free")
+                }
+                binding.totalPrice.setText("YER " + (total + shipping).toString() + ".00")
+                suspendWindowViewModel.progressBar(false)
+                currentCart?.count = currentCart?.count?.plus(currentCount!!)
+                getAllCartViewModel.updateCartLiveDate.value=null
+            }
         }
     }
 
