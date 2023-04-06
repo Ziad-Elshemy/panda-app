@@ -298,15 +298,16 @@
                             app:cardElevation="10dp"
                             >
 
-                                <CheckBox
+                                <Spinner
                                     android:id="@+id/cashOnDelivery"
+                                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/cash_on_delivery"
-                                    android:textColor="@color/black"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    android:padding="7dp"/>
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:backgroundTint="@color/black"
+                                    android:contentDescription="Number of items"
+                                    android:spinnerMode="dropdown"
+                                    android:padding="20dp"/>
 
                         </androidx.cardview.widget.CardView>
 

@@ -16,5 +16,4 @@ data class WishProduct(
     @ColumnInfo(name = "variant") val variant:String,
     @ColumnInfo(name="multiImg") val multiImg:String,
     @ColumnInfo("prands") val prands:String?=null
-
 )

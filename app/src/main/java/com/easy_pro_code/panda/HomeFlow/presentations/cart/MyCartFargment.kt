@@ -1,15 +1,15 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.cart
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -80,6 +80,30 @@ class MyCartFargment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart, container, false)
 
+        //Spinner Value
+        val number = arrayOf(CartSpinner.cash, CartSpinner.wallet)
+        var selected=""
+        val spinner = binding.cashOnDelivery
+        val arrayAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, number)
+        spinner.adapter = arrayAdapter
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                //Toast.makeText(requireContext(), getString(R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
+                pos = position
+                selected=number[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                Toast.makeText(requireContext(), "Please select number of product", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
         val cartAdapter = CartRecyclerView(cartList)
         setupAdapterClickListener(cartAdapter)
@@ -96,7 +120,6 @@ class MyCartFargment : Fragment() {
             findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
 
         }else {
-
             ////Cart Logic
             subscribeToLiveData(cartAdapter)
             suspendWindowViewModel.progressBar(true)
@@ -105,24 +128,17 @@ class MyCartFargment : Fragment() {
             //Update all products in cart
 
             binding.checkOutBtn.setOnClickListener {
-                ///Transfer Cart to order
-                createCartViewModel.createOrder()
-
-                ///Data Observation to Api
-                createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
-                    if (it?.success.toString().equals("order is done")) { Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Sorry, Failed to Create Order! :(", Toast.LENGTH_SHORT).show()
-                    }
+                if (selected==CartSpinner.cash){
+                    createCartViewModel.createOrder()
+                }else if(selected==CartSpinner.wallet){
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.component =
+                        ComponentName("com.easy_pro_code.wallet", "com.easy_pro_code.wallet.payment.PaymentActivity")
+                    startActivity(intent)
                 }
-            }
+                ///Transfer Cart to order
 
-//            binding.checkOutBtn.setOnClickListener {
-//                val intent = Intent(Intent.ACTION_VIEW)
-//                intent.component =
-//                    ComponentName("com.easy_pro_code.wallet", "com.easy_pro_code.wallet.payment.PaymentActivity")
-//                startActivity(intent)
-//            }
+            }
 
         }
 
@@ -169,6 +185,16 @@ class MyCartFargment : Fragment() {
 
     ////Cart Logic Impl
     private fun subscribeToLiveData(cartAdapter:CartRecyclerView){
+
+        ///Data Observation to Api
+        createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
+            if (it?.success.toString().equals("order is done")) { Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Sorry, Failed to Create Order! :(", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
         getAllCartViewModel.getcartsLiveData.observe(viewLifecycleOwner){
 
             if (it.carts!!.isEmpty()){
@@ -291,6 +317,12 @@ class MyCartFargment : Fragment() {
         Places.initialize(requireContext().applicationContext,MAPS_API_KEY)
         // Create a new PlacesClient instance
         Places.createClient(requireContext())
+    }
+
+
+    object CartSpinner{
+        val cash="Cash on delivery"
+        val wallet="Pay with Wallet"
     }
 
 
