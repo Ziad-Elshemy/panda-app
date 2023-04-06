@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 @Parcelize
 data class GetAllProductsByCategoryResponse(
 
-	@field:SerializedName("categoryProducts")
+	@field:SerializedName("products")
 	val categoryProducts: List<ProductsItem>? = null
 ) : Parcelable
 
