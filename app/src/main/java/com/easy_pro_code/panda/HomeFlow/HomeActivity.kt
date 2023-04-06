@@ -41,17 +41,12 @@ class HomeActivity : AppCompatActivity() {
         if (checkForInternet(this)) {
 
         } else {
-            val intent = Intent(this,SplashActivity::class.java)
-            startActivity(intent)
-            this.finish()
+//            val intent = Intent(this,SplashActivity::class.java)
+//            startActivity(intent)
+//            this.finish()
             Toast.makeText(this, "Check your network", Toast.LENGTH_SHORT).show()
         }
-
-
-
     }
-
-
     private fun subscribeToLiveData() {
         suspendWindowViewMode.suspendWindowLiveData.observe(this){
             it?.let{

@@ -293,26 +293,14 @@ class MyCartFargment : Fragment() {
         Places.createClient(requireContext())
     }
 
-
+    override fun onStop() {
+        super.onStop()
+         findNavController().popBackStack()
+    }
 
 }
 
-//it.let {
-//    val list = it.carts?.map {
-//        CartModel(
-//            price = "YER "+it?.items?.get(0)?.productId?.price.toString()+".00",
-//            title= it?.items?.get(0)?.productId?.title.toString(),
-//            userId = it?.id.toString(),
-//            image = null,
-//            count= 5,
-//            productId = it?.items?.get(0)?.productId?.id.toString(),
-//            cartId = it?.id.toString(),
-//            data = it?.date.toString()
-//        )
-//    }
-//    cartAdapter.submitList(list)
-//    Log.e("Ziad Adapter data",list.toString())
-//}
+
 
 
 
