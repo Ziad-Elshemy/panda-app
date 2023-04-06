@@ -208,7 +208,6 @@ class ProductPageFragment:Fragment() {
                         Log.i("Michael", it.cart?.id.toString())
                     }
                     Toast.makeText(requireContext(), "Add To Cart", Toast.LENGTH_SHORT).show()
-
                     initDialog()
 
                 }
@@ -328,6 +327,7 @@ class ProductPageFragment:Fragment() {
         val yesButton: Button = view.findViewById(R.id.yes)
         yesButton.setOnClickListener {
             findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToCart())
+            findNavController().popBackStack()
             cartBoxBuilder.dismiss()
         }
     }

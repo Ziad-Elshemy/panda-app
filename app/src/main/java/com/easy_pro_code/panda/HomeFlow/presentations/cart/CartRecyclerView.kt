@@ -1,17 +1,12 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.cart
 
-import android.R
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +24,7 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
-        (holder as CartViewHolder).bind(item)
+        (holder as CartViewHolder).bind(item,itemCounterChangeListener)
 
         holder.binding.deleteCardView.setOnClickListener(
             View.OnClickListener {
@@ -37,6 +32,18 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
             })
 
 
+    }
+
+    var itemCounterChangeListener:ItemCounterChangeListener?=null
+
+    interface ItemCounterChangeListener{
+        fun onCounterButtonsClickListener(
+            newCount: Int,
+            newPrice: Int,
+            priceDisplay: TextView,
+            numberOfProduct: TextView,
+            cart: MyCartModel
+        )
     }
 
 }
@@ -51,7 +58,10 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
             }
         }
 
-        fun bind(cart: MyCartModel)
+        fun bind(
+            cart: MyCartModel,
+            itemCounterChangeListener: CartRecyclerView.ItemCounterChangeListener?
+        )
         {
 
             try {
@@ -71,26 +81,44 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
             binding.priceDisplay.text="YER ${priceTotal}.00"
             //count
             binding.numberOfProduct.text =cart.count.toString()
-
+            // -
             binding.MinusBtn.setOnClickListener(
                 View.OnClickListener {
 
                     if(cart.count!! >= 1) {
-                        cart.count = cart.count!! - 1
-                        binding.numberOfProduct.text = cart.count.toString()
-                        val newPrice = cart.price!! * cart.count!!
-                        binding.priceDisplay.text = "YER ${newPrice}.00"
+//                        cart.count = cart.count!! - 1
+
+//                        binding.numberOfProduct.text = cart.count.toString()
+
+                        val newPrice = cart.price!! * (cart.count!!-1)
+                        itemCounterChangeListener?.onCounterButtonsClickListener(
+                            -1,
+                            newPrice,
+                            binding.priceDisplay,
+                            binding.numberOfProduct,
+                            cart
+                        )
+//                        binding.priceDisplay.text = "YER ${newPrice}.00"
                     }
 
 
                 })
-            binding.plusIcon.setOnClickListener(
-                View.OnClickListener {
-                    cart.count = cart.count!! + 1
-                    binding.numberOfProduct.text =cart.count.toString()
-                    val newPrice = cart.price!! * cart.count!!
-                    binding.priceDisplay.text="YER ${newPrice}.00"
-                })
+            // +
+            binding.plusIcon.setOnClickListener {
+
+//                    cart.count = cart.count!! + 1
+//                    binding.numberOfProduct.text =cart.count.toString()
+                    val newPrice = cart.price!! * (cart.count!!+1)
+                    itemCounterChangeListener?.onCounterButtonsClickListener(
+                        1,
+                        newPrice,
+                        binding.priceDisplay,
+                        binding.numberOfProduct,
+                        cart
+                    )
+
+//                    binding.priceDisplay.text="YER ${newPrice}.00"
+                }
 //          binding.executePendingBindings()
 
 
