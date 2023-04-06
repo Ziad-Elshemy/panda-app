@@ -36,26 +36,28 @@ class HomeViewModel:ViewModel() {
     }
 
 
-    init {
-            getAllProducts()
-            getAllOffers()
-            getAllCategories()
+
+
+    fun getAllData(){
+        getAllProducts()
+        getAllOffers()
+        getAllCategories()
     }
 
 
-    fun getAllProducts(){
+    private fun getAllProducts(){
         viewModelScope.launch {
             repo.getAllProducts()
         }
     }
 
-    fun getAllOffers(){
+    private fun getAllOffers(){
         viewModelScope.launch {
             repo.getAllOffers()
         }
     }
 
-    fun getAllCategories(){
+    private fun getAllCategories(){
         viewModelScope.launch {
             repo.getAllCategories()
         }

@@ -190,14 +190,16 @@ class MyCartFargment : Fragment() {
     ////Cart Logic Impl
     private fun subscribeToLiveData(cartAdapter:CartRecyclerView){
 
+
         ///Data Observation to Api
         createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
-            if (it?.success.toString().equals("order is done")) { Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
+            if (it?.success.toString().equals("order is done")) {
+                Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
+                AuthUtils.manager.deleteCartID()
             } else {
                 Toast.makeText(requireContext(), "Sorry, Failed to Create Order! :(", Toast.LENGTH_SHORT).show()
             }
         }
-
 
         getAllCartViewModel.getcartsLiveData.observe(viewLifecycleOwner){
 

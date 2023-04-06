@@ -40,7 +40,6 @@ class OrdersViewModel:ViewModel() {
             }catch (e:Exception){
                 Log.e("Ziad CreateOrder VM: ",e.message.toString())
             }
-
       }
     }
 

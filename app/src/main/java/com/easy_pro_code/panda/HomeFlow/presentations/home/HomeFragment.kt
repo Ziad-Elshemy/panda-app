@@ -117,9 +117,7 @@ class HomeFragment : Fragment() {
 //
 //
 //
-        electronicCategoryViewModel.getElectronicProductByCategory("Electronics")
-        phoneCategoryViewModel.getPhoneProductByCategory("Phones")
-        suspendWindowViewModel.progressBar(true)
+
 
     }
     override fun onCreateView(
@@ -379,6 +377,10 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=true
+        electronicCategoryViewModel.getElectronicProductByCategory("Electronics")
+        phoneCategoryViewModel.getPhoneProductByCategory("Phones")
+        homeViewModel.getAllData()
+
         lifecycleScope.launch {
             suspendWindowViewModel.progressBar(true)
             delay(10)

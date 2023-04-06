@@ -75,6 +75,9 @@ class SessionManager (context: Context) {
         return prefsobj.getString(CART_ID,null)
     }
 
+    fun deleteCartID(){
+        prefsobj.edit().putString(CART_ID,null).apply()
+    }
 
     fun isTokenExpired():Boolean?{
         val current = LocalDateTime.now(ZoneId.of("UTC"))
