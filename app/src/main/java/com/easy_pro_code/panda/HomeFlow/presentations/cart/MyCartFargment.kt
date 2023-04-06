@@ -79,8 +79,8 @@ class MyCartFargment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart, container, false)
-
         binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
+
         val cartAdapter = CartRecyclerView(cartList)
         setupAdapterClickListener(cartAdapter)
         binding.mycartsRv.adapter=cartAdapter
