@@ -105,6 +105,7 @@ class MyCartFargment : Fragment() {
         }
 
         binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
+
         val cartAdapter = CartRecyclerView(cartList)
         setupAdapterClickListener(cartAdapter)
         binding.mycartsRv.adapter=cartAdapter
@@ -120,6 +121,7 @@ class MyCartFargment : Fragment() {
             findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
 
         }else {
+
             ////Cart Logic
             subscribeToLiveData(cartAdapter)
             suspendWindowViewModel.progressBar(true)
@@ -139,6 +141,8 @@ class MyCartFargment : Fragment() {
                 ///Transfer Cart to order
 
             }
+
+//
 
         }
 
@@ -319,6 +323,10 @@ class MyCartFargment : Fragment() {
         Places.createClient(requireContext())
     }
 
+    override fun onStop() {
+        super.onStop()
+         findNavController().popBackStack()
+    }
 
     object CartSpinner{
         val cash="Cash on delivery"

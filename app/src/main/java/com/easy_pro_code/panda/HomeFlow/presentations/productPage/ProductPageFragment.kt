@@ -188,63 +188,29 @@ class ProductPageFragment:Fragment() {
         viewBinding.addToCartBtn.setOnClickListener {
 
             if (sessionManager.getCartId() == null) {
-                Log.i("Michael", pos.toString())
                 if (AuthUtils.manager.fetchData().id == null) {
                     findNavController().popBackStack()
-                    Toast.makeText(requireContext(), "please login first", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), "please login first", Toast.LENGTH_SHORT).show()
                 } else {
                     Log.i(
                         "selectedProduct page:",
                         AuthUtils.manager.fetchData().id.toString() + ",  pID:" + selectedProduct?.id.toString() + ",  pos:" + pos.toString()
                     )
-                    addCartViewModel.addToCart(
-                        AuthUtils.manager.fetchData().id.toString(),
-                        selectedProduct?.id.toString(),
-                        pos
-                    )
+                    addCartViewModel.addToCart(AuthUtils.manager.fetchData().id.toString(), selectedProduct?.id.toString(), pos)
                     addCartViewModel.cartsLiveData.observe(viewLifecycleOwner) {
                         sessionManager.saveCartId(it.cart?.id.toString())
-                        Log.i("Michael", it.cart?.id.toString())
                     }
                     Toast.makeText(requireContext(), "Add To Cart", Toast.LENGTH_SHORT).show()
-
                     initDialog()
-
                 }
             } else {
                 addCartViewModel.updateCart(pos, selectedProduct.id.toString())
                 Toast.makeText(requireContext(), "Update Cart", Toast.LENGTH_SHORT).show()
                 initDialog()
             }
-
-//            val view = layoutInflater.inflate(R.layout.cart_dialog,null)
-//            val cartBoxBuilder = AlertDialog.Builder(requireContext()).setView(view).create()
-//            cartBoxBuilder.show()
-//            val continueShoppingButton: Button = view.findViewById(R.id.continueToShopping)
-//            continueShoppingButton.setOnClickListener {
-//                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToHomeFragment())
-//                cartBoxBuilder.dismiss()
-//            }
-//            val yesButton: Button = view.findViewById(R.id.yes)
-//            yesButton.setOnClickListener {
-//                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToCart())
-//                cartBoxBuilder.dismiss()
-//            }
-
         }
 
         viewBinding.downloadIcon.setOnClickListener{
-
-
-            //          val cw = ContextWrapper(requireContext())
-//            // path to /data/data/yourapp/app_data/imageDir
-//            val directory: File = cw.getDir("Download", Context.MODE_PRIVATE)
-//            // Create imageDir
-//            if (!directory.exists()){
-//                directory.mkdir()
-//            }
-
 
             runBlocking(Dispatchers.IO){
 
@@ -331,7 +297,4 @@ class ProductPageFragment:Fragment() {
             cartBoxBuilder.dismiss()
         }
     }
-
-
-
 }
