@@ -14,7 +14,7 @@
         android:icon="@drawable/categories"
         android:title="Categories" />
     <item
-        android:id="@+id/cart"
+        android:id="@+id/myCartFargment"
         android:icon="@drawable/cart"
         android:title="Cart" />
 

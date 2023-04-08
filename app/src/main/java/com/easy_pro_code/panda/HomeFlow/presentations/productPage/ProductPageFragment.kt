@@ -293,7 +293,7 @@ class ProductPageFragment:Fragment() {
         }
         val yesButton: Button = view.findViewById(R.id.yes)
         yesButton.setOnClickListener {
-            findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToCart())
+            findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentToMyCartFargment())
             cartBoxBuilder.dismiss()
         }
     }

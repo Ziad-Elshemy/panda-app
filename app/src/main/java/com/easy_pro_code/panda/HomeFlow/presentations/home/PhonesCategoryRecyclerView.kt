@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easy_pro_code.panda.HomeFlow.models.Phone
+import com.easy_pro_code.panda.HomeFlow.models.fromProductItemToWishProduct
+import com.easy_pro_code.panda.data.Models.local_database.WishProduct
 import com.easy_pro_code.panda.databinding.PhonesListItemBinding
 
-class PhonesRecyclerView (val dataList: List<Phone>?)
+class PhonesRecyclerView (val dataList: List<Phone>?,var wishList: List<WishProduct>?)
 : ListAdapter<Phone, RecyclerView.ViewHolder>(PhoneDiffUtil())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -23,7 +25,7 @@ class PhonesRecyclerView (val dataList: List<Phone>?)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
     {
         val item=getItem(position)
-        (holder as PhoneViewHolder).bind(item,onPhoneClickListener)
+        (holder as PhoneViewHolder).bind(item,onPhoneClickListener,wishList)
     }
 
     var onPhoneClickListener:OnPhoneClickListener?=null
@@ -35,7 +37,9 @@ class PhonesRecyclerView (val dataList: List<Phone>?)
         fun onUnCheck(phone: Phone)
     }
 
-
+    fun submitWishList(wishList: List<WishProduct>?){
+        this.wishList=wishList
+    }
 }
 
 
@@ -50,7 +54,11 @@ class PhoneViewHolder(val binding: PhonesListItemBinding) : RecyclerView.ViewHol
         }
     }
 
-    fun bind(phone: Phone, onPhoneClickListener: PhonesRecyclerView.OnPhoneClickListener?)
+    fun bind(
+        phone: Phone,
+        onPhoneClickListener: PhonesRecyclerView.OnPhoneClickListener?,
+        wishList: List<WishProduct>?
+    )
     {
 
 
@@ -72,6 +80,11 @@ class PhoneViewHolder(val binding: PhonesListItemBinding) : RecyclerView.ViewHol
         }
         binding.phoneItemImage.setOnClickListener {
             onPhoneClickListener?.onClick(phone)
+        }
+        if (wishList != null) {
+            if (phone.product.fromProductItemToWishProduct() in wishList){
+                binding.favIcon.isChecked=true
+            }
         }
         binding.favIcon.setOnCheckedChangeListener{
                 checkBox,isChecked->

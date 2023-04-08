@@ -87,20 +87,29 @@ class MyCartFargment : Fragment() {
         val arrayAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, number)
         spinner.adapter = arrayAdapter
+//        spinner.adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
+                parent: AdapterView<*>?,
+                view: View?,
                 position: Int,
                 id: Long
             ) {
-                //Toast.makeText(requireContext(), getString(R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
-                pos = position
-                selected=number[position]
+                view?.let {
+                    parent?.let {
+                        //Toast.makeText(requireContext(), getString(R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
+                        selected=number[position]
+                    }
+                }
+
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                Toast.makeText(requireContext(), "Please select number of product", Toast.LENGTH_SHORT).show()
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                parent?.let {
+                    Toast.makeText(requireContext(), "Please select number of product", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -116,10 +125,7 @@ class MyCartFargment : Fragment() {
 
 
         if (AuthUtils.manager.getCartId() == null){
-            Toast.makeText(requireContext(),"Please, Add Item First",Toast.LENGTH_SHORT).show()
-          //  findNavController().popBackStack()
-            findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
-
+            findNavController().navigate(MyCartFargmentDirections.actionMyCartFargmentToEmptyCartFragment())
         }else {
 
             ////Cart Logic
@@ -196,6 +202,7 @@ class MyCartFargment : Fragment() {
             if (it?.success.toString().equals("order is done")) {
                 Toast.makeText(requireContext(), "Order Add Successfully :)", Toast.LENGTH_SHORT).show()
                 AuthUtils.manager.deleteCartID()
+                findNavController().navigate(MyCartFargmentDirections.actionMyCartFargmentToEmptyCartFragment())
             } else {
                 Toast.makeText(requireContext(), "Sorry, Failed to Create Order! :(", Toast.LENGTH_SHORT).show()
             }
@@ -205,7 +212,7 @@ class MyCartFargment : Fragment() {
 
             if (it.carts!!.isEmpty()){
                 suspendWindowViewModel.progressBar(false)
-                findNavController().navigate(MyCartFargmentDirections.actionCartToEmptyCartFragment())
+                findNavController().navigate(MyCartFargmentDirections.actionMyCartFargmentToEmptyCartFragment())
             }
             else{
                 total=0
@@ -236,7 +243,7 @@ class MyCartFargment : Fragment() {
                     cartAdapter.submitList(list)
                     //nav_button
                     navBar = requireActivity().findViewById(R.id.bottom_nav)
-                    navBar.getOrCreateBadge(R.id.cart).number = list?.size!!
+                    navBar.getOrCreateBadge(R.id.myCartFargment).number = list?.size!!
 
                     Log.e("Ziad Adapter data",list?.size.toString())
                     Log.e("userId" , AuthUtils.manager.fetchData().id.toString())
@@ -325,10 +332,6 @@ class MyCartFargment : Fragment() {
         Places.createClient(requireContext())
     }
 
-    override fun onStop() {
-        super.onStop()
-         findNavController().popBackStack()
-    }
 
     object CartSpinner{
         val cash="Cash on delivery"

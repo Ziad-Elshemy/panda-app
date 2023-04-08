@@ -1,6 +1,7 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.categories1
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +53,7 @@ class Categories1Fragment : Fragment() {
 
     private fun subscribeToLiveData(adapter: CategoryRecyclerViewAdapter) {
         viewModel.liveData.observe(viewLifecycleOwner){
+            Log.e("errrrrrrrrfdsfsf",it.toString())
             categories=it.category.categoryItemToAllCategoryName()
             adapter.submitList(categories)
         }

@@ -17,22 +17,21 @@ import kotlinx.coroutines.withContext
 class WishListViewModel:ViewModel() {
     private val wishListDao=AppDatabase.getInstance().wishListDao()
 
-    var wishListLiveData:LiveData<List<WishProduct>?> =MutableLiveData()
-    init {
-        getAll()
+    var wishListLiveData:LiveData<List<WishProduct>?> =Transformations.map(wishListDao.getAll()){
+        it
     }
-    fun getAll(){
-        viewModelScope.launch {
-            try {
-                Log.i("here is produt added","get all")
-                wishListLiveData=Transformations.map(wishListDao.getAll()){
-                    it
-                }
-            }catch (ex:Exception){
-                Log.i("error in product by category","error")
-            }
-        }
-    }
+//    fun getAll(){
+//        viewModelScope.launch {
+//            try {
+//                Log.i("here is produt added","get all")
+//                wishListLiveData=Transformations.map(wishListDao.getAll()){
+//                    it
+//                }
+//            }catch (ex:Exception){
+//                Log.i("error in product by category","error")
+//            }
+//        }
+//    }
 
     fun addToWishList(product: Product){
         viewModelScope.launch(Dispatchers.IO) {

@@ -104,8 +104,8 @@ class HomeFragment : Fragment() {
         binding.offersRv.adapter=offersAdapter
         val categoriesAdapter=CategoryRecyclerViewAdapter(categoryList)
         binding.categoriesRv.adapter=categoriesAdapter
-        val phonesAdapter = PhonesRecyclerView(phonesList)
-        val electronicsAdapter = ElectronicsRecyclerView(electronicsList)
+        val phonesAdapter = PhonesRecyclerView(phonesList,wishList)
+        val electronicsAdapter = ElectronicsRecyclerView(electronicsList,wishList)
         binding.phonesRv.adapter=phonesAdapter
         binding.electronicsRv.adapter=electronicsAdapter
         setAdapterClickListener(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter,electronicsAdapter)
@@ -305,6 +305,8 @@ class HomeFragment : Fragment() {
             it?.let {
                 wishList=it
                 productsAdapter.submitWishList(wishList)
+                electronicsAdapter.submitWishList(wishList)
+                phonesAdapter.submitWishList(wishList)
             }
         }
 
@@ -377,6 +379,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=true
+//        wishListViewModel.getAll()
         electronicCategoryViewModel.getElectronicProductByCategory("Electronics")
         phoneCategoryViewModel.getPhoneProductByCategory("Phones")
         homeViewModel.getAllData()

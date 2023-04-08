@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easy_pro_code.panda.HomeFlow.models.Electronics
+import com.easy_pro_code.panda.HomeFlow.models.fromProductItemToWishProduct
+import com.easy_pro_code.panda.data.Models.local_database.WishProduct
 import com.easy_pro_code.panda.databinding.ElectronicsListItemBinding
 
-class ElectronicsRecyclerView (val dataList: List<Electronics>?)
+class ElectronicsRecyclerView (val dataList: List<Electronics>?,var wishList: List<WishProduct>?)
 : ListAdapter<Electronics, RecyclerView.ViewHolder>(ElectronicDiffUtil())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -23,7 +25,7 @@ class ElectronicsRecyclerView (val dataList: List<Electronics>?)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
     {
         val item=getItem(position)
-        (holder as ElectronicViewHolder).bind(item,onElectronicClickListener)
+        (holder as ElectronicViewHolder).bind(item,onElectronicClickListener,wishList)
     }
 
     var onElectronicClickListener:OnElectronicClickListener?=null
@@ -35,6 +37,9 @@ class ElectronicsRecyclerView (val dataList: List<Electronics>?)
         fun onUnCheck(electronic: Electronics)
     }
 
+    fun submitWishList(wishList: List<WishProduct>?){
+        this.wishList=wishList
+    }
 
 }
 
@@ -50,7 +55,11 @@ class ElectronicViewHolder(val binding: ElectronicsListItemBinding) : RecyclerVi
         }
     }
 
-    fun bind(electronic: Electronics, onElectronicClickListener: ElectronicsRecyclerView.OnElectronicClickListener?)
+    fun bind(
+        electronic: Electronics,
+        onElectronicClickListener: ElectronicsRecyclerView.OnElectronicClickListener?,
+        wishList: List<WishProduct>?
+    )
     {
 
 
@@ -70,6 +79,11 @@ class ElectronicViewHolder(val binding: ElectronicsListItemBinding) : RecyclerVi
         binding.electronicPrice.setText(electronic.product.price)
         binding.frame2.setOnClickListener{
             onElectronicClickListener?.onClick(electronic)
+        }
+        if (wishList != null) {
+            if (electronic.product.fromProductItemToWishProduct() in wishList){
+                binding.favIcon.isChecked=true
+            }
         }
         binding.electronicItemImage.setOnClickListener {
             onElectronicClickListener?.onClick(electronic)

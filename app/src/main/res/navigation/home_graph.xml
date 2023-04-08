@@ -104,15 +104,6 @@
             app:destination="@id/reviewFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_cart"
-        android:id="@+id/cart"
-        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.MyCartFargment"
-        android:label="cart" >
-        <action
-            android:id="@+id/action_cart_to_emptyCartFragment"
-            app:destination="@id/emptyCartFragment" />
-    </fragment>
-    <fragment
         tools:layout="@layout/fragment_empty_cart"
         android:id="@+id/emptyCartFragment"
         android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.EmptyCartFragment"
@@ -145,14 +136,15 @@
         <action
             android:id="@+id/action_productPageFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_productPageFragment_to_cart"
-            app:destination="@id/cart" />
         <argument
             android:name="electronics"
             app:argType="com.easy_pro_code.panda.HomeFlow.models.Electronics"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_productPageFragment_to_myCartFargment"
+            app:destination="@id/myCartFargment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_search_results"
@@ -193,6 +185,15 @@
         <argument
             android:name="productId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_cart"
+        android:id="@+id/myCartFargment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.cart.MyCartFargment"
+        android:label="MyCartFargment" >
+        <action
+            android:id="@+id/action_myCartFargment_to_emptyCartFragment"
+            app:destination="@id/emptyCartFragment" />
     </fragment>
 
 
