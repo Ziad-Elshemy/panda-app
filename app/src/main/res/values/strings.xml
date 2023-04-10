@@ -119,5 +119,6 @@
     <string name="search">search</string>
     <string name="color__">Color:</string>
     <string name="size__">Size:</string>
+    <string name="pay_with_wallet">Pay with Wallet</string>
 
 </resources>

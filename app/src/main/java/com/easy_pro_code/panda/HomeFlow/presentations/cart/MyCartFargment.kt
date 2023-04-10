@@ -100,7 +100,7 @@ class MyCartFargment : Fragment() {
                 view?.let {
                     parent?.let {
                         //Toast.makeText(requireContext(), getString(R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
-                        selected=number[position]
+                        selected=getString(number[position])
                     }
                 }
 
@@ -136,9 +136,9 @@ class MyCartFargment : Fragment() {
             //Update all products in cart
 
             binding.checkOutBtn.setOnClickListener {
-                if (selected==CartSpinner.cash){
+                if (selected==getString(CartSpinner.cash)){
                     createCartViewModel.createOrder()
-                }else if(selected==CartSpinner.wallet){
+                }else if(selected==getString(CartSpinner.wallet)){
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.component =
                         ComponentName("com.easy_pro_code.wallet", "com.easy_pro_code.wallet.payment.PaymentActivity")
@@ -334,8 +334,8 @@ class MyCartFargment : Fragment() {
 
 
     object CartSpinner{
-        val cash="Cash on delivery"
-        val wallet="Pay with Wallet"
+        const val cash=R.string.cash_on_delivery
+        const val wallet=R.string.pay_with_wallet
     }
 
 

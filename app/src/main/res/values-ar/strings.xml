@@ -119,4 +119,5 @@
     <string name="search">البحث</string>
     <string name="color__">اللون:</string>
     <string name="size__">المقاس:</string>
+    <string name="pay_with_wallet">الدفع باستخدام المحفظه</string>
 </resources>
