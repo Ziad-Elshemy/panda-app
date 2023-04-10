@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easy_pro_code.panda.HomeFlow.models.Product
+import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.databinding.VariantColorItemBinding
 
 class VariantColorRecyclerViewAdapter
@@ -51,6 +52,15 @@ class VariantColorViewHolder(val binding: VariantColorItemBinding) : RecyclerVie
         onVariantColorClickListener: VariantColorRecyclerViewAdapter.OnVariantColorClickListener?
     )
     {
+        var id:Int=0
+        when(color.lowercase()){
+            "red"->id=R.color.red
+            "white"->id=R.color.white
+            "grey"-> id=R.color.lightGrey
+            "black"->id=R.color.black
+        }
+        if (id==0) binding.color.setBackgroundResource(R.color.yellow)
+        else binding.color.setBackgroundResource(id)
         binding.color.setOnClickListener{
             //change color
             onVariantColorClickListener?.onClick(color)

@@ -145,6 +145,10 @@
             android:id="@+id/action_productPageFragment_to_myCartFargment"
             app:destination="@id/myCartFargment"
             app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_productPageFragment_self"
+            app:destination="@id/productPageFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_search_results"
