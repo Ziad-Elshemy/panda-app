@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Panda</string>
+    <string name="app_name">باندا</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_happy_to_have_you_here">مرحبا ، سعداء بوجودك هنا</string>
     <string name="welcome">أهلا بيك , باندا نورت بيك</string>
@@ -103,18 +103,18 @@
     <string name="cart">عربة التسوق</string>
     <string name="my_account">حسابي</string>
     <string name="detect_the_shipping_location">حدد موقع الشحن</string>
-    <string name="abdalla_ayash">Abdalla Ayash</string>
-    <string name="mokhtar_dewydar">Mokhtar Dewydar</string>
-    <string name="delivery_to_sanaa_yemen">Delivery to Sanaa, Yemen</string>
-    <string name="total_amount_sr_930_00">Total amount SR 930.00</string>
+    <string name="abdalla_ayash">عبدالله عياش</string>
+    <string name="mokhtar_dewydar">مختار دويدار</string>
+    <string name="delivery_to_sanaa_yemen">التسليم إلى صنعاء ، اليمن</string>
+    <string name="total_amount_sr_930_00">المبلغ الإجمالي 930.00 ريال</string>
     <string name="_4_items">(لا يوجد عناصر)</string>
-    <string name="have_been_added_new_products_in_section_the_fashion">Have been added new products in section the fashion</string>
-    <string name="_15_mar_2023">15 Mar 2023</string>
+    <string name="have_been_added_new_products_in_section_the_fashion">تم اضافة منتجات جديدة في قسم الموضة</string>
+    <string name="_15_mar_2023">15 مارس 2023</string>
     <string name="yer_930_00">"YER 930.00 "</string>
     <string name="yer_50_00">YER 50.00</string>
     <string name="yer_980_00">YER 980.00</string>
-    <string name="tuesday_mar_7">Tuesday, Mar 7</string>
-    <string name="use_my_wallet_credit_100_yer">Use my wallet credit 100 YER</string>
+    <string name="tuesday_mar_7">الثلاثاء 7 مارس</string>
+    <string name="use_my_wallet_credit_100_yer">استخدم رصيد محفظتي 100 YEAR</string>
     <string name="do_you_want_go_to_check_out">هل تريد الذهاب لعربة التسوق؟</string>
     <string name="search">البحث</string>
     <string name="color__">اللون:</string>
