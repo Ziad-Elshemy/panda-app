@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.databinding.VariantColorItemBinding
 
 class VariantColorRecyclerViewAdapter

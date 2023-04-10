@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.media.MediaScannerConnection
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Base64
@@ -30,11 +29,11 @@ import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantColorRecyclerV
 import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantOtherRecyclerViewAdapter
 import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantSizeRecyclerViewAdapter
 import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
+import com.easy_pro_code.panda.MainActivity
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.databinding.FragmentProductPageBinding
-import com.sendbird.android.constant.StringSet.title
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import java.io.File
@@ -127,7 +126,6 @@ class ProductPageFragment:Fragment() {
             viewBinding.reviewsSubTitleText.setText(phone.product.title)
             viewBinding.categoryTitleTv.setText(phone.product.category)
             viewBinding.rateText1.setText((phone.product.rate).toString())
-//            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 
         }  else if (electronic != null) {
             selectedProduct = electronic.product
@@ -140,7 +138,6 @@ class ProductPageFragment:Fragment() {
             viewBinding.reviewsSubTitleText.setText(electronic.product.title)
             viewBinding.categoryTitleTv.setText(electronic.product.category)
             viewBinding.rateText1.setText((electronic.product.rate).toString())
-//            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 
         }
         viewBinding.variantColorContainer.isVisible=false
@@ -189,7 +186,9 @@ class ProductPageFragment:Fragment() {
 
             if (sessionManager.getCartId() == null) {
                 if (AuthUtils.manager.fetchData().id == null) {
-                    findNavController().popBackStack()
+                    val LoginIntent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(LoginIntent)
+                    requireActivity().finish()
                     Toast.makeText(requireContext(), "please login first", Toast.LENGTH_SHORT).show()
                 } else {
                     Log.i(
@@ -226,9 +225,6 @@ class ProductPageFragment:Fragment() {
 
                 val fileName = String.format("%dMichael.jpg", System.currentTimeMillis())
                 val outFile: File = File(mypath, fileName)
-//                if (!outFile.exists()){
-//                    outFile.createNewFile()
-//                }
                 val fos: FileOutputStream
                 try {
                     fos = FileOutputStream(outFile)
@@ -236,10 +232,6 @@ class ProductPageFragment:Fragment() {
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
                     fos.flush()
                     fos.close()
-                    //  Toast.makeText(requireContext(), "Download", Toast.LENGTH_SHORT).show()
-
-//                val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
-//                intent.setData(Uri.fromFile(outFile))
                     MediaScannerConnection.scanFile(requireContext(), arrayOf(outFile.toString()), null, null)
 
                 } catch (e: Exception) {

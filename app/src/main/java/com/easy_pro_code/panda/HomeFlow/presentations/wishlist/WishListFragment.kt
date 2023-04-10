@@ -40,7 +40,6 @@ class WishListFragment : Fragment() {
         viewBinding.notificationRv.adapter=wishListAdapter
         setAdapterClickLisenter(wishListAdapter)
         subscribeToLiveData(wishListAdapter)
-//        wishListViewModel.getAll()
         return viewBinding.root
     }
 

@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.HomeFlow.models.categoryItemToAllCategoryName
-import com.easy_pro_code.panda.HomeFlow.models.categoryItemToMainCategoryName
 import com.easy_pro_code.panda.HomeFlow.presentations.home.CategoryRecyclerViewAdapter
 import com.easy_pro_code.panda.HomeFlow.view_model.Categories1ViewModel
 import com.easy_pro_code.panda.R

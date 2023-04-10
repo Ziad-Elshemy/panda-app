@@ -42,7 +42,6 @@ class HomeRepository private constructor(
     }
 
     suspend fun getAllProducts(){
-//        if (productsLiveData.value==null)
         try {
             productsLiveData.value= productWebService.getAllProducts()
         }catch (ex:Exception){
@@ -51,7 +50,6 @@ class HomeRepository private constructor(
     }
 
     suspend fun getAllOffers(){
-//        if (offersLiveData.value==null)
         try {
             offersLiveData.value= offersWebService.getOffers()
         }catch (ex:Exception){
@@ -60,7 +58,6 @@ class HomeRepository private constructor(
     }
 
     suspend fun getAllCategories(){
-//        if (categoryLiveData.value==null)
         try {
             categoryLiveData.value= categoryWebService.getAllCategories()
         }catch (ex:Exception){

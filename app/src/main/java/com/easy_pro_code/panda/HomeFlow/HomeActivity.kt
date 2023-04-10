@@ -7,19 +7,17 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.navigation.NavController
+
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.easy_pro_code.panda.AuthFlow.splash.SplashActivity
 
 import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
-import com.easy_pro_code.panda.MainActivity
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.databinding.ActivityHomeBinding
 
@@ -39,11 +37,11 @@ class HomeActivity : AppCompatActivity() {
         dataBinding.bottomNav.setupWithNavController(navController)
 
         if (checkForInternet(this)) {
-
+            Toast.makeText(this, "Welcome To Panda", Toast.LENGTH_SHORT).show()
         } else {
-//            val intent = Intent(this,SplashActivity::class.java)
-//            startActivity(intent)
-//            this.finish()
+            val intent = Intent(this, SplashActivity::class.java)
+            startActivity(intent)
+            this.finish()
             Toast.makeText(this, "Check your network", Toast.LENGTH_SHORT).show()
         }
     }
@@ -55,7 +53,6 @@ class HomeActivity : AppCompatActivity() {
                 }else{
                     hideSuspendWindow()
                 }
-//                suspendWindowViewMode.suspendWindowLiveData.value=null
             }
         }
     }

@@ -86,9 +86,6 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
                 View.OnClickListener {
 
                     if(cart.count!! >= 1) {
-//                        cart.count = cart.count!! - 1
-
-//                        binding.numberOfProduct.text = cart.count.toString()
 
                         val newPrice = cart.price!! * (cart.count!!-1)
                         itemCounterChangeListener?.onCounterButtonsClickListener(
@@ -98,16 +95,11 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
                             binding.numberOfProduct,
                             cart
                         )
-//                        binding.priceDisplay.text = "YER ${newPrice}.00"
                     }
-
-
                 })
             // +
             binding.plusIcon.setOnClickListener {
 
-//                    cart.count = cart.count!! + 1
-//                    binding.numberOfProduct.text =cart.count.toString()
                     val newPrice = cart.price!! * (cart.count!!+1)
                     itemCounterChangeListener?.onCounterButtonsClickListener(
                         1,
@@ -116,13 +108,7 @@ class CartRecyclerView (val dataList: List<MyCartModel>?)
                         binding.numberOfProduct,
                         cart
                     )
-
-//                    binding.priceDisplay.text="YER ${newPrice}.00"
                 }
-//          binding.executePendingBindings()
-
-
-
         }
     }
 

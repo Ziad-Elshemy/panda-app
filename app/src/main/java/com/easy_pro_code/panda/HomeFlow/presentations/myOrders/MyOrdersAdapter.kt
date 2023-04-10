@@ -1,20 +1,15 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.myOrders
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.easy_pro_code.panda.HomeFlow.models.Order
-import com.easy_pro_code.panda.HomeFlow.models.OrderItems
 import com.easy_pro_code.panda.data.Models.remote_backend.OrderItemsItem
 import com.easy_pro_code.panda.databinding.MyOrdersListItemBinding
-import java.io.ByteArrayOutputStream
-import java.io.File
+
 
 
 class MyOrdersAdapter(val click:ReviewButtonClickListener,val orderList:List<OrderItemsItem?>) : ListAdapter<OrderItemsItem,RecyclerView.ViewHolder>(OrderItemsDiffUtil())  {
@@ -45,7 +40,6 @@ class OrderViewHolder(val binding:MyOrdersListItemBinding) : RecyclerView.ViewHo
     }
 
     fun bind(orderModel:OrderItemsItem,click:ReviewButtonClickListener){
-//        binding.myOrderImage.setImageResource(orderModel.imageId.toInt())
 
         binding.myOrderName.text=orderModel.productId?.title
         binding.myOrderPrice.text=orderModel.productId?.price
@@ -56,23 +50,10 @@ class OrderViewHolder(val binding:MyOrdersListItemBinding) : RecyclerView.ViewHo
         val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
         binding.myOrderImage.setImageBitmap(decodedByte)
 
-
-
-//        val base64String = ""
-//        val base64Image =
-//            base64String.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-//        val decodedString: ByteArray = Base64.decode(base64Image, Base64.DEFAULT)
-//        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-//        binding.myOrderImage.setImageBitmap(decodedByte)
-
-
         binding.reviewBtn.setOnClickListener {
             click.clickListener(orderModel)
         }
     }
-
-
-
 
 }
 

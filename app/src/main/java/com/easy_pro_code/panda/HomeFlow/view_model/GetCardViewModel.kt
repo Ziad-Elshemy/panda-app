@@ -1,17 +1,13 @@
 package com.easy_pro_code.panda.HomeFlow.view_model
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
 import com.easy_pro_code.panda.data.Models.remote_backend.GetCartById
 import com.easy_pro_code.panda.data.Models.remote_backend.UpdateCartRequest
 import com.easy_pro_code.panda.data.Models.remote_backend.UpdateCartResponse
 import com.easy_pro_code.panda.data.api.api_manager.ApiManager
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class GetCartViewModel : ViewModel() {

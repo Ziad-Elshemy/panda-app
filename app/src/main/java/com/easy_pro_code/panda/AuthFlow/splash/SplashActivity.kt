@@ -32,7 +32,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_splash)
 
-        // Handler().postDelayed({
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this,Start()::class.java)
             startActivity(intent)

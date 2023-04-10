@@ -15,7 +15,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
-import com.easy_pro_code.panda.AuthFlow.signUp.SignUpFragment
 import com.easy_pro_code.panda.MainActivity
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
@@ -58,7 +57,6 @@ class MyAccountFragment : Fragment() {
             binding.Divider10.isVisible=false
 
             binding.loginBtn.setOnClickListener {
-              //  findNavController().navigate(MyAccountFragmentDirections.actionMyAccountFragment2ToLoginFragment2())
 
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
@@ -89,18 +87,7 @@ class MyAccountFragment : Fragment() {
 
             binding.Divider1.isVisible=false
             binding.Divider10.isVisible=false
-//            binding.signupBtn.setOnClickListener {
-////            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToSignUpFragment2()
-////            findNavController().navigate(action)
-//
-//                val intent = Intent(requireContext(), MainActivity::class.java)
-////            intent.putExtra("fragmentToLoad",true)
-//                startActivity(intent)
-//                requireActivity().finish()
-//
-//                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
-//                    false
-//            }
+
             binding.editAccountBtn.setOnClickListener {
                 val action =
                     MyAccountFragmentDirections.actionMyAccountFragment2ToEditMyAccountFragment()
@@ -110,8 +97,7 @@ class MyAccountFragment : Fragment() {
             }
             binding.myWalletBtn.setOnClickListener {
                 Toast.makeText(requireContext(), "coming soon", Toast.LENGTH_SHORT).show()
-//            val action = MyAccountFragmentDirections.actionMyAccountFragment2ToMyWalletFragment()
-//            findNavController().navigate(action)
+
             }
             binding.myOrdersBtn.setOnClickListener {
                 val action =

@@ -2,7 +2,6 @@ package com.easy_pro_code.panda.data.api.web_services
 
 import com.easy_pro_code.panda.data.Models.remote_backend.*
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
-import retrofit2.Response
 import retrofit2.http.*
 
 interface CartWebService {

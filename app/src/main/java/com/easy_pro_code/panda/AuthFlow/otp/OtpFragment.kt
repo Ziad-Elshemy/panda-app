@@ -28,8 +28,6 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
 
@@ -113,9 +111,6 @@ class OtpFragment : AuthFragment() {
     override fun successState(verificationId: String, token: PhoneAuthProvider.ForceResendingToken)
     {
         Toast.makeText(requireContext(), "Welcome", Toast.LENGTH_LONG).show()
-        /// by navArgs
-
-//        AuthUtils.manager.saveAuthToken(user,phoneNumber)
 
     }
 

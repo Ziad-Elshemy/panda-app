@@ -1,6 +1,5 @@
 package com.easy_pro_code.panda.data.api.api_manager
 
-import com.easy_pro_code.panda.data.api.web_services.AuthenticationWebService
 import com.easy_pro_code.panda.data.api.web_services.cache.CachePlaceSearchWebService
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

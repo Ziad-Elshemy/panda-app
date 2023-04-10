@@ -110,14 +110,6 @@ class HomeFragment : Fragment() {
         binding.electronicsRv.adapter=electronicsAdapter
         setAdapterClickListener(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter,electronicsAdapter)
         subscribeToLiveData(productsAdapter,offersAdapter,categoriesAdapter,phonesAdapter,electronicsAdapter)
-//        homeViewModel.getAllProducts()
-//
-//        homeViewModel.getAllOffers()
-//        homeViewModel.getAllCategories()
-//
-//
-//
-
 
     }
     override fun onCreateView(
@@ -136,7 +128,6 @@ class HomeFragment : Fragment() {
             requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible=false
         }
         return binding.root
-
     }
 
     private fun setAdapterClickListener(
@@ -285,7 +276,6 @@ class HomeFragment : Fragment() {
                 phonesList=it.categoryProducts.fromPhoneToProduct()
                 phonesAdapter.submitList(phonesList)
             }
-//            Log.e("Ziad Phones data: ", it.categoryProducts.toString() )
         }
 
         electronicCategoryViewModel.electronicsProductsLiveData.observe(viewLifecycleOwner){
@@ -293,7 +283,6 @@ class HomeFragment : Fragment() {
                 electronicsList=it.categoryProducts.fromElectronicsToProduct()
                 electronicsAdapter.submitList(electronicsList)
             }
-//            Log.e("Ziad Electronics data: ", it.categoryProducts.toString() )
         }
 
         homeViewModel.categoryLiveData.observe(viewLifecycleOwner){

@@ -69,7 +69,6 @@ class LoginFragment : AuthFragment() {
         startState()
         initViews()
         subscribeToLiveData()
-//        Log.e("Ziad Response",binding.btnLogin.text.toString())
         return binding.root
     }
 
@@ -79,7 +78,6 @@ class LoginFragment : AuthFragment() {
                     response->
                 binding.progressBarLoadingPhoneAuth.visibility = View.GONE
                 binding.btnLogin.visibility = View.GONE
-//                Log.e("Ziad Response",binding.etPhoneNumber.text.toString())
                 if (response.message.equals("user not found")){
                     Toast.makeText(requireContext(), "please sign up first", Toast.LENGTH_SHORT).show()
                     loginViewModel.clearLiveData()
@@ -117,7 +115,6 @@ class LoginFragment : AuthFragment() {
 
             Toast.makeText(requireContext(), "Enter Valid Number ${phoneNumber.length}", Toast.LENGTH_LONG).show()
         } else {
-            //Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
             loadingState()
             Log.i("Ziad: error" , "loginFragment ${phoneNumber.toString()}")
             loginViewModel.logIn(phoneNumber.toString())

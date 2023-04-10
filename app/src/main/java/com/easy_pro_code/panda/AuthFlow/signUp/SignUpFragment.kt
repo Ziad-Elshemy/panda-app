@@ -29,13 +29,10 @@ import java.util.regex.Pattern
 class SignUpFragment : Fragment() {
 
     lateinit var binding: FragmentSignUpBinding
-
     lateinit var userName: EditText
     lateinit var phoneNumber: EditText
     lateinit var email: EditText
     lateinit var signUpBtn: Button
-
-
     lateinit var viewModel: RegistrationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +51,9 @@ class SignUpFragment : Fragment() {
             val intent = Intent(requireContext(), HomeActivity::class.java)
             startActivity(intent)
 
+        }
+        binding.haveAnAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
         }
 
         binding.signInBtn.setOnClickListener {
@@ -118,8 +118,6 @@ class SignUpFragment : Fragment() {
         phoneNumber = binding.etPhoneNumber
         email = binding.email
         signUpBtn = binding.btnSignUp
-
-//        gender = binding.dropdownMenuGender
         binding.signInBtn.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -175,47 +173,6 @@ class SignUpFragment : Fragment() {
 
     }
 
-//    private fun onRegisterPressed() {
-//        val phoneNumber = binding.etPhoneNumber
-//        val userName = binding.userName
-//        val email = binding.email
-//        val firstName = binding.firstName
-//        val lastName = binding.lastName
-//        if(phoneNumber.text.isNotEmpty() && email.text.isNotEmpty() && firstName.text.isNotEmpty() && lastName.text.isNotEmpty()){
-//            loadingState()
-//            viewModel.signUp(
-//
-//                userName.text.toString(),
-//
-//                firstName.text.toString(),
-//
-//                lastName.text.toString(),
-//
-//                phoneNumber.text.toString(),
-//
-//                email.text.toString(),
-//
-//                )
-//        } else {
-//            if(userName.text.isEmpty()){
-//                userName.error = "user name can't be empty"
-//            }
-//            if(firstName.text.isEmpty()){
-//                firstName.error = "first name can't be empty"
-//            }
-//            if(lastName.text.isEmpty()){
-//                lastName.error = "last name can't be empty"
-//            }
-//            if(phoneNumber.text.isEmpty()){
-//                phoneNumber.error = "phone number can't be empty"
-//            }
-//            if(email.text.isEmpty()){
-//                email.error = "email can't be empty"
-//                Toast.makeText(requireContext(), "Enter Valid Number", Toast.LENGTH_LONG).show()
-//            }
-//        }
-//    }
-
     private fun loadingState() {
         binding.btnSignUp.visibility = View.GONE
         binding.progressIndicator.visibility = View.VISIBLE
@@ -229,7 +186,6 @@ class SignUpFragment : Fragment() {
         val firstName=binding.firstName.text.toString().trim()
         val lastName=binding.lastName.text.toString().trim()
         val emailText=binding.email.text.toString().trim()
-//            val userGender = gender.selectedItem.toString().trim()
 
         if (userNameFirst.isEmpty()) {
             userName.error = "Please Enter Your User Name"

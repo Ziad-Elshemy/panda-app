@@ -29,34 +29,23 @@ class LoginViewModel : ViewModel(){
     fun autoSignIn(): UserData {
         return  sessionManager.fetchData()
     }
-    fun onSucessfulsignIn(user: UserData,phoneNumber: String)
-    {
-        //Comment
-//        sessionManager.saveAuthToken(user,phoneNumber)
-    }
-
 
     fun logIn(phoneNumber:String){
         viewModelScope.launch {
 
             try {
                 val userRequest= SignInRequest(phoneNumber)
-//                Log.i("Ziad: error" , "try loginViewModel ${userRequest.toString()}")
                 _userLiveData.value=authenticationWebService.signIn(userRequest)
-//                Log.i("Ziad: error" , _userLiveData.value.toString())
             }catch (t:Throwable){
                 when(t){
                     is HttpException ->{
                         when (t.code())
                         {
                             400 -> {
-//                                val response=UserData(message = "User Not found.")
-//                                _userLiveData.value=response
+
                                 Log.i("Ziad: error" , "400")
                             }
                             else -> {
-//                                val response = UserData(message = "something went wrong")
-//                                _userLiveData.value = response
 
                                 Log.i("Ziad: error" , "Something went Wrong")
 

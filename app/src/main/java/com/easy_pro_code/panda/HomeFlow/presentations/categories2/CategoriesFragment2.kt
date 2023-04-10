@@ -14,8 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.easy_pro_code.panda.HomeFlow.models.Product
 import com.easy_pro_code.panda.HomeFlow.models.fromProductToProduct
-import com.easy_pro_code.panda.HomeFlow.presentations.categories1.Categories1FragmentDirections
-import com.easy_pro_code.panda.HomeFlow.presentations.home.HomeFragmentDirections
 import com.easy_pro_code.panda.HomeFlow.presentations.home.ProductsHomeRecyclerView
 import com.easy_pro_code.panda.HomeFlow.view_model.CategoryViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel

@@ -95,7 +95,6 @@ class SessionManager (context: Context) {
     fun fetchData(): UserData {
         return UserData(
             token = prefsobj.getString(USER_TOKEN, null),
-          // roles =prefsobj.getStringSet(ROLE, null)?.toList(),
             email =prefsobj.getString(EMAIL, null),
             id = prefsobj.getString(ID, null),
             userName = prefsobj.getString(USER_NAME,null)
