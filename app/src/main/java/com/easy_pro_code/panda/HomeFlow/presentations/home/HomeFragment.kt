@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
         val imageSlider = binding.imageSlider
         imageSlider.setImageList(imageList)
 
-        val productsAdapter=ProductsHomeRecyclerView(productsList,wishList,lifecycleScope)
+        val productsAdapter=BestSellerRecyclerViewAdapter(productsList,wishList,lifecycleScope)
         binding.productRv.adapter=productsAdapter
         productsAdapter.submitList(productsList)
         val offersAdapter=OffersRecyclerView(offersList)
@@ -131,13 +131,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAdapterClickListener(
-        productsAdapter: ProductsHomeRecyclerView,
+        productsAdapter: BestSellerRecyclerViewAdapter,
         offersAdapter: OffersRecyclerView,
         categoriesAdapter: CategoryRecyclerViewAdapter,
         phonesAdapter: PhonesRecyclerView,
         electronicsAdapter: ElectronicsRecyclerView
     ) {
-        productsAdapter.onProductClickListener=object :ProductsHomeRecyclerView.OnProductClickListener{
+        productsAdapter.onBestSellerClickListener=object :BestSellerRecyclerViewAdapter.OnBestSellerClickListener{
             override fun onClick(product: Product) {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductPageFragment(
                         product = product,
@@ -248,7 +248,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun subscribeToLiveData(
-        productsAdapter: ProductsHomeRecyclerView,
+        productsAdapter: BestSellerRecyclerViewAdapter,
         offersAdapter: OffersRecyclerView,
         categoriesAdapter: CategoryRecyclerViewAdapter,
         phonesAdapter: PhonesRecyclerView,

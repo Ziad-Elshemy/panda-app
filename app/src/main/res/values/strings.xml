@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Panda</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_happy_to_have_you_here">Welcome, happy to have you here</string>
     <string name="welcome">أهلا بيك , باندا نورت بيك</string>
@@ -43,7 +42,7 @@
     <string name="language">Language</string>
     <string name="terms_and_conditions">Terms and conditions</string>
     <string name="about">About</string>
-    <string name="_3_items"></string>
+    <string name="_3_items" translatable="false"></string>
     <string name="my_balance">My Balance</string>
     <string name="wallet_balance">Wallet Balance</string>
     <string name="add_balance">Add balance</string>
@@ -56,7 +55,7 @@
     <string name="to_follow_the_status_of_the_order">To follow the status of the order</string>
     <string name="shopping_again">Shopping Again</string>
     <string name="enter_otp_code">Enter otp code</string>
-    <string name="enter_the_code_sent_to_you_in_a_message_on_your_email">Enter the code sent to you in a message on your email</string>
+    <string name="enter_the_code_sent_to_you_in_a_message_on_your_email">Enter the code sent to you in a message on your SMS</string>
     <string name="total_amount_sr_930_00">Total amount SR 930.00</string>
     <string name="card_number">Card Number</string>
     <string name="exp_date">Exp.Date</string>
@@ -96,5 +95,30 @@
     <string name="selected_item">Selected item:</string>
     <string name="continue_to_shopping">Shopping more</string>
     <string name="yes">Yes</string>
+    <string name="similar_products">similar products</string>
+    <string name="best_seller">best seller</string>
+    <string name="helpful">Helpful</string>
+    <string name="report">Report</string>
+    <string name="order_number">Order Number:</string>
+    <string name="num_of_items">Num of Items:</string>
+    <string name="date">Date:</string>
+    <string name="electronics">electronics</string>
+    <string name="phones">phones</string>
+    <string name="descriptions">Descriptions</string>
+    <string name="this_item_will_be_delivered_in_72_hours">This item will be delivered in 72 hours</string>
+    <string name="specifications">Specifications</string>
+    <string name="reviews">Reviews</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="home">Home</string>
+    <string name="wishlist">WishList</string>
+    <string name="categories">Categories</string>
+    <string name="cart">Cart</string>
+    <string name="my_account">My Account</string>
+    <string name="detect_the_shipping_location">Detect the shipping location</string>
+    <string name="do_you_want_go_to_check_out">Do you want go to check out ?</string>
+    <string name="search">search</string>
+    <string name="color__">Color:</string>
+    <string name="size__">Size:</string>
+    <string name="pay_with_wallet">Pay with Wallet</string>
 
 </resources>

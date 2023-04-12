@@ -1,7 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.productPage
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -20,15 +19,18 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.denzcoskun.imageslider.models.SlideModel
+import com.easy_pro_code.panda.HomeFlow.models.Electronics
 import com.easy_pro_code.panda.HomeFlow.models.Product
-import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantColorRecyclerViewAdapter
-import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantOtherRecyclerViewAdapter
-import com.easy_pro_code.panda.HomeFlow.presentations.home.VariantSizeRecyclerViewAdapter
+import com.easy_pro_code.panda.HomeFlow.models.fromElectronicsToProduct
+import com.easy_pro_code.panda.HomeFlow.presentations.home.*
 import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
+import com.easy_pro_code.panda.HomeFlow.view_model.CategoryViewModel
+import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
 import com.easy_pro_code.panda.MainActivity
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
@@ -43,15 +45,19 @@ import java.lang.Exception
 class ProductPageFragment:Fragment() {
     lateinit var viewBinding:FragmentProductPageBinding
     private lateinit var  addCartViewModel: AddCartViewModel
+    private lateinit var categoryViewModel:CategoryViewModel
+    private val suspendWindowViewModel: SuspendWindowViewModel by activityViewModels()
     lateinit var cart: OrderCart
     val sessionManager = AuthUtils.manager
     var pos:Int = 0
+
 
     lateinit var selectedProduct:Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addCartViewModel= ViewModelProvider(this).get(AddCartViewModel::class.java)
+        categoryViewModel=ViewModelProvider(this).get(CategoryViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -80,18 +86,25 @@ class ProductPageFragment:Fragment() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
-                view: View,
+                view: View?,
                 position: Int,
                 id: Long
             ) {
                 //Toast.makeText(requireContext(), getString(R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
-                pos = number[position].toInt()
+                view?.let {
+                    pos = number[position].toInt()
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 Toast.makeText(requireContext(), "Please select number of product", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val categoryAdapter=ElectronicsRecyclerView(listOf(), listOf())
+        viewBinding.similarProductsRv.adapter=categoryAdapter
+
+        suspendWindowViewModel.progressBar(true)
         if (product != null) {
             selectedProduct = product
             viewBinding.productTitleTv.setText(product.title)
@@ -104,6 +117,7 @@ class ProductPageFragment:Fragment() {
             viewBinding.newPriceCurrencyText.isVisible = false
             viewBinding.rateIcon1.setText((product.rate).toString())
 
+            categoryViewModel.getProductByCategory(product.category!!)
         } else if (offer != null) {
             selectedProduct = offer.product
             viewBinding.productTitleTv.setText(offer.product.title)
@@ -115,6 +129,7 @@ class ProductPageFragment:Fragment() {
             viewBinding.rateText1.setText((offer.product.rate).toString())
             viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 
+            categoryViewModel.getProductByCategory(offer.product.category!!)
         } else if (phone != null) {
             selectedProduct = phone.product
             viewBinding.productTitleTv.setText(phone.product.title)
@@ -126,7 +141,8 @@ class ProductPageFragment:Fragment() {
             viewBinding.reviewsSubTitleText.setText(phone.product.title)
             viewBinding.categoryTitleTv.setText(phone.product.category)
             viewBinding.rateText1.setText((phone.product.rate).toString())
-
+//            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+            categoryViewModel.getPhoneProductByCategory(phone.product.category!!)
         }  else if (electronic != null) {
             selectedProduct = electronic.product
             viewBinding.productTitleTv.setText(electronic.product.title)
@@ -138,6 +154,7 @@ class ProductPageFragment:Fragment() {
             viewBinding.reviewsSubTitleText.setText(electronic.product.title)
             viewBinding.categoryTitleTv.setText(electronic.product.category)
             viewBinding.rateText1.setText((electronic.product.rate).toString())
+//            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 
         }
         viewBinding.variantColorContainer.isVisible=false
@@ -225,6 +242,9 @@ class ProductPageFragment:Fragment() {
 
                 val fileName = String.format("%dMichael.jpg", System.currentTimeMillis())
                 val outFile: File = File(mypath, fileName)
+//                if (!outFile.exists()){
+//                    outFile.createNewFile()
+//                }
                 val fos: FileOutputStream
                 try {
                     fos = FileOutputStream(outFile)
@@ -232,6 +252,10 @@ class ProductPageFragment:Fragment() {
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
                     fos.flush()
                     fos.close()
+                    //  Toast.makeText(requireContext(), "Download", Toast.LENGTH_SHORT).show()
+
+//                val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+//                intent.setData(Uri.fromFile(outFile))
                     MediaScannerConnection.scanFile(requireContext(), arrayOf(outFile.toString()), null, null)
 
                 } catch (e: Exception) {
@@ -270,8 +294,39 @@ class ProductPageFragment:Fragment() {
         }
         val imageSlider = viewBinding.productImageSlider
         imageSlider.setImageList(imageList)
+        categoryAdapter.onElectronicClickListener=object :ElectronicsRecyclerView.OnElectronicClickListener{
+            override fun onClick(electronic: Electronics) {
+                findNavController().navigate(ProductPageFragmentDirections.actionProductPageFragmentSelf(electronics=electronic))
+            }
 
+            override fun onCheck(electronic: Electronics) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onUnCheck(electronic: Electronics) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        subscribeToLiveData(categoryAdapter)
         return viewBinding.root
+    }
+
+    private fun subscribeToLiveData(categoryAdapter: ElectronicsRecyclerView) {
+        categoryViewModel.productsLiveData.observe(viewLifecycleOwner){
+            categoryAdapter.submitList(it.categoryProducts.fromElectronicsToProduct())
+            suspendWindowViewModel.progressBar(false)
+        }
+
+        categoryViewModel.electronicsProductsLiveData.observe(viewLifecycleOwner){
+            categoryAdapter.submitList(it.categoryProducts.fromElectronicsToProduct())
+            suspendWindowViewModel.progressBar(false)
+        }
+
+        categoryViewModel.phonesProductsLiveData.observe(viewLifecycleOwner){
+            categoryAdapter.submitList(it.categoryProducts.fromElectronicsToProduct())
+            suspendWindowViewModel.progressBar(false)
+        }
     }
 
     fun initDialog(){

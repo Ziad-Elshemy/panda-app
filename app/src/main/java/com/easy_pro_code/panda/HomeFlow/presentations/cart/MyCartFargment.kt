@@ -40,6 +40,7 @@ class MyCartFargment : Fragment() {
     private lateinit var createCartViewModel : OrdersViewModel
     private lateinit var updateCartViewModel : AddCartViewModel
     private var cartList : List<MyCartModel> = listOf()
+//    val sessionManager = AuthUtils.manager
     private lateinit var edTextObj: EditText
     private var edTextId:Int=-1
 
@@ -49,6 +50,7 @@ class MyCartFargment : Fragment() {
     val createAddressViewModel:CreateAddressViewModel by activityViewModels()
     var total=0
     var totalAfterDiscount =0
+
     private lateinit var  cartModel :MyCartModel
 
     var startAutocompleteIntentListener =
@@ -58,6 +60,8 @@ class MyCartFargment : Fragment() {
         }
 
     private val suspendWindowViewModel: SuspendWindowViewModel by activityViewModels()
+
+
 
     var currentPriceDisplay: TextView?=null
     var currentPrice:Int?=null
@@ -83,6 +87,7 @@ class MyCartFargment : Fragment() {
         val arrayAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, number)
         spinner.adapter = arrayAdapter
+//        spinner.adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -94,7 +99,8 @@ class MyCartFargment : Fragment() {
             ) {
                 view?.let {
                     parent?.let {
-                        selected=number[position]
+                        //Toast.makeText(requireContext(), getString(R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
+                        selected=getString(number[position])
                     }
                 }
 
@@ -128,18 +134,24 @@ class MyCartFargment : Fragment() {
             ///Getting all products in cart
             getAllCartViewModel.getAllCarts()
             //Update all products in cart
+
             binding.checkOutBtn.setOnClickListener {
-                if (selected==CartSpinner.cash){
+                if (selected==getString(CartSpinner.cash)){
                     createCartViewModel.createOrder()
-                }else if(selected==CartSpinner.wallet){
-                    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+                }else if(selected==getString(CartSpinner.wallet)){
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.component =
+                        ComponentName("com.easy_pro_code.wallet", "com.easy_pro_code.wallet.payment.PaymentActivity")
+                    startActivity(intent)
                 }
                 ///Transfer Cart to order
+
             }
+
+//
 
         }
 
-        //promo code to discount in price
         binding.applyBtn.setOnClickListener {
             if (binding.enterPromoCode.getText().toString().equals("panda20")){
                 binding.promoCodeActiveted.visibility = View.VISIBLE
@@ -185,6 +197,7 @@ class MyCartFargment : Fragment() {
 
     ////Cart Logic Impl
     private fun subscribeToLiveData(cartAdapter:CartRecyclerView){
+
 
         ///Data Observation to Api
         createCartViewModel.createOrderLiveData.observe(viewLifecycleOwner) {
@@ -236,6 +249,7 @@ class MyCartFargment : Fragment() {
 
                     Log.e("Ziad Adapter data",list?.size.toString())
                     Log.e("userId" , AuthUtils.manager.fetchData().id.toString())
+//                   binding.subtotalPrice.setText("YER "+total.toString()+".00")
                     if (total<1000)  {
                         shipping=50* list?.size!!
                         binding.shippingFeePrice.setText("YER "+shipping.toString()+".00")
@@ -287,6 +301,7 @@ class MyCartFargment : Fragment() {
     }
     private val registerForActivityResult=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result->
+//        viewBinding.edFrom.setOnClickListener(startAutocompleteIntentListener)
         hideSuspendWindow()
         if(result.resultCode == Activity.RESULT_OK ){
             data= result?.data?.let { Autocomplete.getPlaceFromIntent(it) }
@@ -325,7 +340,28 @@ class MyCartFargment : Fragment() {
         val wallet="Pay with Wallet"
     }
 
+
+
 }
+
+//it.let {
+//    val list = it.carts?.map {
+//        CartModel(
+//            price = "YER "+it?.items?.get(0)?.productId?.price.toString()+".00",
+//            title= it?.items?.get(0)?.productId?.title.toString(),
+//            userId = it?.id.toString(),
+//            image = null,
+//            count= 5,
+//            productId = it?.items?.get(0)?.productId?.id.toString(),
+//            cartId = it?.id.toString(),
+//            data = it?.date.toString()
+//        )
+//    }
+//    cartAdapter.submitList(list)
+//    Log.e("Ziad Adapter data",list.toString())
+//}
+
+
 
 
 
