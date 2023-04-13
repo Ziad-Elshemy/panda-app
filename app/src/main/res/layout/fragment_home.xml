@@ -26,7 +26,7 @@
             android:orientation="vertical"
             tools:context=".HomeFlow.presentations.home.HomeFragment">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/headingLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,52 +36,52 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/address_drop_down"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/text_input_shadow"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <EditText
-                        android:id="@+id/locationDetection"
-                        android:background="@drawable/text_input_shadow"
-                        android:drawableStart="@drawable/baseline_location_on_24"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:gravity="center"
-                        android:hint="@string/detect_the_shipping_location"
-                        android:singleLine="true"
-                        android:textAllCaps="false"
-                        android:textSize="15sp"
-                        android:editable="false"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"/>
-
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <ImageView
                     android:id="@+id/search_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/baseline_search_24" />
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_search_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/notification_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/pandaincart"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/Location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/locationDetection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/baseline_notifications_24" />
+                    android:layout_margin="10dp"
+                    app:flow_horizontalAlign="center"
+                    android:textColor="@color/black"
+                    android:text="Detect Location"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:drawableLeftCompat="@drawable/baseline_location_on_24" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/image_slider"
@@ -108,10 +108,11 @@
 
             <TextView
                 android:id="@+id/offers_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
+                android:background="@color/divider_color"
+                android:padding="5dp"
                 android:fontFamily="@font/medium"
                 android:text="@string/offers"
                 android:textColor="@color/black"
@@ -133,10 +134,11 @@
                 tools:listitem="@layout/offers_list_item" />
 
             <TextView
+                android:background="@color/divider_color"
+                android:padding="5dp"
                 android:id="@+id/phones_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="21dp"
-                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/medium"
                 android:text="@string/phones"
@@ -159,10 +161,11 @@
                 tools:listitem="@layout/phones_list_item" />
 
             <TextView
+                android:background="@color/divider_color"
+                android:padding="5dp"
                 android:id="@+id/electronics_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/medium"
                 android:text="@string/electronics"
@@ -185,10 +188,11 @@
                 tools:listitem="@layout/electronics_list_item" />
 
             <TextView
+                android:background="@color/divider_color"
+                android:padding="5dp"
                 android:id="@+id/products_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/medium"
                 android:text="@string/best_seller"

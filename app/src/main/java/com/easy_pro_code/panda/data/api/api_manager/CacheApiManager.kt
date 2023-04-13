@@ -34,7 +34,7 @@ class CacheApiManager {
         }
 
         fun getPlaceSearch(): CachePlaceSearchWebService {
-            return CacheApiManager.getInstance().create(CachePlaceSearchWebService::class.java)
+            return getInstance().create(CachePlaceSearchWebService::class.java)
         }
     }
 

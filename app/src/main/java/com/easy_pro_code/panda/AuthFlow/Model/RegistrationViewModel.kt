@@ -34,7 +34,7 @@ class RegistrationViewModel : ViewModel() {
             }catch (t:Throwable){
                 when(t){
                     is HttpException ->{
-                        t?.response()?.errorBody()
+                        t.response()?.errorBody()
                         val response= SignUp(message = "Connection failed,please try again")
                         _userLiveData.value=response
                     }

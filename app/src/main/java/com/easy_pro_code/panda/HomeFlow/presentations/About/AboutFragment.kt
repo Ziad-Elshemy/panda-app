@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.About
 
+import android.graphics.pdf.PdfDocument
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentAboutBinding.inflate(layoutInflater)
         return binding.root
     }

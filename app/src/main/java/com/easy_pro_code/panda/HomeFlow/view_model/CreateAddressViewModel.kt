@@ -23,14 +23,18 @@ class CreateAddressViewModel:ViewModel() {
     fun checkAddress(lat:String,lng:String,address:String){
         viewModelScope.launch {
             try {
-                val placeSearchResponse=async { placeWebService.placeSearch(
-                        CachePlaceSearchRequest(
-                            Location(
-                                jsonMemberLong = lng,
-                                lat=lat
+                val placeSearchResponse=async {
+                        placeWebService.placeSearch(
+                            CachePlaceSearchRequest(
+                                Location(
+                                    jsonMemberLong = lng,
+                                    lat=lat
+                                )
                             )
                         )
-                ) }
+
+
+                 }
                 if (placeSearchResponse.await().orders==null){
                     createAddressWithoutCacheLiveData.value=createAddressWebService.createAddressWithoutCache(
                         CreateAddressWithoutCacheRequest(

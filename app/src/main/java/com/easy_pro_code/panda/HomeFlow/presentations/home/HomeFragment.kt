@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -47,7 +48,7 @@ class HomeFragment : Fragment() {
     private var phonesList:List<Phone>? = listOf()
     private var electronicsList:List<Electronics>? = listOf()
     private val categoryList:List<String>?= listOf()
-    private lateinit var edTextObj:EditText
+    private lateinit var edTextObj:TextView
     private var city:String=""
     private var edTextId:Int=-1
     private var wishList:List<WishProduct>? = listOf()
@@ -60,7 +61,7 @@ class HomeFragment : Fragment() {
 
     var startAutocompleteIntentListener =
         View.OnClickListener { view: View ->
-            edTextObj= view as EditText
+            edTextObj= view as TextView
             startAutocompleteIntent()
         }
     override fun onCreate(savedInstanceState: Bundle?) {
