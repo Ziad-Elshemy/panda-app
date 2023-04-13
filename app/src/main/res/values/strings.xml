@@ -120,5 +120,20 @@
     <string name="color__">Color:</string>
     <string name="size__">Size:</string>
     <string name="pay_with_wallet">Pay with Wallet</string>
+    <string name="_6_global_ratings">6 global ratings</string>
+    <string name="_5_star">5 star</string>
+    <string name="_4_star">4 star</string>
+    <string name="_3_star">3 star</string>
+    <string name="_2_star">2 star</string>
+    <string name="_1_star">1 star</string>
+    <string name="customer_reviews">Customer reviews</string>
+    <string name="_0">0 %</string>
+    <string name="_10">10 %</string>
+    <string name="_30">30 %</string>
+    <string name="_70">70 %</string>
+    <string name="error">Error!</string>
+    <string name="please_check_interent">Please check your network connection and try again</string>
+    <string name="close_app">close app</string>
+    <string name="try_again">Try Again</string>
 
 </resources>

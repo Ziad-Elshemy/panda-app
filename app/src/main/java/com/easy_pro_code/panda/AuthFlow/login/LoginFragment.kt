@@ -112,7 +112,6 @@ class LoginFragment : AuthFragment() {
                 phoneNumber
             ) || phoneNumber.length != 11
         ) {
-
             Toast.makeText(requireContext(), "Enter Valid Number ${phoneNumber.length}", Toast.LENGTH_LONG).show()
         } else {
             loadingState()

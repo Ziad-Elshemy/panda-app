@@ -120,4 +120,22 @@
     <string name="color__">اللون:</string>
     <string name="size__">المقاس:</string>
     <string name="pay_with_wallet">الدفع باستخدام المحفظه</string>
+    <string name="_6_global_ratings">6 اجمالى التقييمات</string>
+    <string name="_5_star">5 نجوم</string>
+    <string name="_4_star">4 نجوم</string>
+    <string name="_3_star">3 نجوم</string>
+    <string name="_2_star">2 نجوم</string>
+    <string name="_1_star">1 نجوم</string>
+    <string name="customer_reviews">تقييمات العملاء</string>
+    <string name="_0">0 %</string>
+    <string name="_10">10 %</string>
+    <string name="_30">30 %</string>
+    <string name="_70">70 %</string>
+    <string name="error">خطأ!</string>
+    <string name="please_check_interent">من فضلك تاكد من الاتصال بالانترنت و حاول مرة اخرى</string>
+    <string name="close_app">أغلاق التطبيق</string>
+    <string name="try_again">حاول مرة اخرى</string>
+
+
+
 </resources>

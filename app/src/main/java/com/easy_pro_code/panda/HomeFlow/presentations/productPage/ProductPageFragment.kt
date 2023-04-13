@@ -1,6 +1,7 @@
 package com.easy_pro_code.panda.HomeFlow.presentations.productPage
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -258,6 +259,7 @@ class ProductPageFragment:Fragment() {
 //                intent.setData(Uri.fromFile(outFile))
                     MediaScannerConnection.scanFile(requireContext(), arrayOf(outFile.toString()), null, null)
 
+                    Toast.makeText(requireContext(), "Download", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
