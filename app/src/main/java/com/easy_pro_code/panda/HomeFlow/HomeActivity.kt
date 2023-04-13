@@ -124,6 +124,7 @@ class HomeActivity : AppCompatActivity() {
             }
 
         )
+        alertDialog.setCancelable(false)
         alertDialog.show()
     }
 
