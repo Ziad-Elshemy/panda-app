@@ -33,6 +33,7 @@ import com.easy_pro_code.panda.HomeFlow.presentations.home.*
 import com.easy_pro_code.panda.HomeFlow.view_model.AddCartViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.CategoryViewModel
 import com.easy_pro_code.panda.HomeFlow.view_model.SuspendWindowViewModel
+import com.easy_pro_code.panda.MainActivity
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_backend.OrderCart
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
@@ -110,7 +111,7 @@ class ProductPageFragment:Fragment() {
             selectedProduct = product
             viewBinding.productTitleTv.setText(product.title)
             viewBinding.totalPriceET.setText(product.price)
-            viewBinding.reviewsSubTitleText.setText(product.title)
+          //  viewBinding.reviewsSubTitleText.setText(product.title)
             viewBinding.categoryTitleTv.setText(product.category)
             viewBinding.rateText1.setText((product.rate).toString())
             viewBinding.newTotalPriceET.isVisible = false
@@ -125,7 +126,7 @@ class ProductPageFragment:Fragment() {
             viewBinding.totalPriceET.setText(offer.product.price)
             viewBinding.newTotalPriceET.setText(offer.newPrice)
             viewBinding.rateIcon1.setText((offer.product.rate.toString()))
-            viewBinding.reviewsSubTitleText.setText(offer.product.title)
+          //  viewBinding.reviewsSubTitleText.setText(offer.product.title)
             viewBinding.categoryTitleTv.setText(offer.product.category)
             viewBinding.rateText1.setText((offer.product.rate).toString())
             viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
@@ -139,7 +140,7 @@ class ProductPageFragment:Fragment() {
             viewBinding.pricesLineSeparator1.isVisible = false
             viewBinding.newPriceCurrencyText.isVisible = false
             viewBinding.rateIcon1.setText((phone.product.rate.toString()))
-            viewBinding.reviewsSubTitleText.setText(phone.product.title)
+         //   viewBinding.reviewsSubTitleText.setText(phone.product.title)
             viewBinding.categoryTitleTv.setText(phone.product.category)
             viewBinding.rateText1.setText((phone.product.rate).toString())
 //            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
@@ -152,7 +153,7 @@ class ProductPageFragment:Fragment() {
             viewBinding.pricesLineSeparator1.isVisible = false
             viewBinding.newPriceCurrencyText.isVisible = false
             viewBinding.rateIcon1.setText((electronic.product.rate.toString()))
-            viewBinding.reviewsSubTitleText.setText(electronic.product.title)
+         //   viewBinding.reviewsSubTitleText.setText(electronic.product.title)
             viewBinding.categoryTitleTv.setText(electronic.product.category)
             viewBinding.rateText1.setText((electronic.product.rate).toString())
 //            viewBinding.totalPriceET.paintFlags = viewBinding.totalPriceET.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
@@ -357,7 +358,7 @@ class ProductPageFragment:Fragment() {
 
         val loginBtn:Button = view.findViewById(R.id.login_btn)
         loginBtn.setOnClickListener {
-            val intent:Intent= Intent(requireContext(),MainActivity::class.java)
+            val intent:Intent= Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
         }
     }
