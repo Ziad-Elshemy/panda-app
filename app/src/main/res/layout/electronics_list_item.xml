@@ -103,7 +103,7 @@
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="@id/rate2"
                         app:layout_constraintEnd_toStartOf="@id/rate2"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/fav_icon"
                         app:layout_constraintTop_toTopOf="@id/rate2" />
 
                     <TextView
@@ -121,16 +121,16 @@
 
                     <CheckBox
                         android:id="@+id/fav_icon"
-                        android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:button="@drawable/fav_ic_selector"
+                        android:layout_marginTop="10dp"
                         android:elevation="10dp"
                         android:minWidth="48dp"
                         android:minHeight="48dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:useMaterialThemeColors="false" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

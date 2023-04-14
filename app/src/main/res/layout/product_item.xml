@@ -77,11 +77,9 @@
                     android:fontFamily="@font/light"
                     android:text="YER 6000"
                     app:layout_constraintBottom_toTopOf="@id/rate1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.487"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/product_name"
-                    app:layout_constraintVertical_bias="0.461" />
+                     />
 
                 <TextView
                 android:id="@+id/rate1"
@@ -97,7 +95,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/rate2"
                 app:layout_constraintEnd_toStartOf="@id/rate2"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fav_icon"
                 app:layout_constraintTop_toTopOf="@id/rate2" />
 
             <TextView
@@ -119,12 +117,11 @@
                     android:layout_height="34dp"
                     android:layout_gravity="end"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="8dp"
                     android:button="@drawable/fav_ic_selector"
                     android:elevation="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:useMaterialThemeColors="false" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
