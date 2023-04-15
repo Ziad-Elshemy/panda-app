@@ -135,5 +135,6 @@
     <string name="please_check_interent">Please check your network connection and try again</string>
     <string name="close_app">close app</string>
     <string name="try_again">Try Again</string>
+    <string name="address_text">Address:</string>
 
 </resources>

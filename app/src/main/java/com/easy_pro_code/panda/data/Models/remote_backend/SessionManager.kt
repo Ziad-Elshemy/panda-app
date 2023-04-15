@@ -2,10 +2,17 @@ package com.easy_pro_code.panda.data.Models.remote_backend
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import android.util.Log
+import com.easy_pro_code.panda.HomeFlow.presentations.MyAddress.AddressItem
 import com.easy_pro_code.panda.R
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
+import com.google.gson.Gson
+import java.lang.reflect.Type
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.util.*
+
 
 class SessionManager (context: Context) {
 
@@ -73,6 +80,20 @@ class SessionManager (context: Context) {
 
     fun getCartId():String?{
         return prefsobj.getString(CART_ID,null)
+    }
+
+    fun saveArrayList(list: LinkedList<AddressItem?>?, key: String?) {
+        val editor: SharedPreferences.Editor = prefsobj.edit()
+        val gson = Gson()
+        val json: String = gson.toJson(list)
+        editor.putString(key, json)
+        editor.apply()
+    }
+    fun getArrayList(key: String?): LinkedList<AddressItem?>? {
+        val gson = Gson()
+        val json: String? = prefsobj.getString(key, null)
+        val type: Type = object : TypeToken<LinkedList<AddressItem?>?>() {}.getType()
+        return gson.fromJson(json, type)
     }
 
     fun deleteCartID(){

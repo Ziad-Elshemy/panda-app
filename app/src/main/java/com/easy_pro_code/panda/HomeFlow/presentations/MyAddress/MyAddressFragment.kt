@@ -3,6 +3,7 @@ package com.easy_pro_code.panda.HomeFlow.presentations.MyAddress
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.R
+import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.databinding.FragmentMyAddressBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
@@ -32,6 +34,9 @@ class MyAddressFragment : Fragment() {
         binding.addressRv.adapter = adapter
 
 
+        Log.e("Array",AuthUtils.manager.getArrayList("Address")?.isNotEmpty().toString())
+        if(AuthUtils.manager.getArrayList("Address")?.isNotEmpty() == true)
+            binding.hintTv.isVisible= false
 
         bottomSheetDialog = BottomSheetDialog(requireContext())
         createDialog()
@@ -50,7 +55,7 @@ class MyAddressFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     fun createDialog()
     {
         val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog_add_address_item, null, false)
@@ -63,10 +68,10 @@ class MyAddressFragment : Fragment() {
 
         addButton.setOnClickListener {
 
-            if(adapter!=null)
+            Log.e("Array",AuthUtils.manager.getArrayList("Address")?.isNotEmpty().toString())
+            if(AuthUtils.manager.getArrayList("Address")?.isNotEmpty() == true)
                 binding.hintTv.isVisible= false
-
-binding.addressRv
+                binding.addressRv
             if (address==null || address.text.toString() == "")
             {
                 address.error = "this field is required"
@@ -75,7 +80,6 @@ binding.addressRv
             else if( phone.text.toString() == ""  || !TextUtils.isDigitsOnly(phone.text) || phone.text.length != 11)
             {
                 phone.error= "Enter valid number"
-
 
             }
             else

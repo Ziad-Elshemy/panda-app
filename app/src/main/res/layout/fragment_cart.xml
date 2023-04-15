@@ -135,22 +135,31 @@
                             app:layout_constraintTop_toBottomOf="@id/total_txt"
                             app:layout_constraintStart_toStartOf="@id/shippingFee_txt" />
 
-                        <EditText
-                            android:editable="false"
-                            android:textSize="15sp"
-                            android:singleLine="true"
-                            android:id="@+id/deliverTo_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginEnd="30dp"
-                            android:background="@drawable/text_input_shadow"
-                            android:text="@string/locationToDeliver"
-                            android:textAppearance="@style/total"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/total_price" />
+                        <LinearLayout
+                            android:id="@+id/menu_num_of_items_container"
+                            android:layout_width="150dp"
+                            android:layout_height="35dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="50dp"
+                            android:background="@drawable/rounded_black_stroke_background"
+                            app:layout_constraintTop_toTopOf="@id/deliverTo_txt"
+                            app:layout_constraintBottom_toBottomOf="@id/deliverTo_txt"
+                            app:layout_constraintEnd_toEndOf="@id/total_price"
+                            app:layout_constraintStart_toStartOf="@id/total_price">
+
+                                <Spinner
+                                    android:id="@+id/dropdown_menu_num_of_items"
+                                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:backgroundTint="@color/black"
+                                    android:contentDescription="Number of items"
+                                    android:spinnerMode="dropdown"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@id/add_to_cart_btn"
+                                    app:layout_constraintStart_toStartOf="parent" />
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/total_price"

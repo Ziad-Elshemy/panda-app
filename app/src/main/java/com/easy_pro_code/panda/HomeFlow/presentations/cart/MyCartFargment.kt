@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easy_pro_code.panda.BuildConfig.MAPS_API_KEY
 import com.easy_pro_code.panda.HomeFlow.models.MyCartModel
+import com.easy_pro_code.panda.HomeFlow.presentations.MyAddress.AddressItem
 import com.easy_pro_code.panda.HomeFlow.view_model.*
 import com.easy_pro_code.panda.R
 import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
@@ -43,6 +44,7 @@ class MyCartFargment : Fragment() {
 //    val sessionManager = AuthUtils.manager
     private lateinit var edTextObj: EditText
     private var edTextId:Int=-1
+    var pos:AddressItem = AddressItem()
 
     var list: List<MyCartModel>? = listOf()
     lateinit var navBar: BottomNavigationView
@@ -113,7 +115,40 @@ class MyCartFargment : Fragment() {
             }
         }
 
-        binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
+        //Spinner Value
+        val numberAddress = AuthUtils.manager.getArrayList("Address")
+        Log.e("numberAddress",numberAddress.toString())
+//        AuthUtils.manager.getArrayList("Address")?.last?.let {
+//            numberAddress.toMutableList().add(
+//                it
+//            )
+//        }
+
+        val spinnerAddress = binding.dropdownMenuNumOfItems
+        val arrayAdapterAddress =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item,
+                numberAddress?.toArray() as Array<out Any>
+            )
+        spinnerAddress.adapter = arrayAdapterAddress
+        spinnerAddress.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                //Toast.makeText(requireContext(), getString(R.string.selected_item) + " " + number[position], Toast.LENGTH_SHORT).show()
+                view?.let {
+                    pos = numberAddress[position]!!
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                Toast.makeText(requireContext(), "Please select number of product", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+//        binding.deliverToValue.setText(createAddressViewModel.deliveryLocation)
 
         val cartAdapter = CartRecyclerView(cartList)
         setupAdapterClickListener(cartAdapter)
@@ -121,7 +156,7 @@ class MyCartFargment : Fragment() {
         cartAdapter.submitList(cartList)
         initPlacesSdk()
 
-        binding.deliverToValue.setOnClickListener(startAutocompleteIntentListener)
+//        binding.deliverToValue.setOnClickListener(startAutocompleteIntentListener)
 
 
         if (AuthUtils.manager.getCartId() == null){

@@ -5,31 +5,38 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.easy_pro_code.panda.data.Models.remote_firebase.AuthUtils
 import com.easy_pro_code.panda.databinding.AddressListItemBinding
 import java.util.*
 
 
 class MyAddressAdapter: RecyclerView.Adapter<AddressItemViewHolder>()
 {
-    val addressListData: LinkedList<AddressItem> = LinkedList()
+    val addressListData: LinkedList<AddressItem?>? = LinkedList()
+    var addressListDataShared: LinkedList<AddressItem?>? = AuthUtils.manager.getArrayList("Address")
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressItemViewHolder
     {
         return AddressItemViewHolder.create(parent)
     }
 
     override fun getItemCount(): Int {
-        return addressListData.size
+//        return addressListData.size
+        return addressListDataShared?.size?:0
     }
 
     override fun onBindViewHolder(holder: AddressItemViewHolder, position: Int)
     {
-        holder.bind(addressListData[position])
+//        holder.bind(addressListData[position])
+        holder.bind(addressListDataShared?.get(position)!!,position)
     }
     fun add(addressItem: AddressItem)
     {
-        addressListData.add(addressItem)
-
-        Log.i("Felo", "${addressListData.size}")
+        addressListData?.add(addressItem)
+        addressListDataShared?.add(addressItem)
+        AuthUtils.manager.saveArrayList(addressListData,"Address")
+        addressListDataShared = AuthUtils.manager.getArrayList("Address")
+        Log.i("Felo", "${addressListData.toString()}")
         notifyDataSetChanged()
     }
 }
@@ -59,16 +66,17 @@ class AddressItemViewHolder(val binding: AddressListItemBinding) : RecyclerView.
         }
     }
 
-    fun bind(item: AddressItem)
+    fun bind(item: AddressItem,position: Int)
     {
+        binding.addressNum.text = (position+1).toString()
         binding.address.text = item.address
         binding.phoneNum.text = item.phone
     }
 }
 
 data class AddressItem(
-    val address: String,
-    val phone: String
+    val address: String = "s",
+    val phone: String = "s"
 )
 
 

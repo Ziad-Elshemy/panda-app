@@ -110,6 +110,7 @@ class MyAccountFragment : Fragment() {
             }
             binding.myAddressBtn.setOnClickListener {
 //                Toast.makeText(requireContext(),"coming soon",Toast.LENGTH_SHORT).show()
+                Log.e("Zizo",AuthUtils.manager.getArrayList("Address").toString())
                 val action =
                     MyAccountFragmentDirections.actionMyAccountFragment2ToMyAddressFragment()
                 findNavController().navigate(action)

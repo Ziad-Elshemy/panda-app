@@ -73,7 +73,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/regular"
-                android:text="Address: "
+                android:text="@string/address_text"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/address_imageView"
