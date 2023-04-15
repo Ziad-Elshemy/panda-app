@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="address_text">Address:</string>
+    <string name="dialog_login">To checkout you should have an account \n are you really want to login or sign up ?</string>
+    <string name="cancel">Cancel</string>
+    <string name="login_btn">Login</string>
+    <string name="detect_location">Detect Location</string>
+    <string name="my_address">My Address</string>
+    <string name="log_out">Log Out</string>
+    <string name="address_list">Address List</string>
+    <string name="you_can_add_your_saftey_list_here">you can add your saftey List Here...</string>
+    <string name="add_new_address">Add New Address</string>
+    <string name="address_number">Address Number:</string>
+    <string name="address_list_item">Address:</string>
+    <string name="phone_num">01117565737</string>
+    <string name="phone_num_tv">Phone Num:</string>
 </resources>
