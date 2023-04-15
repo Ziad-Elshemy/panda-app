@@ -75,7 +75,7 @@
                     android:layout_margin="10dp"
                     app:flow_horizontalAlign="center"
                     android:textColor="@color/black"
-                    android:text="Detect Location"
+                    android:text="@string/detect_location"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

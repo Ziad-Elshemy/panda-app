@@ -135,7 +135,19 @@
     <string name="please_check_interent">من فضلك تاكد من الاتصال بالانترنت و حاول مرة اخرى</string>
     <string name="close_app">أغلاق التطبيق</string>
     <string name="try_again">حاول مرة اخرى</string>
-
+    <string name="dialog_login">للاضافة الي سلتك يجب ان يكون لديك حساب علي باندا \n هل تود تسجيل الدخول او انشاء حساب ؟ </string>
+    <string name="cancel">الغاء</string>
+    <string name="login_btn">تسجيل حسابك</string>
+    <string name="detect_location">كشف الموقع</string>
+    <string name="my_address">عناويني</string>
+    <string name="log_out">تسجيل الخروج</string>
+    <string name="address_list">قائمة العناوين</string>
+    <string name="you_can_add_your_saftey_list_here">يمكنك اضافة قائمة العناوين الخاصة بك هنا...</string>
+    <string name="add_new_address">اضافة عنوان جديد</string>
+    <string name="address_number">رقم العنوان:</string>
+    <string name="address_list_item">العنوان:</string>
+    <string name="phone_num">01117565737</string>
+    <string name="phone_num_tv">الهاتف:</string>
 
 
 </resources>
