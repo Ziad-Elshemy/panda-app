@@ -49,12 +49,14 @@ class MyAccountFragment : Fragment() {
             binding.myOrdersBtn.isVisible=false
             binding.support2Btn.isVisible=false
             binding.logoutBtn.isVisible=false
+            binding.myAddressBtn.isVisible=false
 
             binding.Divider1.isVisible=false
             binding.Divider2.isVisible=false
             binding.Divider3.isVisible=false
             binding.Divider4.isVisible=false
             binding.Divider10.isVisible=false
+            binding.Divider9.isVisible=false
 
             binding.loginBtn.setOnClickListener {
 
@@ -102,6 +104,14 @@ class MyAccountFragment : Fragment() {
             binding.myOrdersBtn.setOnClickListener {
                 val action =
                     MyAccountFragmentDirections.actionMyAccountFragment2ToMyOrdersFragment()
+                findNavController().navigate(action)
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
+                    false
+            }
+            binding.myAddressBtn.setOnClickListener {
+//                Toast.makeText(requireContext(),"coming soon",Toast.LENGTH_SHORT).show()
+                val action =
+                    MyAccountFragmentDirections.actionMyAccountFragment2ToMyAddressFragment()
                 findNavController().navigate(action)
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav).isVisible =
                     false

@@ -169,10 +169,39 @@
                     android:id="@+id/Divider4"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    app:layout_constraintBottom_toTopOf="@+id/support2_btn"
+                    app:layout_constraintBottom_toTopOf="@+id/myAddress_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/myOrders_btn" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/myAddress_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/add_location_ic"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="30dp"
+                    android:text="My Address"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/Divider4" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/Divider9"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:layout_constraintBottom_toTopOf="@+id/support2_btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/myAddress_btn" />
 
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -192,7 +221,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/Divider4" />
+                    app:layout_constraintTop_toBottomOf="@id/Divider9" />
 
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/Divider5"

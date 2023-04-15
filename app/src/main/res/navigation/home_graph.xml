@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_myAccountFragment2_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_myAccountFragment2_to_myAddressFragment"
+            app:destination="@id/myAddressFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_about"
@@ -199,6 +202,11 @@
             android:id="@+id/action_myCartFargment_to_emptyCartFragment"
             app:destination="@id/emptyCartFragment" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_my_address"
+        android:id="@+id/myAddressFragment"
+        android:name="com.easy_pro_code.panda.HomeFlow.presentations.MyAddress.MyAddressFragment"
+        android:label="MyAddressFragment" />
 
 
 </navigation>

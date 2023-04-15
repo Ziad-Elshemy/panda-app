@@ -493,70 +493,13 @@
                         />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/similar_products_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="20dp"
-                    app:layout_constraintTop_toBottomOf="@id/other_variants_container"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/similar_products"
-                        android:layout_marginStart="20dp"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/similar_products_rv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/electronics_list_item"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="4dp"
-                        android:background="@color/divider_color"
-                        />
-                </LinearLayout>
-
-
-<!--                <TextView-->
-<!--                    android:id="@+id/product_Reviews_tv"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginVertical="20dp"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:fontFamily="@font/medium"-->
-<!--                    android:text="@string/reviews"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="18sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/similar_products_container" />-->
-
-                <!--                <View-->
-                <!--                    android:id="@+id/product_line_separator2"-->
-                <!--                    android:layout_width="185dp"-->
-                <!--                    android:layout_height="1dp"-->
-                <!--                    android:layout_marginTop="4dp"-->
-                <!--                    android:background="@android:color/darker_gray"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/reviews_sub_title_text" />-->
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/review_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="15dp"
-                    app:layout_constraintTop_toBottomOf="@id/similar_products_container"
+                    app:layout_constraintTop_toBottomOf="@id/other_variants_container"
                     >
 
                     <TextView
@@ -845,6 +788,67 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                <LinearLayout
+                    android:id="@+id/similar_products_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/review_layout"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/similar_products"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/similar_products_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/electronics_list_item"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:background="@color/divider_color"
+                        />
+                </LinearLayout>
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/product_Reviews_tv"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginVertical="20dp"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:fontFamily="@font/medium"-->
+<!--                    android:text="@string/reviews"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/similar_products_container" />-->
+
+                <!--                <View-->
+                <!--                    android:id="@+id/product_line_separator2"-->
+                <!--                    android:layout_width="185dp"-->
+                <!--                    android:layout_height="1dp"-->
+                <!--                    android:layout_marginTop="4dp"-->
+                <!--                    android:background="@android:color/darker_gray"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/reviews_sub_title_text" />-->
+
+
+
+
+
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -856,7 +860,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/review_layout"
+                    app:layout_constraintTop_toBottomOf="@id/similar_products_container"
                     tools:listitem="@layout/reviews_list_item" />
 
 
