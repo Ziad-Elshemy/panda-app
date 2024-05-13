@@ -1,5 +1,6 @@
 package com.easy_pro_code.panda.AuthFlow.Model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,9 +35,18 @@ class RegistrationViewModel : ViewModel() {
             }catch (t:Throwable){
                 when(t){
                     is HttpException ->{
-                        t.response()?.errorBody()
-                        val response= SignUp(message = "Connection failed,please try again")
-                        _userLiveData.value=response
+                        when(t.code()){
+                            400->{
+//                                Log.e("Email",t.response()?.errorBody().toString())
+                                t.response()?.errorBody()
+                                val response= SignUp(message = "Email or Phone already in use")
+                                _userLiveData.value=response
+                            }
+                            else->{
+                            val response= SignUp(message = "Connection failed,please try again")
+                            _userLiveData.value=response
+                            }
+                        }
                     }
                 }
 

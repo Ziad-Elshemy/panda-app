@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -89,11 +90,12 @@ class SignUpFragment : Fragment() {
     private fun subscribeLiveData() {
         viewModel.userLiveData.observe(viewLifecycleOwner) {
             it?.let { signUpResponse ->
-                if (signUpResponse.message.equals("Failed! Phone is already in use!")) {
+                Log.e("Email",signUpResponse.message.toString())
+                if (signUpResponse.message.equals("Email or Phone already in use")) {
                     Toast.makeText(
                         requireContext(),
-                        "Failed! Phone is already in use!",
-                        Toast.LENGTH_SHORT
+                        "Failed! Email or Phone already in use!",
+                        Toast.LENGTH_LONG
                     ).show()
                 } else if (signUpResponse.message.equals("something went wrong")) {
                     Toast.makeText(requireContext(), "something went wrong", Toast.LENGTH_SHORT)

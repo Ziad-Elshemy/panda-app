@@ -89,9 +89,10 @@ class SessionManager (context: Context) {
         editor.putString(key, json)
         editor.apply()
     }
-    fun getArrayList(key: String?): LinkedList<AddressItem?>? {
+    fun getArrayList(key: String?): LinkedList<AddressItem?> {
         val gson = Gson()
         val json: String? = prefsobj.getString(key, null)
+        if (json==null) return LinkedList()
         val type: Type = object : TypeToken<LinkedList<AddressItem?>?>() {}.getType()
         return gson.fromJson(json, type)
     }
